@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+  <div class="panel-heading">List of reviews <a ui-sref="reviews.add" title="Add review" class="pull-right">Add</a>
+  </div>
+
+  <div class="panel-body">
+    <div ng-switch on="data.records.length > 0">
+      <!-- Display the data when available -->
+      <div ng-switch-when="true">
+
+        <table class="table table-hover">
+          <thead>
+            <tr role="row">
+              <th>Name</th>
+              <th class="cell-actions">Actions</th>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="record in data.records" ng-controller="ReviewsItemCtrl">
+              <td ui-sref="reviews.details({id: record._id})">
+                {{record.title}}
+              </td>
+              <td>
+                <button type="button" class="btn btn-labeled btn-default btn-xs" ui-sref="reviews.update({id: record._id})">
+                  <span class="btn-label"><i class="fa fa-edit"></i></span>Edit
+                </button>
+                <button type="button" class="btn btn-labeled btn-danger btn-xs" ng-click="deleteReview(record)">
+                  <span class="btn-label"><i class="fa fa-trash-o"></i></span>Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- data pager -->
+        <ul class="pager">
+          <!-- Previous button when enabled-->
+          <li ng-hide="paginator.previous()" class="previous">
+            <a href ng-click="previousPage()">Previous</a>
+          </li>
+
+          <!-- Previous button when disabled-->
+          <li class="previous disabled" ng-show="paginator.previous()">
+            <a href>Previous</a>
+          </li>
+
+          <!-- Next button when enabled-->
+          <li ng-hide="paginator.next()" class="next">
+            <a href ng-click="nextPage()">Next</a>
+          </li>
+
+          <!-- Next button when disabled-->
+          <li class="next disabled" ng-show="paginator.next()">
+            <a href>Next</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Say sorry when we are not able to display the data -->
+      <div ng-switch-default>
+        There are no data available.
+      </div>
+    </div>
+  </div> <!-- //.panel-body -->
+  <div class="panel-footer">
+
+  </div>
+
+</div>

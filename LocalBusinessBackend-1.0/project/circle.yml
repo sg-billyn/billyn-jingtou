@@ -1,0 +1,12 @@
+machine:
+  environment:
+    NODE_ENV: test
+# Custom dependencies
+dependencies:
+  pre:
+    - sudo apt-get update
+    - sudo apt-get install ruby-sass
+    - gem install sass
+    - npm install -g karma-cli bower
+    - npm install
+    - bower install

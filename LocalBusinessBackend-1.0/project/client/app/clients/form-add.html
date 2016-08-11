@@ -1,0 +1,29 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('clients.add'), 'csspinner traditional': ui.inProgress}">
+  <div class="panel-heading">Add client</div>
+  <form role="form" name="addForm">
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Name *</label>
+        <input type="text" placeholder="Enter the client name" class="form-control" ng-model="data.model.name" required>
+      </div>
+      <div class="form-group">
+        <p>
+          <label>Key ID</label>
+          <input type="text" placeholder="Generate a key" class="form-control" ng-model="credentials.clientId" required readonly>
+        </p>
+        <p>
+          <label>Key Secret</label>
+          <input type="text" placeholder="Generate a secret" class="form-control" ng-model="credentials.clientSecret" required readonly>
+        </p>
+      </div>
+      <div class="form-group">
+        <a class="btn btn-primary" ng-click="generateKeys()">Generate Key ID/Secret</a>
+      </div>
+      <div class="required">* Required fields</div>
+    </div>
+    <div class="panel-footer">
+      <button ng-disabled="(addForm.$valid && !ui.inProgress) ? false : true" class="btn btn-success" ng-click="save()">Save</button>
+      <button ui-sref="clients" class="btn btn-warning">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div class="rowTitle">
+            <span style="display: inline-block;" class="animated flipInY">
+                <img src="components/blyn/core/space/view/img/icon64_appwx_logo.png" class="img-rounded" width="50" height="50">
+                &nbsp;
+                机构圈的机构
+            </span>
+        </div>
+    </div>
+</div>
+<div class="dashboard row">
+    <div class="col-sm-12">
+        <!-- dashboard-header -->
+
+        <!-- /dashboard-header -->
+        <!-- dashboard-body -->
+        <div class="dashboard-body">
+            <div class="dashboard-title">
+                <b>机构圈机构---当前机构圈：{{vm.circle.alias}}</b>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="space in vm.circle.spaces">
+                    <div class="dashboard-space">
+                        <div>
+                            <a style="cursor: pointer" ui-sref="pc.space.app.circle.manageCircle.spaces({spaceId: space._id})">
+                                <i class="fa fa-window"></i> {{space.alias}}
+                            </a>
+                        </div>
+
+                        <div class="appBookmark" ng-repeat="(index, collab) in space.collabs">
+                            <div>
+                                <a href="#" ng-click="vm.toggleShowSlice('collab'+collab._id)"><i class="fa fa-plus-circle"></i> {{collab.alias}}</a>
+                            </div>
+                            <div style="margin-top:10px;padding-right:10px;padding-left:10px;" ng-show="vm.showSlice['collab'+collab._id]">
+                                <div ng-repeat="(index, nutPermit) in collab.nutPermits">
+                                    <a ui-sref="pc.space.app.{{nutPermit.nut.name}}.{{nutPermit.permit.name}}">{{nutPermit.nut.alias}}::{{nutPermit.permit.alias}}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div style="min-height: 258px"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /dashboard-body -->
+    </div>
+</div>

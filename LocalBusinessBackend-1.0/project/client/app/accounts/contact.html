@@ -1,0 +1,78 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<section>
+  <!-- START Page content-->
+  <div class="main-content">
+    <h3>Account
+       <br>
+       <small>Provide some contact information about the business.</small>
+    </h3>
+    <div class="row">
+      <form role="form" name="accountForm" class="form-horizontal">
+
+        <div class="col-md-12 col-md main" ui-view="mainPane">
+
+          <div class="panel panel-default" ng-class="{ active: $state.includes('photos'), 'csspinner traditional': ui.inProgress }">
+            <div class="panel-heading">Account</div>
+
+            <div class="panel-body">
+
+              <fieldset>
+                <legend>Contact person</legend>
+
+                  <div class="form-group">
+                     <label class="col-sm-2 control-label">Full Name</label>
+                     <div class="col-sm-10">
+                       <input class="form-control" type="text" ng-model="data.model.contact.name" value="" placeholder="John Smith">
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-sm-2 control-label">Phone</label>
+                     <div class="col-sm-10">
+                       <input class="form-control" type="text" ng-model="data.model.contact.phone" value="" placeholder="+30 697 221 00">
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-sm-2 control-label">Email</label>
+                     <div class="col-sm-10">
+                       <input class="form-control" type="text" ng-model="data.model.contact.email" value="" placeholder="john.smith@mybusiness.com">
+                     </div>
+                  </div>
+
+              </fieldset>
+
+            </div><!-- //.panel-body -->
+
+            <div class="panel-footer">
+              <button ng-disabled="(accountForm.$valid) ? false : false" class="btn btn-primary" ng-click="update()">Save</button>
+              <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
+            </div>
+
+          </div> <!-- /.panel -->
+
+
+        </div> <!-- /ui main-view -->
+      </form>
+    </div> <!-- / .row -->
+
+  </div>
+  <!-- END Page content-->
+  <!-- START Page footer-->
+  <footer>&copy; 2015 - appseed.io - local business</footer>
+  <!-- END Page Footer-->
+</section>
+
+<style>
+  /* This margin value is set to 0 when the form-group is into a fieldset
+   * We do not need this so re-set this in its initial value
+   */
+  fieldset .form-group {
+    margin-bottom: 15px;
+  }
+</style>

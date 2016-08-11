@@ -1,0 +1,213 @@
+{
+	"type": "nut.core",
+	"permits": {
+		"appStore": {
+			"alias": "appStore"
+		}
+	},
+	"apps": {
+		"appEngine": {
+			"alias": "appEngine",
+			"type": "app.core",
+			"cores": {
+				"role": {
+					"preload": true,
+					"grants": {
+						"admin": "adminSpaceRole|管理机构角色,adminUserRole|管理用户角色"					
+					}
+				},
+				"space": {
+					"preload": true,
+					"grants": {
+						"admin": [
+							{
+								"name": "adminSpace",
+								"alias": "机构设置"
+							},
+							{
+								"name": "appStore",
+								"alias": "应用商店"
+							}
+						]
+					}
+				},
+				"collab": {
+					"preload": true,
+					"grants": {
+						"admin": ["adminCollab|设置合作"],
+						"everyone": "collabNuts|合作功能"
+					}
+				},
+				"circle": {
+					"grants": {
+						"admin": ["adminCircle|设置机构圈"],
+						"manager":["manageCircle|管理机构圈"],
+						"everyone": ["circleMember|机构圈主页"]				
+					}
+				}
+			}
+		},
+		"userApp": {
+			"alias": "User App",
+			"type": "app.core",
+			"cores": {
+				"user": {
+					"preload": true,
+					"grants": {
+						"admin": "adminUser",
+						"member": "userMember",
+						"customer": "userCustomer"
+					}
+				}
+			}
+		},
+		"weMember": {
+			"alias": "微会员",
+			"type": "app.normal",
+			"nuts": {
+				"voucher": {
+					"preload": true,
+					"grants": {
+						"admin": "adminVoucher",
+						"member": "manageVoucher",
+						"customer": "useVoucher"
+					}
+				},
+				"point": {
+					"preload": true,
+					"grants": {
+						"admin": "adminPoint",
+						"member": "managePoint",
+						"customer": "pointCustomer"
+					}
+				},
+				"card": {
+					"preload": true,
+					"grants": {
+						"admin": "adminCard",
+						"member": "manageCard",
+						"customer": "cardCustomer"
+					}
+				}
+			}
+		},
+		"propertyAgent": {
+			"alias": "置业中介",
+			"type": "app.normal",
+			"nuts": {
+				"propertyOwner": {
+					"alias": "置业所有人",
+					"grants": {
+						"admin": [
+							"adminPropertyOwner|设置置业所有人"
+						],
+						"manager": "managePropertyOwner|管理置业所有人",
+						"client": [
+							"profile|个人档案"
+						]
+					}
+				},
+				"propertyInfo": {
+					"alias": "置业信息",
+					"grants": {
+						"admin": [
+							"adminPropertyInfo|设置置业信息"
+						],
+						"propertyManager": [
+							"managePropertyInfo|管理置业信息"
+						],
+						"client": [
+							"search|查找置业信息",
+							"classifyPropertyInfo|分类置业信息",
+							"propertyInfoFeeder|最新置业信息"
+						]
+					}
+				},
+				"propertyProduct": {
+					"alias": "置业产品",
+					"grants": {
+						"admin": "adminPropertyProduct|设置置业产品",
+						"manager": "managePropertyProduct|管理置业产品",
+						"client": [
+							"searchProduct|查找置业",
+							"classifyProduct|置业产品分类"
+						]
+					}
+				}
+			}
+		},
+		"propertyData": {
+			"alias": "置业数据",
+			"type": "app.normal",
+			"nuts": {
+				"collectPropertyData": {
+					"alias": "数据采集",
+					"grants": {
+						"admin": [
+							"adminCollect|设置数据采集"
+						],
+						"manager": "adminCollect|管理数据采集"
+					}
+				},
+				"publishPropertyData": {
+					"alias": "数据发布",
+					"grants": {
+						"admin": [
+							"adminPublish|设置数据发布"
+						],
+						"manager": [
+							"managePublish|管理数据发布"
+						],
+						"client": [
+							"search|查找",
+							"classifyPublish|分类发布信息",
+							"usePublish|使用发布信息"
+						]
+					}
+				},
+				"managePropertyData": {
+					"alias": "数据管理",
+					"grants": {
+						"admin": "adminManage|设置数据管理",
+						"manager": "manageData|管理数据",
+						"client": [
+							"search|查找",
+							"classify|分类"
+						]
+					}
+				}
+			}
+		},
+		"propertyAssessment": {
+			"alias": "资产评估",
+			"type": "app.normal",
+			"nuts": {
+				"assessmentService": {
+					"alias": "评估服务",
+					"grants": {
+						"admin": [
+							"adminService|设置服务"
+						],
+						"manager": "manageService|管理服务"
+					}
+				},
+				"assessmentReport": {
+					"alias": "评估报告",
+					"grants": {
+						"admin": [
+							"adminReport|设置报告"
+						],
+						"manager": [
+							"manageReport|管理评估报告"
+						],
+						"client": [
+							"search|查找",
+							"classify|分类",
+							"usage|使用报告"
+						]
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,109 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<section>
+  <!-- START Page content-->
+  <div class="main-content">
+    <h3>New account
+      <br>
+      <small>Create a new Account.</small>
+    </h3>
+
+    <div class="row">
+      <form class="form-horizontal" name="form" ng-submit="register(form)" novalidate>
+
+        <div class="col-md-12 col-md main" ui-view="mainPane">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Account</div>
+
+            <div class="panel-body">
+
+              <fieldset>
+                <legend>Account</legend>
+
+                <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                                    'has-error': form.name.$invalid && submitted }">
+                  <label class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="name" class="form-control" ng-model="user.name" required/>
+                    <p class="help-block" ng-show="form.name.$error.required && submitted">
+                      A name is required
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
+                                                    'has-error': form.email.$invalid && submitted }">
+                  <label class="col-sm-2 control-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" name="email" class="form-control" ng-model="user.email" required mongoose-error/>
+                    <p class="help-block" ng-show="form.email.$error.email && submitted">
+                      Doesn't look like a valid email.
+                    </p>
+                    <p class="help-block" ng-show="form.email.$error.required && submitted">
+                      What's your email address?
+                    </p>
+                    <p class="help-block" ng-show="form.email.$error.mongoose">
+                      {{ errors.email }}
+                    </p>
+                  </div>
+                </div>
+
+                <div ng-if="isCreate" class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
+                                                    'has-error': form.password.$invalid && submitted }">
+                  <label class="col-sm-2 control-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="3" required mongoose-error/>
+                    <p class="help-block" ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
+                      Password must be at least 3 characters.
+                    </p>
+                    <p class="help-block" ng-show="form.password.$error.mongoose">
+                      {{ errors.password }}
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+
+            </div><!-- //.panel-body -->
+
+            <div class="panel-footer">
+
+                <button class="btn btn-lg btn-primary" type="submit">
+                  {{submitLabel}}
+                </button>
+                <button ng-if="isCreate" class="btn btn-lg btn-warning" type="reset">
+                  Reset
+                </button>
+                <button ng-if="isEdit" class="btn btn-lg btn-warning" ng-click="cancel()">
+                  Cancel
+                </button>
+
+            </div> <!-- /.panel-footer -->
+
+          </div> <!-- /.panel -->
+
+        </div> <!-- /ui main-view -->
+
+      </form>
+    </div><!-- /row -->
+
+  </div> <!-- /.main-content -->
+
+<!-- END Page content-->
+<!-- START Page footer-->
+<footer>&copy; 2015 - appseed.io - local business</footer>
+<!-- END Page Footer-->
+</section>
+
+<style>
+/* This margin value is set to 0 when the form-group is into a fieldset
+* We do not need this so re-set this in its initial value
+*/
+fieldset .form-group {
+  margin-bottom: 15px;
+}
+</style>

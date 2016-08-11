@@ -1,0 +1,32 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('clients.details') }">
+  <div class="panel-heading">
+    {{data.model.name}}
+    <a href title="Edit this client" class="fa fa-edit pull-right" ui-sref="clients.update({id: data.model._id})"></a>
+  </div>
+  <div class="panel-body">
+    <p>
+      <label>Key ID</label>
+      <input type="text" placeholder="Generate a key" class="form-control" ng-model="data.model.clientId" required readonly>
+    </p>
+    <p>
+      <label>Key Secret</label>
+      <input type="text" placeholder="Generate a secret" class="form-control" ng-model="data.model.clientSecret" required readonly>
+    </p>
+    <p>
+      <label>Created:</label>
+      <span>
+        {{data.model.createdAt | date:'medium'}}
+      </span>
+    </p>
+    <p>
+      <label>Modified:</label>
+      <span>
+        {{data.model.modifiedAt | date:'medium'}}
+      </span>
+    </p>
+  </div>
+  <!-- //.panel-body -->
+  <div class="panel-footer">
+    <button class="btn btn-primary" ui-sref="clients.update({id: data.model._id})">Edit</button>
+  </div>
+</div>

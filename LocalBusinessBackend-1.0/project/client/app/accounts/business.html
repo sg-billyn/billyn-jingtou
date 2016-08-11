@@ -1,0 +1,211 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<section>
+  <!-- START Page content-->
+  <div class="main-content">
+    <h3>Account
+       <br>
+       <small>Provide information about the business and other preferences.</small>
+    </h3>
+    <div class="row">
+      <form role="form" name="accountForm" class="form-horizontal">
+
+        <div class="col-md-12 col-md main" ui-view="mainPane">
+
+          <div class="panel panel-default" ng-class="{ active: $state.includes('photos'), 'csspinner traditional': ui.inProgress }">
+            <div class="panel-heading">Account</div>
+
+            <div class="panel-body">
+
+              <fieldset>
+                <legend>Business</legend>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Name</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.name" value="" placeholder="My Business Name">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Description</label>
+                   <div class="col-sm-10">
+                     <textarea class="form-control" type="text" ng-model="data.model.business.description" value="" rows="3" placeholder="A short description about your business"></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Web site</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.website" value="" placeholder="http://www.mybusiness.com">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">E-mail</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.email" value="" placeholder="info@mybusiness.com">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Address</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.address" value="" placeholder="Enter the physical address af this business">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">City</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.city" value="" placeholder="Enter the city">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Zip Code</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.zipcode" value="" placeholder="621 00">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Latitude and Longitude</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.latlong" value="" placeholder="40.7421, -70.345">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Map Zoom level</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.zoom" value="" placeholder="eg: 2.3">
+                   </div>
+                </div>
+
+              </fieldset> <!-- / business -->
+
+              <fieldset>
+                <legend>Social</legend>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Facebook Page</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.model.business.social.facebookPage" value="" placeholder="https://www.facebook.com/ionicframework">
+                   </div>
+                </div>
+              </fieldset> <!-- / social -->
+
+              <fieldset>
+                <legend>Opening Hours</legend>
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Time Zone</label>
+                   <div class="col-sm-10">
+                     <select ng-model="data.model.business.hours.zone" convert-to-number class="form-control">
+                       <option value="-12">GMT -12</option>
+                       <option value="-11">GMT -11</option>
+                       <option value="-10">GMT -10</option>
+                       <option value="-9">GMT -9</option>
+                       <option value="-8">GMT -8</option>
+                       <option value="-7">GMT -7</option>
+                       <option value="-6">GMT -6</option>
+                       <option value="-5">GMT -5</option>
+                       <option value="-4">GMT -4</option>
+                       <option value="-3">GMT -3</option>
+                       <option value="-2">GMT -2</option>
+                       <option value="-1">GMT -1</option>
+                       <option value="0">GMT</option>
+                       <option value="1">GMT +1</option>
+                       <option value="2">GMT +2</option>
+                       <option value="3">GMT +3</option>
+                       <option value="4">GMT +4</option>
+                       <option value="5">GMT +5</option>
+                       <option value="6">GMT +6</option>
+                       <option value="7">GMT +7</option>
+                       <option value="8">GMT +8</option>
+                       <option value="9">GMT +9</option>
+                       <option value="10">GMT +10</option>
+                       <option value="11">GMT +11</option>
+                       <option value="12">GMT +12</option>
+                     </select>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Open</label>
+                   <div class="col-sm-10">
+                     <a title="Add more prices" class="pull-right" ng-click="addOpenHourInputs()">Add Open hour</a>
+                     <table class="table table-condensed table-striped">
+                       <tr>
+                         <th>Day</th>
+                         <th>Open at</th>
+                         <th>Close at</th>
+                         <th></th>
+                       </tr>
+
+                       <tr ng-repeat="openHour in data.model.business.hours.days" >
+                         <td>
+                           <select ng-model="openHour.day" convert-to-number class="form-control">
+                             <option value="0">Sunday</option>
+                             <option value="1">Monday</option>
+                             <option value="2">Tuesday</option>
+                             <option value="3">Wednesday</option>
+                             <option value="4">Thursday</option>
+                             <option value="5">Friday</option>
+                             <option value="6">Saturday</option>
+                           </select>
+                         </td>
+                         <td>
+                           <timepicker ng-model="openHour.openAt" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                         </td>
+                         <td>
+                           <timepicker ng-model="openHour.closeAt" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                         </td>
+                         <td>
+                           <button ng-if="$index>0" type="button" class="btn btn-danger btn-xs pull-right" ng-click="removeOpenHourInputs($index)">
+                             <span aria-hidden="true">&times;</span>
+                             <span class="sr-only">Close</span>
+                           </button>
+                         </td>
+                       </tr>
+                     </table>
+
+                   </div>
+                </div>
+
+              </fieldset> <!-- / Opening hours -->
+
+
+            </div><!-- //.panel-body -->
+
+            <div class="panel-footer">
+              <button ng-disabled="(accountForm.$valid) ? false : false" class="btn btn-primary" ng-click="update()">Save</button>
+              <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
+            </div>
+
+          </div> <!-- /.panel -->
+
+
+        </div> <!-- /ui main-view -->
+      </form>
+    </div> <!-- / .row -->
+
+  </div>
+  <!-- END Page content-->
+  <!-- START Page footer-->
+  <footer>&copy; 2015 - appseed.io - local business</footer>
+  <!-- END Page Footer-->
+</section>
+
+<style>
+  /* This margin value is set to 0 when the form-group is into a fieldset
+   * We do not need this so re-set this in its initial value
+   */
+  fieldset .form-group {
+    margin-bottom: 15px;
+  }
+</style>

@@ -1,0 +1,118 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <link rel="stylesheet" href="app/7979d829.app.css"/>
+
+  <!-- 3rd party theme -->
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/animo/animate+animo.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/csspinner/csspinner.min.css">
+
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/app.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/wintermin-theme-b.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/app-fix.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/common.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/common-fix.css">
+  <!-- end 3rd party theme -->
+</head>
+
+<body ng-app="localBusinessApp">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- START Main wrapper-->
+  <div class="wrapper">
+    <!-- START Top Navbar-->
+    <div ng-include="'components/navbar/navbar.html'"></div>
+    <!-- END Top Navbar-->
+
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+
+  </div>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+  </script>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+  <script src="app/6e03e2e6.vendor.js"></script>
+
+  <!-- manualy installed components -->
+  <script type="text/javascript" src="thirdparty/ui-sortable/src/sortable.js"></script>
+  <!-- end manualy installed components -->
+
+
+
+  <script src="app/8862ead5.app.js"></script>
+
+  <!-- 3rd party theme -->
+  <!-- Modernizr JS Script-->
+  <script src="thirdparty/wintermin/vendor/modernizr/modernizr.js" type="application/javascript"></script>
+  <!-- FastClick for mobiles-->
+  <script src="thirdparty/wintermin/vendor/fastclick/fastclick.js" type="application/javascript"></script>
+
+  <script src="thirdparty/wintermin/vendor/bootstrap/js/bootstrap.js"></script>
+
+  <!-- Plugins-->
+  <script src="thirdparty/wintermin/vendor/chosen/chosen.jquery.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/slider/js/bootstrap-slider.js"></script>
+  <script src="thirdparty/wintermin/vendor/filestyle/bootstrap-filestyle.min.js"></script>
+  <!-- Animo-->
+  <script src="thirdparty/wintermin/vendor/animo/animo.min.js"></script>
+  <!-- Sparklines-->
+  <script src="thirdparty/wintermin/vendor/sparklines/jquery.sparkline.min.js"></script>
+  <!-- Slimscroll-->
+  <script src="thirdparty/wintermin/vendor/slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- Store + JSON-->
+  <script src="thirdparty/wintermin/vendor/store/store+json2.min.js"></script>
+  <!-- Classyloader-->
+  <script src="thirdparty/wintermin/vendor/classyloader/js/jquery.classyloader.min.js"></script>
+  <!--  Flot Charts-->
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.tooltip.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.resize.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.pie.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.time.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.categories.min.js"></script>
+
+  <script src="thirdparty/wintermin/app/js/app.js" type="application/javascript"></script>
+  <script src="thirdparty/wintermin/app/js/pages.js" type="application/javascript"></script>
+  <!-- END 3rd party theme-->
+</body>
+
+</html>

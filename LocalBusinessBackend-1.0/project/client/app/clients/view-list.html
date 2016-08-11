@@ -1,0 +1,39 @@
+<div class="panel panel-default" ng-class="{'panel-danger': order.isDirty}">
+  <div class="panel-heading">List of clients
+    <a ui-sref="clients.add" title="Add Clients" class="pull-right">Add</a>
+  </div>
+  <div class="panel-body warning">
+    <div ng-switch on="data.records.length > 0">
+      <!-- Display the records when available -->
+      <div ng-switch-when="true">
+        <table class="table table-hover">
+          <thead>
+            <tr role="row">
+              <th>Name</th>
+              <th class="cell-actions">Actions</th>
+          </thead>
+          <tbody ui-sortable="sortableOptions" ng-model="data.records">
+            <tr ng-repeat="record in data.records" ng-controller="ClientsItemCtrl">
+              <td ng-bind="record.name" ui-sref="clients.details({id: record._id})"></td>
+              <td>
+                <button type="button" class="btn btn-labeled btn-default btn-xs" ui-sref="clients.update({id: record._id})">
+                  <span class="btn-label"><i class="fa fa-edit"></i></span>Edit
+                </button>
+                <button type="button" class="btn btn-labeled btn-danger btn-xs" ng-click="deleteItem(record)">
+                  <span class="btn-label"><i class="fa fa-trash-o"></i></span>Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Say sorry when we are not able to display the records -->
+      <div ng-switch-default>
+        There are no data available.
+      </div>
+    </div>
+  </div>
+  <!-- //.panel-body -->
+  <div class="panel-footer">
+  </div>
+</div>

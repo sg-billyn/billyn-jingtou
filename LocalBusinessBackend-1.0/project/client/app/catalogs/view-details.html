@@ -1,0 +1,33 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('catalog.details') }">
+  <div class="panel-heading">
+    {{data.model.title}}
+    <a href title="Edit this news" class="fa fa-edit pull-right" ui-sref="catalogs.update({id: data.model._id})"></a>
+  </div>
+
+  <div class="panel-body">
+    <p>
+      <div class="row">
+        <div ng-repeat="picture in data.model.pictures" class="image col-sm-6">
+          <img ng-if="picture" ng-src="{{picture}}" class="img-responsive img-thumbnail" alt="{{picture.title}}" width="100%">
+        </div>
+      </div>
+      <style>
+        .row > div.image:nth-child(odd) {clear: both;}
+      </style>
+    </p>
+
+    <p ng-bind="data.model.body"></p>
+    <p>
+      URL: <a href="{{data.model.url}}" title="{{data.model.url}}" ng-bind="data.model.url"></a>
+    </p>
+    <p>
+      PDF URL: <a href="{{data.model.pdfUrl}}" title="{{data.model.pdfUrl}}" ng-bind="data.model.pdfUrl"></a>
+    </p>
+
+  </div> <!-- //.panel-body -->
+
+  <div class="panel-footer">
+    <button class="btn btn-primary" ui-sref="catalogs.update({id: data.model._id})">Edit</button>
+  </div>
+
+</div>

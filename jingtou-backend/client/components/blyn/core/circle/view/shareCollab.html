@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div class="rowTitle">
+            <span style="display: inline-block;" class="animated flipInY">
+                <img src="components/blyn/core/space/view/img/icon64_appwx_logo.png" class="img-rounded" width="50" height="50">
+                &nbsp;
+                分享机构协作
+            </span>
+        </div>
+    </div>
+</div>
+<div class="dashboard row">
+    <div class="col-sm-12">
+        <!-- dashboard-header -->
+
+        <!-- /dashboard-header -->
+        <!-- dashboard-body -->
+        <div class="dashboard-body">
+            <div class="dashboard-title">
+                <b>当前圈子： {{vm.circle.alias}}</b>
+                <div class="pull-right">
+                    <a ui-sref="pc.space.app.circle.manageCircle.spaces({circleId:circle._id})">
+                        <i class="fa fa-plus"></i> 新增协作
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="collab in vm.collabs">
+                    <div class="dashboard-space">
+                        <div>
+                            <a style="cursor: pointer" ui-sref="pc.space.app.circle({circleId: circle._id})">
+                                <i class="fa fa-windows"></i> {{collab.alias}}
+                            </a>
+                        </div>
+
+                        <div class="appBookmark">
+                            <div>协作描述：{{collab.description}}</div>
+                            <div>加入状态：{{collab.CircleCollab ?collab.CircleCollab.joinStatus: "未申请"}}</div>
+                        </div>
+                        <div class="appBookmark">
+                                <div>
+                                    <a ui-sref="#" ng-click="vm.applyShareCollab(collab)">
+                                    申请分享
+                                </a> |
+                                    <a ui-sref="pc.space.app.circle.manageCircle.spaces({circleId:circle._id})">
+                                         退出分享
+                                    </a>
+                                </div>
+                        </div>
+                        <!-- <div style="min-height: 258px"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /dashboard-body -->
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<!--
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">news</a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+          <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a>
+        </li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a>
+        </li>
+        <li ng-show="isLoggedIn()">
+          <p class="navbar-text">Hello {{ getCurrentUser().name }}</p>
+        </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}">
+          <a href="/settings">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+        </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- START Top Navbar-->
+<nav role="navigation" class="navbar navbar-default navbar-top navbar-fixed-top"  ng-class="{anonymous: !isLoggedIn()}" ng-controller="NavbarCtrl">
+   <!-- START navbar header-->
+   <div class="navbar-header">
+      <a href="dashboard.html" class="navbar-brand">
+         <div class="brand-logo">
+            <img src="assets/images/logo.png" alt="App Logo" class="img-responsive">
+         </div>
+         <div class="brand-logo-collapsed">
+            <img src="assets/images/logo-single.png" alt="App Logo" class="img-responsive">
+         </div>
+      </a>
+   </div>
+   <!-- END navbar header-->
+   <!-- START Nav wrapper-->
+   <div class="nav-wrapper">
+      <!-- START Left navbar-->
+      <ul class="nav navbar-nav">
+         <li>
+            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+            <a href="#" data-toggle-state="aside-collapsed" data-persists="true" class="hidden-xs">
+               <em class="fa fa-navicon"></em>
+            </a>
+            <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+            <a href="#" data-toggle-state="aside-toggled" class="visible-xs">
+               <em class="fa fa-navicon"></em>
+            </a>
+         </li>
+
+         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+           <a ng-href="{{item.link}}"><em class="fa {{item.fa}}"></em> {{item.title}}</a>
+         </li>
+         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}" style="display:none"><a href="/admin"><em class="fa fa-users"></em> Admin</a>
+         </li>
+      </ul>
+      <!-- END Left navbar-->
+      <!-- START Right Navbar-->
+      <ul class="nav navbar-nav navbar-right">
+         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}">
+           <a href="/login"><em class="fa fa-sign-in"></em> Login</a>
+         </li>
+         <!--
+         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}">
+           <a href="/settings">
+             <span class="glyphicon glyphicon-cog"></span>
+           </a>
+         </li>
+
+         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><em class="fa fa-sign-out"></em> Logout</a>
+         </li>
+          -->
+         <!-- START User menu-->
+         <li class="dropdown">
+            <a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">
+               <em class="glyphicon glyphicon-cog"></em>
+            </a>
+            <!-- START Dropdown menu-->
+            <ul class="dropdown-menu">
+               <li>
+                  <div class="p">
+                     {{ getCurrentUser().name }}
+                  </div>
+               </li>
+               <li class="divider"></li>
+               <li>
+                 <a href="/settings">
+                   <em class="fa fa-gear"></em> Settings
+                 </a>
+               </li>
+               <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}">
+                 <a href="" ng-click="logout()">
+                   <em class="fa fa-sign-out"></em> Logout
+                 </a>
+               </li>
+            </ul>
+            <!-- END Dropdown menu-->
+         </li>
+         <!-- END User menu-->
+      </ul>
+      <!-- END Right Navbar-->
+   </div>
+   <!-- END Nav wrapper-->
+</nav>
+<!-- END Top Navbar-->

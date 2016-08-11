@@ -1,0 +1,58 @@
+<!-- START wrapper-->
+<div class="login row row-table page-wrapper">
+  <div class="col-lg-5 col-md-6 col-sm-8 col-xs-12 align-middle">
+    <!-- START panel-->
+    <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+        <a href="#">
+          <img src="assets/images/logo.png" alt="Image" class="block-center img-rounded">
+        </a>
+
+        <p class="text-center mt-lg">
+          <strong>RESET YOUR PASSWORD</strong>
+        </p>
+      </div>
+      <div class="panel-body">
+        <div class="has-success">
+          <p class="help-block" ng-show="success && submitted">
+            You have successfully reset your password. You will be redirected to the login page in 10 seconds,
+            so you can login using your new password.
+          </p>
+        </div>
+
+        <form role="form" class="mb-lg form" name="form" ng-submit="reset(form)" novalidate>
+          <div class="form-group has-feedback">
+            <input id="password" type="password" name="password" placeholder="New Password" class="form-control"
+                   ng-model="password" required>
+            <span class="fa fa-lock form-control-feedback text-muted"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input id="confirm" type="password" name="confirm" placeholder="Confirm Password" class="form-control"
+                   ng-model="confirm" required>
+            <span class="fa fa-lock form-control-feedback text-muted"></span>
+          </div>
+
+          <div class="form-group has-error">
+            <p class="help-block" ng-show="form.password.$error.required && submitted">
+              Please enter your new password.
+            </p>
+
+            <p class="help-block" ng-show="form.confirm.$error.required && submitted">
+              Please enter a password confirmation.
+            </p>
+
+            <p class="help-block" ng-show="password != confirm && submitted">
+              The new password and its confirmation must match.
+            </p>
+
+            <p class="help-block">{{error}}</p>
+          </div>
+
+          <button type="submit" class="btn btn-block btn-success">Reset</button>
+        </form>
+      </div>
+    </div>
+    <!-- END panel-->
+  </div>
+</div>
+<!-- END wrapper-->

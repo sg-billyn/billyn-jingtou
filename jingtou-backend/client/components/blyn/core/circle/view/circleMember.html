@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div class="rowTitle">
+            <span style="display: inline-block;" class="animated flipInY">
+                <img src="components/blyn/core/space/view/img/icon64_appwx_logo.png" class="img-rounded" width="50" height="50">
+                &nbsp;
+                我的机构圈子
+            </span>
+        </div>
+    </div>
+</div>
+<div class="dashboard row">
+    <div class="col-sm-12">
+        <!-- dashboard-header -->
+
+        <!-- /dashboard-header -->
+        <!-- dashboard-body -->
+        <div class="dashboard-body">
+            <div class="dashboard-title">
+                <b>我的机构圈</b>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="circle in vm.circles">
+                    <div class="dashboard-space">
+                        <div>
+                            <a style="cursor: pointer" ui-sref="pc.space.app.circle({circleId: circle._id})">
+                                <i class="fa fa-circle-o"></i> {{circle.alias}}
+                            </a>
+                        </div>
+
+                        <div class="appBookmark">
+                            <div>圈子描述：{{circle.description}}</div>
+                        </div>
+                        <div class="appBookmark">
+                            <div>
+                                <a ui-sref="pc.space.app.circle.circleMember.spaces({circleId:circle._id})">
+                                    <i class="fa fa-windows"></i> 机构数量：{{circle.spaces.length}}
+                                </a>
+                            </div>
+                            <div>
+                                <a ui-sref="pc.space.app.circle.circleMember.spaces({circleId:circle._id})">
+                                    <i class="fa fa-random"></i> 协作数量：{{circle.collabs.length}}
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div style="min-height: 258px"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /dashboard-body -->
+    </div>
+</div>

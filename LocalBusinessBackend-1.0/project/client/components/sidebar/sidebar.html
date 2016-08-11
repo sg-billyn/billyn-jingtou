@@ -1,0 +1,143 @@
+<!--
+<div ng-controller="SidebarCtrl" ng-show="currentUser" class="col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li><a ui-sref="main">Home</a>
+    </li>
+    <li><a ui-sref="news">News</a>
+    </li>
+  </ul>
+</div>
+-->
+
+<!-- START Sidebar (left)-->
+<nav ng-controller="SidebarCtrl" ng-show="currentUser" class="sidebar">
+  <ul class="nav">
+    <!-- START Menu-->
+    <li class="nav-heading">{{ currentUser.name }}</li>
+    <li ng-class="{active: isGroupActive('dashboard')}">
+      <a ui-sref="main" title="Dashboard" data-toggle="" class="no-submenu">
+        <em class="fa fa-dashboard"></em>
+        <span class="item-text">Dashboard</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('articles')}" ng-if="!isAdmin()">
+      <a ui-sref="articles" title="Articles" data-toggle="" class="no-submenu">
+        <em class="fa fa-comments-o"></em>
+        <span class="item-text">Articles</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('products')}" ng-if="!isAdmin()">
+      <a ui-sref="products" title="Products" data-toggle="" class="no-submenu">
+        <em class="fa fa-th-large"></em>
+        <span class="item-text">Products</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('services')}" ng-if="!isAdmin()">
+      <a ui-sref="services" title="Services" data-toggle="" class="no-submenu">
+        <em class="fa fa-tasks"></em>
+        <span class="item-text">Services</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('galleries')}" ng-if="!isAdmin()">
+      <a ui-sref="galleries" title="Gallery" data-toggle="collapse-next" class="no-submenu">
+        <em class="fa fa-picture-o"></em>
+        <span class="item-text">Galleries</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('catalogs')}" ng-if="!isAdmin()">
+      <a ui-sref="catalogs" title="Catalogs" data-toggle="collapse-next" class="no-submenu">
+        <em class="fa fa-th"></em>
+        <span class="item-text">Catalogs</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('pages')}" ng-if="!isAdmin()">
+      <a ui-sref="pages" title="Pages" data-toggle="" class="no-submenu">
+        <em class="fa fa-file-o"></em>
+        <span class="item-text">Pages</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('reviews')}" ng-if="!isAdmin()">
+      <a ui-sref="reviews" title="Reviews" data-toggle="" class="no-submenu">
+        <em class="fa fa-quote-left"></em>
+        <span class="item-text">Reviews</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('account')}" ng-if="!isAdmin()">
+      <a href="" title="Account" data-toggle="collapse-next" class="has-submenu">
+        <em class="fa fa-gears"></em>
+        <span class="item-text">Business</span>
+      </a>
+      <!-- START SubMenu item-->
+      <ul class="nav collapse" ng-class="{in: isGroupActive('account')}">
+        <li ng-class="{active: isItemActive('business')}">
+          <a ui-sref="business" title="Business" data-toggle="" class="no-submenu">
+            <span class="item-text">Information</span>
+          </a>
+        </li>
+        <li ng-class="{active: isItemActive('photos')}">
+          <a ui-sref="photos" title="Photos" data-toggle="" class="no-submenu">
+            <span class="item-text">Photos</span>
+          </a>
+        </li>
+        <li ng-class="{active: isItemActive('contact')}">
+          <a ui-sref="contact" title="Contact" data-toggle="" class="no-submenu">
+            <span class="item-text">Contact</span>
+          </a>
+        </li>
+      </ul>
+      <!-- END SubMenu item-->
+    </li>
+
+    <li ng-class="{active: isGroupActive('push')}" ng-if="false">
+      <!-- push notifications will be implemented in the future -->
+      <a ui-sref="push" title="Push" data-toggle="collapse-next" class="no-submenu">
+        <em class="fa fa-bullhorn"></em>
+        <span class="item-text">Push</span>
+      </a>
+    </li>
+
+    <li ng-show="isAdmin()" ng-class="{active: isGroupActive('admin')}">
+      <a href="/admin" ng-class="{active: isActive('/admin')}" class="no-submenu">
+        <em class="fa fa-users"></em>
+        <span class="item-text">Administration</span>
+      </a>
+    </li>
+
+    <li ng-class="{active: isGroupActive('clients')}" ng-if="!isAdmin()">
+      <a ui-sref="clients" title="Clients" data-toggle="collapse-next" class="no-submenu">
+        <em class="fa fa-mobile"></em>
+        <span class="item-text">API Clients</span>
+      </a>
+    </li>
+
+    <li ng-if="false">
+      <!-- language selector will be implemented in the future -->
+      <a title="Languanges" data-toggle="collapse-next" class="has-submenu">
+        <em class="fa fa-flag"></em>
+        <span class="item-text">Languanges</span>
+      </a>
+      <!-- Languages sub menu items -->
+      <ul class="nav collapse">
+        <li>
+          <a ng-click="onChangeLanguage('en')" title="English" data-toggle="" class="no-submenu">
+            <span class="item-text">English</span>
+          </a>
+        </li>
+        <li>
+          <a ng-click="onChangeLanguage('de')" title="Germany" data-toggle="" class="no-submenu">
+            <span class="item-text">Germany</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<!-- END Sidebar (left)-->

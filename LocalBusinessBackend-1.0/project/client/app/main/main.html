@@ -1,0 +1,261 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<!-- START Main section-->
+<section class="dashboard">
+  <!-- START Page content-->
+  <div class="main-content">
+    <h3 ng-if="!isAdmin()">Dashboard
+       <br>
+       <small>Local Business</small>
+    </h3>
+    <h3 ng-if="isAdmin()">Dashboard
+       <br>
+       <small>Welcome admin</small>
+    </h3>
+    <div data-toggle="notify" data-onload data-message="&lt;b&gt;Welcome Visitor!&lt;/b&gt; Dismiss this message with a click or wait for it to disappear." data-options="{&quot;status&quot;:&quot;danger&quot;, &quot;pos&quot;:&quot;top-right&quot;}"
+    class="hidden-xs"></div>
+
+    <div class="row" ng-if="isAdmin()">
+      <section class="col-md-9">
+      <div class="row">
+         <div class="col-md-4">
+            <!-- START administrator widget-->
+            <div class="panel widget" ui-sref="admin">
+               <div class="panel-body">
+                  <div class="text-right text-muted">
+                     <em class="fa fa-users fa-2x"></em>
+                  </div>
+                  <h3 class="mt0">01.</h3>
+                  <p class="text-muted">Administration</p>
+                  <div class="progress progress-striped progress-xs">
+                     <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-100">
+                        <span class="sr-only">100% Complete</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+       </div>
+       </section>
+         <aside class="col-md-3">
+            <!-- START widget-->
+            <div class="panel widget">
+               <div class="panel-body bg-warning text-center">
+                  <div class="text-lg m0" ng-controller="MainCtrl">{{date | date: "EEE"}}</div>
+                  <div class="text m0" ng-controller="MainCtrl">{{date | date: "MMMM d, y"}}</div>
+                  <div class="mb-lg"></div>
+                  <em class="fa fa-heart-o fa-2x"></em>
+               </div>
+            </div>
+            <!-- END widget-->
+         </aside>
+
+    </div>
+    <!-- END administrator widget-->
+
+    <div class="row" ng-if="!isAdmin()">
+       <!-- START dashboard main content-->
+       <section class="col-md-9">
+          <!-- START Secondary Widgets-->
+          <div class="row">
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="articles">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-comments fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">01.</h3>
+                      <p class="text-muted">Articles</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="products">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-th-large fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">02.</h3>
+                      <p class="text-muted">Products</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-info progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="services">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-tasks fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">03.</h3>
+                      <p class="text-muted">Services</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-warning progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+          </div> <!-- 1st row widgets -->
+
+          <!-- 2nd row widgets -->
+          <div class="row">
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="galleries">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-picture-o fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">04.</h3>
+                      <p class="text-muted">Galleries</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="catalogs">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-th fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">05.</h3>
+                      <p class="text-muted">Catalogs</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-info progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="pages">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-file-o fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">06.</h3>
+                      <p class="text-muted">Pages</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-warning progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+          </div> <!-- 2nd row widgets -->
+
+          <!-- 3rd row widgets -->
+          <div class="row">
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="reviews">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-quote-left fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">07.</h3>
+                      <p class="text-muted">Reviews</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="business">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-gears fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">08.</h3>
+                      <p class="text-muted">Business</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-info progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+             <div class="col-md-4">
+                <!-- START widget-->
+                <div class="panel widget" ui-sref="clients">
+                   <div class="panel-body">
+                      <div class="text-right text-muted">
+                         <em class="fa fa-mobile fa-2x"></em>
+                      </div>
+                      <h3 class="mt0">09.</h3>
+                      <p class="text-muted">API Clients</p>
+                      <div class="progress progress-striped progress-xs">
+                         <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-warning progress-100">
+                            <span class="sr-only">100% Complete</span>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!-- END widget-->
+             </div>
+          </div> <!-- 3rd row widgets -->
+
+          <!-- END Secondary Widgets-->
+
+       </section>
+       <!-- END dashboard main content-->
+       <!-- START dashboard sidebar-->
+       <aside class="col-md-3">
+          <!-- START widget-->
+          <div class="panel widget">
+             <div class="panel-body bg-warning text-center">
+                <div class="text-lg m0" ng-controller="MainCtrl">{{date | date: "EEE"}}</div>
+                <div class="text m0" ng-controller="MainCtrl">{{date | date: "MMMM d, y"}}</div>
+                <div class="mb-lg"></div>
+                <em class="fa fa-heart-o fa-2x"></em>
+             </div>
+          </div>
+          <!-- END widget-->
+       </aside>
+       <!-- END dashboard sidebar-->
+    </div>
+  </div>
+  <!-- END Page content-->
+  <!-- START Page footer-->
+  <footer>&copy; 2015 - appseed.io - local business</footer>
+  <!-- END Page Footer-->
+</section>

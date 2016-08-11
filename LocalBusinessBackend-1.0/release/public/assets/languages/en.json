@@ -1,0 +1,21 @@
+{
+  "TITLE": "Title",
+  "ADD_ARTICLE": "Add article",
+  "ARTICLE_PAGE_HEADING": "Articles",
+  "ARTICLE_PAGE_HEADING2": "Manage articles to provide information about the business.",
+  "ARTICLE_LIST_HEADING": "List of articles",
+  "ARTICLE_LIST_NOT_AVAILABLE": "There are no data available.",
+  "ARTICLE_LIST_ADD_LINK": "Add",
+  "ARTICLE_ADD_FORM_TITLE_LABEL": "Title",
+  "ARTICLE_ADD_FORM_TITLE_PLACEHOLDER": "Title",
+  "ARTICLE_ADD_FORM_CAT_TAGS_LABEL": "Categories / Tags",
+  "ARTICLE_ADD_FORM_CAT_TAGS_PLACEHOLDER": "tag1, tag2, tag3",
+  "ARTICLE_ADD_FORM_BODY_LABEL": "Body",
+  "ARTICLE_ADD_FORM_BODY_PLACEHOLDER": "Body text",
+  "ARTICLE_ADD_FORM_PHOTO_LABEL": "Photo",
+  "ARTICLE_ADD_FORM_PHOTO_PLACEHOLDER": "drop an image here or click to select a file",
+  "ARTICLE_ADD_FORM_HTML5_DROP": "HTML5 Drop File is not supported!",
+  "ARTICLE_ADD_FORM_REQUIRED_FIELDS": "Required Fields",
+  "ARTICLE_ADD_FORM_SAVE_BUTTON": "Save",
+  "ARTICLE_ADD_FORM_CANCEL_BUTTON": "Cancel"
+}

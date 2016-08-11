@@ -1,0 +1,13 @@
+node_modules
+public
+.tmp
+.sass-cache
+client/bower_components
+heroku
+/views
+dist
+local-business.sublime-workspace
+local-business.sublime-project
+.idea
+
+!misc/postinstall/**

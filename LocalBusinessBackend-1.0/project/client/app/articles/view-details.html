@@ -1,0 +1,32 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('articles.details') }">
+  <div class="panel-heading">
+    {{data.model.title}}
+    <a href title="Edit this article" class="fa fa-edit pull-right" ui-sref="articles.update({id: data.model._id})"></a>
+  </div>
+
+  <div class="panel-body">
+
+    <p>
+      <div class="row">
+        <div ng-repeat="picture in ui.pictures" class="image col-sm-6">
+          <img ng-if="picture" ng-src="{{picture}}" class="img-responsive img-thumbnail" alt="{{data.model.title}}" width="100%">
+        </div>
+      </div>
+      <style>
+      .row > div.image:nth-child(odd) {clear: both;}
+      </style>
+    </p>
+
+    <p ng-bind="data.model.body"></p>
+
+    <p>
+      <span class="badge" ng-bind="data.model.tags"></span>
+    </p>
+  </div>
+  <!-- //.panel-body -->
+
+  <div class="panel-footer">
+    <button class="btn btn-primary" ui-sref="articles.update({id: data.model._id})">Edit</button>
+  </div>
+
+</div>

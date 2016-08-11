@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div class="rowTitle">
+            <span style="display: inline-block;" class="animated flipInY">
+                <img src="components/blyn/core/space/view/img/icon64_appwx_logo.png" class="img-rounded" width="50" height="50">
+                &nbsp;
+                关注机构圈
+            </span>
+        </div>
+    </div>
+</div>
+<div class="dashboard row">
+    <div class="col-sm-12">
+        <!-- dashboard-header -->
+
+        <!-- /dashboard-header -->
+        <!-- dashboard-body -->
+        <div class="dashboard-body">
+            <div class="dashboard-title">
+                <b>关注的机构圈</b> ｜
+                <a style="cursor: pointer" ui-sref="pc.space.app.circle.circleMemberChief.joinCircle">
+                    <i class="fa fa-search"></i>寻找机构圈
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="circle in vm.joinedCircles">
+                    <div class="dashboard-space">
+                        <div>
+                            <a style="cursor: pointer" ui-sref="pc.space.app.circle({circleId: circle._id})">
+                                <i class="fa fa-windows"></i> {{circle.alias}}
+                            </a>
+                            <span class="pull-right">
+                                <a ui-sref="pc.space.app.circle.adminCircle.addCircle">
+                                    退出关注
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="appBookmark">
+                            <div>圈子描述：{{circle.description}}</div>
+                            <div>加入状态：{{circle.CircleSpace.joinStatus}}</div>
+                        </div>
+                        <div class="appBookmark">
+                            <div>
+                                <a ui-sref="pc.space.app.circle.circleMemberChief.shareCollab({circleId:circle._id})">
+                                    <i class="fa fa-cloud"></i> 分享协作
+                                </a>
+                            </div>
+                        </div>
+                        <div class="appBookmark">
+                            <div>
+                                <a ui-sref="pc.space.app.circle.circleMemberChief.listCollab({circleId:circle._id})">
+                                    <i class="fa fa-cutlery"></i> 参与协作
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- <div style="min-height: 258px"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /dashboard-body -->
+    </div>
+</div>

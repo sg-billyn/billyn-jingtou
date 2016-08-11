@@ -1,0 +1,200 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(client) app/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <!-- endinjector -->
+  <!-- endbuild -->
+
+  <!-- 3rd party theme -->
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/animo/animate+animo.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/vendor/csspinner/csspinner.min.css">
+
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/app.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/wintermin-theme-b.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/app-fix.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/common.css">
+  <link rel="stylesheet" href="thirdparty/wintermin/app/css/common-fix.css">
+  <!-- end 3rd party theme -->
+</head>
+
+<body ng-app="localBusinessApp">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- START Main wrapper-->
+  <div class="wrapper">
+    <!-- START Top Navbar-->
+    <div ng-include="'components/navbar/navbar.html'"></div>
+    <!-- END Top Navbar-->
+
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+
+  </div>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+  </script>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+  <!-- build:js({client,node_modules}) app/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+  <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- manualy installed components -->
+  <script type="text/javascript" src="thirdparty/ui-sortable/src/sortable.js"></script>
+  <!-- end manualy installed components -->
+
+
+
+  <!-- build:js({.tmp,client}) app/app.js -->
+  <script src="app/app.js"></script>
+  <!-- injector:js -->
+  <script src="app/account/account.js"></script>
+  <script src="app/account/create/create.controller.js"></script>
+  <script src="app/account/forgot/forgot.controller.js"></script>
+  <script src="app/account/login/login.controller.js"></script>
+  <script src="app/account/reset/reset.controller.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
+  <script src="app/account/signup/signup.controller.js"></script>
+  <script src="app/accounts/accounts.controller.js"></script>
+  <script src="app/accounts/accounts.js"></script>
+  <script src="app/admin/admin.controller.js"></script>
+  <script src="app/admin/admin.js"></script>
+  <script src="app/articles/articles.controller.js"></script>
+  <script src="app/articles/articles.js"></script>
+  <script src="app/catalogs/catalogs.controller.js"></script>
+  <script src="app/catalogs/catalogs.js"></script>
+  <script src="app/clients/clients.controller.js"></script>
+  <script src="app/clients/clients.js"></script>
+  <script src="app/galleries/galleries.controller.js"></script>
+  <script src="app/galleries/galleries.js"></script>
+  <script src="app/main/main.controller.js"></script>
+  <script src="app/main/main.js"></script>
+  <script src="app/pages/pages.controller.js"></script>
+  <script src="app/pages/pages.js"></script>
+  <script src="app/products/products.controller.js"></script>
+  <script src="app/products/products.js"></script>
+  <script src="app/push/push.controller.js"></script>
+  <script src="app/push/push.js"></script>
+  <script src="app/reviews/reviews.controller.js"></script>
+  <script src="app/reviews/reviews.js"></script>
+  <script src="app/services/services.controller.js"></script>
+  <script src="app/services/services.js"></script>
+  <script src="components/accounts/accounts.service.js"></script>
+  <script src="components/articles/articles.service.js"></script>
+  <script src="components/auth/auth.service.js"></script>
+  <script src="components/auth/user.service.js"></script>
+  <script src="components/catalogs/catalogs.service.js"></script>
+  <script src="components/clients/clients.service.js"></script>
+  <script src="components/config/config.service.js"></script>
+  <script src="components/convert-to-number/convert-to-number.directive.js"></script>
+  <script src="components/galleries/galleries.service.js"></script>
+  <script src="components/imageUploader/imageUploader.service.js"></script>
+  <script src="components/media/media.service.js"></script>
+  <script src="components/modal/modal.service.js"></script>
+  <script src="components/modalDeleteItem/modalDeleteItem.service.js"></script>
+  <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+  <script src="components/navbar/navbar.controller.js"></script>
+  <script src="components/pages/pages.service.js"></script>
+  <script src="components/paginator/paginator.service.js"></script>
+  <script src="components/preparationtimes/preparationtimes.service.js"></script>
+  <script src="components/products/products.service.js"></script>
+  <script src="components/reviews/reviews.service.js"></script>
+  <script src="components/service/services.service.js"></script>
+  <script src="components/sidebar/sidebar.controller.js"></script>
+  <script src="components/taxes/taxes.service.js"></script>
+  <!-- endinjector -->
+  <!-- endbuild -->
+
+  <!-- 3rd party theme -->
+  <!-- Modernizr JS Script-->
+  <script src="thirdparty/wintermin/vendor/modernizr/modernizr.js" type="application/javascript"></script>
+  <!-- FastClick for mobiles-->
+  <script src="thirdparty/wintermin/vendor/fastclick/fastclick.js" type="application/javascript"></script>
+
+  <script src="thirdparty/wintermin/vendor/bootstrap/js/bootstrap.js"></script>
+
+  <!-- Plugins-->
+  <script src="thirdparty/wintermin/vendor/chosen/chosen.jquery.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/slider/js/bootstrap-slider.js"></script>
+  <script src="thirdparty/wintermin/vendor/filestyle/bootstrap-filestyle.min.js"></script>
+  <!-- Animo-->
+  <script src="thirdparty/wintermin/vendor/animo/animo.min.js"></script>
+  <!-- Sparklines-->
+  <script src="thirdparty/wintermin/vendor/sparklines/jquery.sparkline.min.js"></script>
+  <!-- Slimscroll-->
+  <script src="thirdparty/wintermin/vendor/slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- Store + JSON-->
+  <script src="thirdparty/wintermin/vendor/store/store+json2.min.js"></script>
+  <!-- Classyloader-->
+  <script src="thirdparty/wintermin/vendor/classyloader/js/jquery.classyloader.min.js"></script>
+  <!--  Flot Charts-->
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.tooltip.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.resize.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.pie.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.time.min.js"></script>
+  <script src="thirdparty/wintermin/vendor/flot/jquery.flot.categories.min.js"></script>
+
+  <script src="thirdparty/wintermin/app/js/app.js" type="application/javascript"></script>
+  <script src="thirdparty/wintermin/app/js/pages.js" type="application/javascript"></script>
+  <!-- END 3rd party theme-->
+</body>
+
+</html>

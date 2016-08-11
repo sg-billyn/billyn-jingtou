@@ -1,0 +1,27 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('clients.update'), 'csspinner traditional': ui.inProgress}">
+  <div class="panel-heading">Edit client</div>
+  <form role="form" name="updateForm">
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Name *</label>
+        <input type="text" placeholder="Enter the client name" class="form-control" ng-model="data.model.name" required>
+      </div>
+      <p>
+        <label>Key ID</label>
+        <input type="text" placeholder="Generate a key" class="form-control" ng-model="data.model.clientId" required readonly>
+      </p>
+      <p>
+        <label>Key Secret</label>
+        <input type="text" placeholder="Generate a secret" class="form-control" ng-model="data.model.clientSecret" required readonly>
+      </p>
+      <div class="form-group">
+        <a class="btn btn-primary" ng-click="generateKeys()">Generate Key ID/Secret</a>
+      </div>
+      <div class="required">* Required fields</div>
+    </div>
+    <div class="panel-footer">
+      <button ng-disabled="(updateForm.$valid) ? false : true" class="btn btn-success" ng-click="update()">Update</button>
+      <button ui-sref="clients.details({id: data.model._id})" class="btn btn-warning">Cancel</button>
+    </div>
+  </form>
+</div>

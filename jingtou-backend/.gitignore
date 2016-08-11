@@ -1,0 +1,12 @@
+node_modules
+public
+.tmp
+.vscode
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
+npm-debug.log
+coverage
+doc/esdoc
+dev.sqlite

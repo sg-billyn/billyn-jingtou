@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div class="rowTitle">
+            <span style="display: inline-block;" class="animated flipInY">
+                <img src="components/blyn/core/space/view/img/icon64_appwx_logo.png" class="img-rounded" width="50" height="50">
+                &nbsp;
+                圈子功能列表
+            </span>
+        </div>
+    </div>
+</div>
+<div class="dashboard row">
+    <div class="col-sm-12">
+        <!-- dashboard-header -->
+
+        <!-- /dashboard-header -->
+        <!-- dashboard-body -->
+        <div class="dashboard-body">
+            <div class="dashboard-title">
+                <b>机构圈机构</b>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" ng-repeat="space in vm.circle.spaces">
+                    <div class="dashboard-space">
+                        <div>
+                            <a style="cursor: pointer" ui-sref="pc.space.app.circle.manageCircle.spaces({spaceId: space._id})">
+                                <i class="fa fa-windows"></i> {{space.alias}}
+                            </a>
+                        </div>
+
+                        <div class="appBookmark" ng-repeat="(index, collab) in space.collabs">
+                            <div>
+                                {{collab.alias}}
+                                <div class="pull-right">
+                                    <a href="#" ng-click="vm.toggleShowSlice('joinCollab_'+collab._id)"> 参与协作 <i class="fa fa-expand"></i></a>
+                                </div>
+                            </div>
+                            <div style="padding-top:10px" ng-show="vm.showSlice['joinCollab_'+collab._id]">
+                                <div style="margin-left:5px; padding-bottom:7px" ng-repeat="(index, role) in vm.getCollabRolesForManage(collab)">
+                                    执行角色：{{role.name}} ( {{role.CollabRole? "已加入":"未加入"}} )
+                                    <div class="pull-right" style="padding-right:20px">
+                                        <a ng-show="role.CollabRole || role.CollabRole.joinStatus === 'none' ? false: true" href="#" style="cursor: pointer" ng-click="vm.addCollabRole(collab,role)"><i class="fa fa-plus"></i> 加入协作</a>
+                                        <a ng-show="role.CollabRole && role.CollabRole.joinStatus === 'joined' ? true: false" href="#" ng-click="vm.addCollabRole(collab,role, 'exit')"><i class="fa fa-sign-out"></i> 退出协作</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- <div style="min-height: 258px"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /dashboard-body -->
+    </div>
+</div>

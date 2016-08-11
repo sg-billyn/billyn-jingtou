@@ -1,0 +1,28 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<section>
+  <!-- START Page content-->
+  <div class="main-content">
+    <button type="button" class="btn btn-primary pull-right" ui-sref="articles.add">
+       <em class="fa fa-plus-circle fa-fw mr-sm"></em>{{'ADD_ARTICLE' | translate}}</button>
+    <h3>{{'ARTICLE_PAGE_HEADING' | translate}}
+       <br>
+       <small>{{'ARTICLE_PAGE_HEADING2' | translate}}</small>
+    </h3>
+    <div class="row">
+      <div class="col-md-6 col-md main" ui-view="leftPane">
+      </div>
+
+      <div class="col-md-6 main" ui-view="rightPane">
+      </div>
+    </div>
+  </div>
+  <!-- END Page content-->
+  <!-- START Page footer-->
+  <footer>&copy; 2015 - appseed.io - local business</footer>
+  <!-- END Page Footer-->
+</section>

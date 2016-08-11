@@ -1,0 +1,20 @@
+{
+  "TITLE": "Titel",
+  "ADD_ARTICLE": "Artikel hinzufügen",
+  "ARTICLE_PAGE_HEADING": "Artikel",
+  "ARTICLE_LIST_HEADING": "Liste der Artikel",
+  "ARTICLE_LIST_NOT_AVAILABLE": "Es sind keine Daten vorhanden.",
+  "ARTICLE_LIST_ADD_LINK": "Hinzufügen",
+  "ARTICLE_ADD_FORM_TITLE_LABEL": "Titel",
+  "ARTICLE_ADD_FORM_TITLE_PLACEHOLDER": "Titel",
+  "ARTICLE_ADD_FORM_CAT_TAGS_LABEL": "Kategorien / Stichwörter",
+  "ARTICLE_ADD_FORM_CAT_TAGS_PLACEHOLDER": "tag1, tag2, tag3",
+  "ARTICLE_ADD_FORM_BODY_LABEL": "Körper",
+  "ARTICLE_ADD_FORM_BODY_PLACEHOLDER": "Fließtext",
+  "ARTICLE_ADD_FORM_PHOTO_LABEL": "Foto",
+  "ARTICLE_ADD_FORM_PHOTO_PLACEHOLDER": "Drop ein Bild oder klicken Sie hier, um eine Datei auszuwählen",
+  "ARTICLE_ADD_FORM_HTML5_DROP": "HTML5-Tropfen Datei wird nicht unterstützt!",
+  "ARTICLE_ADD_FORM_REQUIRED_FIELDS": "Erforderliche Felder",
+  "ARTICLE_ADD_FORM_SAVE_BUTTON": "Speichern",
+  "ARTICLE_ADD_FORM_CANCEL_BUTTON": "Stornieren"
+}

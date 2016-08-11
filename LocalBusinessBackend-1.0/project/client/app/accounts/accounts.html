@@ -1,0 +1,169 @@
+<!-- START aside-->
+<aside class="aside">
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+</aside>
+<!-- END aside-->
+
+<section>
+  <!-- START Page content-->
+  <div class="main-content">
+    <h3>Account
+       <br>
+       <small>Provide information about the business and other preferences.</small>
+    </h3>
+    <div class="row">
+      <form role="form" name="accountForm" class="form-horizontal">
+
+        <div class="col-md-12 col-md main" ui-view="mainPane">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Account</div>
+
+            <div class="panel-body">
+
+              <fieldset>
+                <legend>Business</legend>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Name</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.name" value="" placeholder="My business">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Description</label>
+                   <div class="col-sm-10">
+                     <textarea class="form-control" type="text" ng-model="data.business.description" value="" rows="3" placeholder="A short description about your business"></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Opening hours</label>
+                   <div class="col-sm-10">
+                     <textarea class="form-control" type="text" ng-model="data.business.hours" value="" rows="3" placeholder="e.g: 10:00am - 10:00pm"></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Web site</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.website" value="" placeholder="http://www.mybusiness.com">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">E-mail</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.email" value="" placeholder="info@mybusiness.com">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Address</label>
+                   <div class="col-sm-10">
+                     <textarea class="form-control" type="text" ng-model="data.business.address" value="" placeholder="Enter the physical address af this business"></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Zip Code</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.zipcode" value="" placeholder="621 00">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Place</label>
+                   <div class="col-sm-10">
+                     <textarea class="form-control" type="text" ng-model="data.business.place" value="" placeholder=""></textarea>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Latitude and Longitude</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.latlong" value="" placeholder="40.7421, -70.345">
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="col-sm-2 control-label">Map Zoom level</label>
+                   <div class="col-sm-10">
+                     <input class="form-control" type="text" ng-model="data.business.zoom" value="" placeholder="eg: 2.3">
+                   </div>
+                </div>
+
+              </fieldset> <!-- / business -->
+
+
+              <fieldset>
+                <legend>Photos</legend>
+
+                <div class="well">
+                  <p>
+                    <div class="row">
+                      <div ng-repeat="picture in ui.pictures" class="image col-sm-4">
+                        <img ng-src="{{picture}}" class="img-responsive img-thumbnail" alt="Uploaded Image" width="100%" ng-file-drop="onFileSelect($files)">
+                        <button type="button" class="btn btn-danger btn-xs pull-right" style="top: -28px; position: relative; right: 5px;" ng-click="deleteImage($index)">
+                          <span aria-hidden="true">&times;</span>
+                          <span class="sr-only">Close</span>
+                        </button>
+                      </div>
+                    </div>
+                    <style>
+                      .row > div.image:nth-child(3n+1) {clear: both;}
+                    </style>
+                  </p>
+                  <div ng-file-drop="onFileSelect($files)"
+                       ng-file-select="onFileSelect($files)"
+                       ng-file-drag-over-class="bg-success"
+                       ng-show="dropSupported"
+                       class="drop-box">
+                       drop an image here<br>
+                       or click to select a file
+                  </div>
+
+                  <div ng-file-drop-available="dropSupported=true"
+                       ng-show="!dropSupported">
+                       HTML5 Drop File is not supported!
+                       <input type="file" name="image" ng-model="page.file" ng-file-select="onFileSelect($files)">
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{page.progress}}%">
+                      {{page.progress}}% Complete
+                    </div>
+                  </div>
+               </div> <!-- /.well -->
+
+             </fieldset><!-- /photos -->
+
+            </div><!-- //.panel-body -->
+
+            <div class="panel-footer">
+              <button ng-disabled="(accountForm.$valid) ? false : false" class="btn btn-primary" ng-click="update()">Save</button>
+              <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
+            </div>
+
+          </div> <!-- /.panel -->
+
+
+        </div> <!-- /ui main-view -->
+      </form>
+    </div> <!-- / .row -->
+
+  </div>
+  <!-- END Page content-->
+  <!-- START Page footer-->
+  <footer>&copy; 2015 - appseed.io - local business</footer>
+  <!-- END Page Footer-->
+</section>
+
+<style>
+  /* This margin value is set to 0 when the form-group is into a fieldset
+   * We do not need this so re-set this in its initial value
+   */
+  fieldset .form-group {
+    margin-bottom: 15px;
+  }
+</style>

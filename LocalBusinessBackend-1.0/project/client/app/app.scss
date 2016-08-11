@@ -1,0 +1,91 @@
+$icon-font-path:"/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path:"/bower_components/font-awesome/fonts";
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+// Component styles are injected through grunt
+// injector
+@import 'account/login/login.scss';
+@import 'accounts/accounts.scss';
+@import 'admin/admin.scss';
+@import 'articles/articles.scss';
+@import 'catalogs/catalogs.scss';
+@import 'clients/clients.scss';
+@import 'galleries/galleries.scss';
+@import 'main/main.scss';
+@import 'pages/pages.scss';
+@import 'products/products.scss';
+@import 'push/push.scss';
+@import 'reviews/reviews.scss';
+@import 'services/services.scss';
+@import 'modal/modal.scss';
+@import 'sidebar/sidebar.scss';
+// endinjector
+
+/**
+ * Navigation bar
+ */
+nav.navbar.anonymous{
+  display: none;
+}
+
+.navbar-brand{
+  height:61px;
+}
+
+/*
+ * Shortable (table rows)
+ */
+.ui-sortable-handle{
+  cursor:move;
+}
+
+/**
+ * Listing tables Actions cell
+ */
+ table th.cell-actions{
+   width: 160px;
+ }
+
+
+/**
+ * Drop box
+ */
+.drop-box {
+  background: #F8F8F8;
+  text-align: center;
+  border: 3px #3071a9 dotted;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.drop-box:hover{
+  background: #FeFeFe;
+}
+
+/**
+ * Overrides in order to mutch windermin rules
+ */
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a,
+  .navbar-nav > li > p{
+    padding-top: 20.5px;
+    padding-bottom: 20.5px;
+  }
+  .navbar-nav > li > p{
+    margin: 0;
+  }
+}

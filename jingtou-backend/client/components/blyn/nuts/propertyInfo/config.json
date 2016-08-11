@@ -1,0 +1,21 @@
+{
+	"type": "nut.normal",
+	"permits": {
+		"managePropertyInfo": {
+			"alias": "管理置产信息"
+		},
+		"adminPropertyInfo": {
+			"alias": "设置置业信息"
+		},
+		"propertyInfoFeeder": {
+			"alias": "最新置业信息"
+		},
+		"search": {
+			"alias": "查找置业信息"
+		},
+		"classifyPropertyInfo": {
+			"alias": "分类置业信息"
+		}
+	}
+}
+

@@ -1,0 +1,29 @@
+<div class="panel panel-default" ng-class="{ active: $state.includes('reviews.details') }">
+  <div class="panel-heading">
+    {{data.model.title}}
+    <a href title="Edit this review" class="fa fa-edit pull-right" ui-sref="reviews.update({id: data.model._id})"></a>
+  </div>
+
+  <div class="panel-body">
+    <p ng-bind="data.model.teaser"></p>
+
+    <p>
+      <div class="row">
+        <div ng-repeat="picture in ui.pictures" class="image col-sm-6">
+          <img ng-if="picture" ng-src="{{picture}}" class="img-responsive img-thumbnail" alt="{{data.model.title}}" width="100%">
+        </div>
+      </div>
+      <style>
+        .row > div.image:nth-child(odd) {clear: both;}
+      </style>
+    </p>
+
+    <p ng-bind="data.model.body"></p>
+
+  </div> <!-- //.panel-body -->
+
+  <div class="panel-footer">
+    <button class="btn btn-primary" ui-sref="reviews.update({id: data.model._id})">Edit</button>
+  </div>
+
+</div>
