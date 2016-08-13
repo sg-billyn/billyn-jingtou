@@ -13,8 +13,8 @@
             // }
         }
     }
-    
-     class RoleHomeController {
+
+    class RoleHomeController {
         constructor($state, $stateParams, $rootScope, BNut) {
             var ctrl = this;
             $rootScope.current.nut.permits = [];
@@ -69,11 +69,52 @@
                 });
             });
         }
-
     }
 
-   class AdminSpaceRoleController {
-        constructor($stateParams, $state, BRole, toaster) {
+    class AdminRoleNutController {
+
+        constructor(BRole, $rootScope, BNut) {
+
+            this.space = $rootScope.current.space;
+            this.userSpace = $rootScope.current.userSpace;
+
+            this.BNut = BNut;
+
+            var self = this;
+
+            this.checkboxCollection = {};
+
+            angular.forEach(this.space.apps, function (app) {
+                angular.forEach(app.nuts, function (nut) {
+                    self.getNutPermitsInConfig(nut);
+                })
+            })
+
+            //populate checkbox value
+            angular.forEach(self.userSpace.apps, function (app) {
+                angular.forEach(app.nuts, function (oNut) {
+                    angular.forEach(oNut.permitRoles, function (permitRole) {
+                        self.checkboxCollection['nut_' + oNut._id + '_' + permitRole.permit.name] = true;
+                    })
+                })
+            })
+        }
+
+        getNutPermitsInConfig(nut) {
+            var self = this;
+            if (angular.isObject(nut.config)) {
+                return nut.config.permits;
+            } else {
+                return self.BNut.getNutConfig(nut).then(function (config) {
+                    nut.config = config;
+                    return config.permits;
+                });
+            }
+        }
+    }
+
+    class AdminSpaceRoleController {
+        constructor($stateParams, $state, BRole, toaster, $rootScope) {
             // alert("Space Role Cotroller");
             this.currentRole = {};
             this.newRole = {};
@@ -85,9 +126,10 @@
             this.adminRoles = [];
             this.memberRoles = [];
             this.customerRoles = [];
+            this.$rootScope = $rootScope;
             this.BRole.getSpaceRoles(spaceId).then(function (data) {
                 angular.forEach(data, function (role) {
-                    console.log(role);
+                    //console.log(role);
                     if (role.fullname.indexOf("root.role.admin") == 0) {
                         ctrl.adminRoles.push(role);
                     }
@@ -126,6 +168,17 @@
                 ctrl.toaster.success("Success delete role");
             });
 
+        }
+
+        showAdminNut(role) {
+            var ctrl = this;
+            this.$state.go('pc.space.app.role.adminNut',
+                {
+                    spaceId: ctrl.$rootScope.current.space._id,
+                    appId: ctrl.$rootScope.current.app._id,
+                    nutId: ctrl.$rootScope.current.nut._id,
+                    roleId: role._id
+                });
         }
     }
 
@@ -258,12 +311,12 @@
                 case 'admin': return 'label-danger';
                 case 'member': return 'label-warning';
                 case 'customer': return 'label-success';
-                default : return 'label-info';
+                default: return 'label-info';
             }
         }
 
     } //class
-    
+
     class RoleAdminAddRoleController {
         constructor($stateParams, BRole, toaster) {
             this.toaster = toaster;
@@ -474,7 +527,8 @@
         .controller('RoleController', RoleController)
         .controller('RoleHomeController', RoleHomeController)
         .controller('AdminSpaceRoleController', AdminSpaceRoleController)
-        .controller('AdminUserRoleController', AdminUserRoleController)        
+        .controller('AdminUserRoleController', AdminUserRoleController)
+        .controller('AdminRoleNutController', AdminRoleNutController)
         // .controller('SpaceRoleController', SpaceRoleController)
         // .controller('UserRoleController', UserRoleController)
         // .controller('RoleAdminController', RoleAdminController)

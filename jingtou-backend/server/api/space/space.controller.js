@@ -191,6 +191,9 @@ export function show(req, res) {
     Space.belongsTo(Category, { as: 'type' });
     Space.hasMany(App, { as: 'apps' });
     Space.hasMany(Role, { as: 'roles' });
+    App.hasMany(Nut, { as: 'nuts' });
+    Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
+    Nut.belongsTo(Category, {as: 'type'});
 
     //console.log('2');
 
@@ -206,9 +209,33 @@ export function show(req, res) {
             {
                 model: App,
                 as: 'apps',
-                include: {
-                    model: Category, as: 'type'
-                }
+                include: [
+                    {
+                        model: Category, as: 'type'
+                    },
+                    {
+                        model: Nut, as: 'nuts',
+                        include: [
+                            {
+                                model: Category, as: 'type'
+                            },
+                            {
+                                model: PermitRole, as: 'permitRoles',
+                                where: {
+                                    'owner': 'nut'
+                                },
+                                include: [
+                                    {
+                                        model: Permit, as: 'permit'
+                                    },
+                                    {
+                                        model: Role, as: 'role'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             },
             {
                 model: Role,
@@ -375,6 +402,7 @@ export function findUserSpaces(req, res) {
         App.belongsTo(Category, { as: 'type' });
         //console.log(5);
         App.hasMany(Nut, { as: 'nuts' });
+        Nut.belongsTo(Category, {as: 'type'});
         //console.log(6);
         Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
         //console.log(7);
@@ -383,7 +411,25 @@ export function findUserSpaces(req, res) {
         PermitRole.belongsTo(Role, { as: 'role' });
         //console.log(9);
 
+        var findSpaceWhere = {};
+
+        //for find one space
+        for (var key in query) {
+            if (key.toLocaleLowerCase() === 'id' || key.toLocaleLowerCase() === 'spaceid' || key.toLocaleLowerCase() === '_id') {
+                findSpaceWhere._id = query[key];
+            }
+        }
+
+        if (!query.userId) {
+            query.userId = req.user._id;
+        }
+
+        //console.log('query:', JSON.stringify(query));
+
+        //console.log('findSpaceWhere:', JSON.stringify(findSpaceWhere));
+
         return Space.findAll({
+            where: findSpaceWhere,
             include: [
                 {
                     model: Category, as: 'type'
@@ -408,6 +454,9 @@ export function findUserSpaces(req, res) {
                         {
                             model: Nut, as: 'nuts',
                             include: [
+                                {
+                                    model: Category, as: 'type'
+                                },
                                 {
                                     model: PermitRole, as: 'permitRoles',
                                     where: {

@@ -23,6 +23,13 @@ angular.module('billynApp')
                       $rootScope.breadcrumb.space = space.alias;
                     }) : 
                     $q.resolve('No spaceId.');
+          },
+          userSpace: function($q, $stateParams, $rootScope, BSpace){
+            return $stateParams.spaceId ? 
+            BSpace.getUserSpace($stateParams.spaceId, $rootScope.current.user._id)
+            .then(function(userSpace){
+              $rootScope.current.userSpace = userSpace;
+            }) : null;
           }
         }
       })

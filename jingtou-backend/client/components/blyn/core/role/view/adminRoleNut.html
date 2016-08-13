@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="app in vm.space.apps track by $index" style="margin-bottom: 20px;">
+                <div class="functionSection">
+                    <div class="functionSection-content">
+                        <div class="functionSection-head">
+                            <div class="functionSection-icon">
+                                <span class="fa fa-gear"></span>
+                            </div>
+                        </div>
+                        <div class="functionSection-body">
+                            <div class="functionSection-body-content">
+                                <div class="functionSection-top">
+                                    <a class="functionSection-title">{{app.alias}}</a>
+                                </div>
+                                <div ng-repeat="nut in app.nuts track by $index">
+                                    <div>
+                                        <h5>{{nut.alias}}</h5>
+                                    </div>
+                                    <div ng-repeat="(key,permit) in nut.config.permits track by $index">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-model="vm.checkboxCollection['nut_'+nut._id+'_'+key]"> {{permit.alias}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -53,12 +53,16 @@
               <span class="badge">{{role.name}}</span>
             </td>
             <td>
+              <button type="button" class="btn btn-primary btn-xs" ng-click="vm.showAdminNut(role)">
+                管理功能
+              </button>
               <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addRoleModal" ng-click="vm.currentRole=role">
                 添加子角色
               </button>
               <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteRoleModal" ng-click="vm.currentRole=role" ng-hide="role.fullname == 'root.role.admin'">
                 删除
               </button>
+              
             </td>
           </tr>
           <tr ng-repeat="role in vm.memberRoles">
@@ -69,6 +73,9 @@
               <span class="badge">{{role.name}}</span>
             </td>
             <td>
+              <button type="button" class="btn btn-primary btn-xs" ng-click="vm.showAdminNut(role)">
+                管理功能
+              </button>
               <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addRoleModal" ng-click="vm.currentRole=role">
                 添加子角色
               </button>
@@ -85,6 +92,9 @@
               <span class="badge">{{role.name}}</span>
             </td>
             <td>
+              <button type="button" class="btn btn-primary btn-xs" ng-click="vm.showAdminNut(role)">
+                管理功能
+              </button>
               <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addRoleModal" ng-click="vm.currentRole=role">
                 添加子角色
               </button>

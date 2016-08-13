@@ -53,6 +53,12 @@
 			//return $q.reject('fail to find role');
 		}
 
+		service.findById = function (roleId) {
+			return resRole.get({
+				id: roleId
+			}).$promise;
+		}
+
 		service.findAll = function (roleData) {
 			if (angular.isString(roleData)) {
 				roleData = {

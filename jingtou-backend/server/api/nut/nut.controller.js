@@ -229,6 +229,10 @@ export function findAllUserPermitNut(req, res) {
   var query = {};
   //console.log('query 1:', JSON.stringify(query));
 
+  if (!query.userId) {
+    req.query.userId = req.user._id;
+  }
+
   if (!req.query.spaceId || !req.query.userId) {
     res.status(500).send('please provice spaceId and userId!');
   } else {

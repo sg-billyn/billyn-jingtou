@@ -56,12 +56,22 @@
 					};
 				}
 				if (angular.isObject(findData)) {
-					var typeName
+					var typeName;
+					var spaceId;
 					for (var key in findData) {
 						if (key === 'type' || key.toLowerCase() === 'typename') {
 							typeName = findData[key];
 							delete findData[key];
 						}
+						//use to find one use space
+						if (key.toLowerCase() === 'spaceid' || key.toLowerCase() === 'id') {
+							spaceId = findData[key];
+							delete findData[key];
+							findData.spaceId = spaceId;
+						}
+					}
+					if(!findData.userId){
+						findData.userId = $rootScope.current.user._id;
 					}
 					return resSpace.findUserSpaces(findData).$promise.then(function (resources) {
 						var spaces = [];
@@ -99,6 +109,17 @@
 			//return $q.reject('fail to get user spaces!');
 
 		};
+
+		service.getUserSpace = function (findData, callback){
+			if(typeof findData === 'number' || parseInt(findData) > 0){
+				findData = {
+					spaceId: findData
+				}
+			}
+			return this.getUserSpaces(findData, callback).then(function(spaces){
+				return spaces[0];
+			})
+		}
 
 		service.getTypeSpaces = function (typeData, callback) {
 			//get: /api/spaces/type
