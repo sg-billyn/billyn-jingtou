@@ -11,6 +11,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- Font awesome -->
+    <link href="vender/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="vender/inspinia/css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="vender/inspinia/css/style.css" rel="stylesheet">
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -36,6 +42,8 @@
       <link rel="stylesheet" href="components/oauth-buttons/oauth-buttons.css">
       <!-- endinjector -->
     <!-- endbuild -->
+
+    
   </head>
   <body ng-app="billynApp">
     <!--[if lt IE 7]>
@@ -95,7 +103,8 @@
       <script src="components/blyn/nuts/trade/trade.module.js"></script>
       <script src="components/blyn/nuts/voucher/voucher.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="components/blyn/core/space/blyn.space.js"></script>
+      <script src="components/blyn/core/space/blyn.space.controllers.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
       <script src="components/auth/router.decorator.js"></script>
@@ -117,8 +126,8 @@
       <script src="components/blyn/core/role/blyn.role.controllers.js"></script>
       <script src="components/blyn/core/role/blyn.role.js"></script>
       <script src="components/blyn/core/role/role.service.js"></script>
-      <script src="components/blyn/core/space/blyn.space.controllers.js"></script>
       <script src="app/account/login/login.controller.js"></script>
+      <script src="components/blyn/core/space/blyn.space.js"></script>
       <script src="components/blyn/core/space/space.service.js"></script>
       <script src="components/blyn/core/user/blyn.user.controllers.js"></script>
       <script src="components/blyn/core/user/blyn.user.js"></script>
@@ -148,7 +157,7 @@
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
       <script src="components/socket/socket.service.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
+      <script src="app/app.directives.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

@@ -1,0 +1,82 @@
+<h4>current role: {{vm.current.role.name}}</h4>
+<div class="row">
+    <div class="col-lg-4" ng-repeat="app in vm.space.apps track by $index">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>{{app.alias}}</h5>
+
+                <!-- This is example of local custom ibox tools -->
+                <div class="ibox-tools">
+                    <span class="label label-warning-light">总共{{app.nuts.length}}个功能 </span>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <div class="feed-activity-list">
+
+                        <div class="feed-element" ng-repeat="nut in app.nuts track by $index">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+                                    <a class="pull-left">
+                                {{nut.alias}}
+                            </a>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+                                    <div class="media-body ">
+
+                                        <div class="text-muted" ng-repeat="(key,permit) in nut.config.permits track by $index">
+                                            <label>
+                                                <input type="checkbox" ng-model="vm.checkboxCollection['nut_'+nut._id+'_'+key]" ng-change="vm.togglePermitCheckbox(nut,key)"> {{permit.alias}}
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="app in vm.space.apps track by $index" style="margin-bottom: 20px;">
+                <div class="functionSection">
+                    <div class="functionSection-content">
+                        <div class="functionSection-head">
+                            <div class="functionSection-icon">
+                                <span class="fa fa-gear"></span>
+                            </div>
+                        </div>
+                        <div class="functionSection-body">
+                            <div class="functionSection-body-content">
+                                <div class="functionSection-top">
+                                    <a class="functionSection-title">{{app.alias}}</a>
+                                </div>
+                                <div ng-repeat="nut in app.nuts track by $index">
+                                    <div>
+                                        <h5>{{nut.alias}}</h5>
+                                    </div>
+                                    <div ng-repeat="(key,permit) in nut.config.permits track by $index">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-model="vm.checkboxCollection['nut_'+nut._id+'_'+key]"> {{permit.alias}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->

@@ -6,6 +6,7 @@ angular.module('billynApp.core')
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId', '/pc/space/:spaceId/app/:appId/role/:nutId/home');
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminSpaceRole', '/pc/space/:spaceId/app/:appId/role/:nutId/adminSpaceRole/home');
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminUserRole', '/pc/space/:spaceId/app/:appId/role/:nutId/adminUserRole/home');
+    $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminNut/:roleId', '/pc/space/:spaceId/app/:appId/role/:nutId/adminNut/:roleId/home');
 
     //    $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/admin', '/pc/space/:spaceId/app/:appId/role/:nutId/admin/home');
     //   $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/admin/home', '/pc/space/:spaceId/app/:appId/role/:nutId/admin/home/space');
@@ -55,6 +56,23 @@ angular.module('billynApp.core')
         ncyBreadcrumb: { skip: true },
         authenticate: true
       })
+      .state('pc.space.app.role.adminSpaceRole.adminNut', {
+        url: '/adminNut/:roleId',
+        templateUrl: 'components/blyn/core/role/view/adminRoleNut.html',
+        controller: 'AdminRoleNutController',
+        controllerAs: 'vm',
+        ncyBreadcrumb: { label: '设置角色功能' },
+        authenticate: true,
+        resolve: {
+          currentRole: function($stateParams, BRole, $rootScope){
+            var roleId = $stateParams.roleId;
+            return BRole.findById(roleId).then(function(role){
+              $rootScope.current.role = role;
+              return role;
+            })
+          }
+        }
+      })
       .state('pc.space.app.role.adminUserRole', {
         url: '/adminUserRole',
         template: '<div ui-view=""></div>',
@@ -71,6 +89,7 @@ angular.module('billynApp.core')
         ncyBreadcrumb: { skip: true },
         authenticate: true
       })
+      
       .state('pc.space.app.role.member', {
         url: '/member',
         templateUrl: 'components/blyn/core/role/view/memberHome.html',

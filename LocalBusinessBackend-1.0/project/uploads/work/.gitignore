@@ -1,5 +1,0 @@
-# we ignore all the files inside upload directory
-/*
-# then we only include the following files, the rest of the files will be ignored
-!.gitignore
-!.gitkeep

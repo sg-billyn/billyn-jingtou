@@ -92,7 +92,7 @@
 
 				return resNut.query(nutData).$promise.then(function (nuts) {
 					return $q.when(nuts[0]);
-				});				
+				});
 			}
 			else {
 				//otherwise, return error
@@ -180,9 +180,17 @@
 			//return $q.reject('fail to add nut into app!');
 		}
 
-		service.getNutConfig = function (nutName, isCore) {
-			var configPath;
+		service.getNutConfig = function (nut, isCore) {
+			var configPath, nutName;
 			//first get nutData from config file
+			if (typeof nut === 'string') {
+				nutName = nut;
+			}
+
+			if (typeof nut === 'object') {
+				nutName = nut.name;
+				isCore = nut.type.name === 'nut.core' ? true : false;
+			}
 			if (typeof nutName === 'string') {
 				configPath = '/components/blyn/nuts/' + nutName + '/config.json';
 			}
@@ -190,7 +198,9 @@
 				configPath = '/components/blyn/core/' + nutName + '/config.json';
 			}
 
-			return $http.get(configPath);
+			return $http.get(configPath).then(function(config){
+				return $q.when(config.data);
+			});
 		}
 
 		service.addCore = function (nutData, appId, spaceId) {
@@ -397,7 +407,7 @@
 		service.userHasPermit = function (nutData, permitData) {
 			return this.findUserNutPermits(nutData).then(function (permits) {
 				var ret = false;
-				if (angular.isString(permitData)) {					
+				if (angular.isString(permitData)) {
 					angular.forEach(permits, function (permit) {
 						if (permit.name === permitData) {
 							ret = true;
@@ -407,7 +417,7 @@
 
 				if (angular.isObject(permitData)) {
 					var permitId = permitData._id || permitData.id || permitData.permitId || undefined;
-					if (permitId) {						
+					if (permitId) {
 						angular.forEach(permits, function (permit) {
 							if (permit._id === permit.id) {
 								ret = true;
