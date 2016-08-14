@@ -18,7 +18,7 @@ var Promise = require('bluebird');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -26,7 +26,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
+  return function (entity) {
     return entity.updateAttributes(updates)
       .then(updated => {
         return updated;
@@ -35,7 +35,7 @@ function saveUpdates(updates) {
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       return entity.destroy()
         .then(() => {
@@ -46,7 +46,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if (!entity) {
       res.status(404).end();
       return null;
@@ -57,7 +57,7 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
@@ -66,25 +66,25 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   //console.log('req.body',JSON.stringify(req.query));
   var mode = 'leaf';
-  if(req.query.mode){
+  if (req.query.mode) {
     mode = req.query.mode;
     delete req.query.mode;
   }
-  if(req.query.permitId){
-    return Permit.findById(req.query.permitId).then(function(permit){
+  if (req.query.permitId) {
+    return Permit.findById(req.query.permitId).then(function (permit) {
       return permit.getChildren('leaf')
-      .then(respondWithResult(res))
-      .catch(handleError(res));
+        .then(respondWithResult(res))
+        .catch(handleError(res));
     });
   } else {
-      if(req.query.spaceId){
-        return Permit.getPermitRoot(req.query).then(function(permitRoot){
-          //var findData = req.query;
-          //findData.mode = 'leaf';
-          return permitRoot.getChildren('leaf')
+    if (req.query.spaceId) {
+      return Permit.getPermitRoot(req.query).then(function (permitRoot) {
+        //var findData = req.query;
+        //findData.mode = 'leaf';
+        return permitRoot.getChildren('leaf')
           .then(respondWithResult(res))
           .catch(handleError(res));
-        });
+      });
     }
   }
 
@@ -113,7 +113,7 @@ export function show(req, res) {
 
 // Creates a new Permit in the DB
 export function create(req, res) {
-  return addPermit(req,res);
+  return addPermit(req, res);
   /*
   Permit.create(req.body)
     .then(respondWithResult(res, 201))
@@ -122,7 +122,7 @@ export function create(req, res) {
 
 // Creates a new Permit in the DB
 export function findOrCreate(req, res) {
-  return addPermit(req,res);
+  return addPermit(req, res);
 
   /*
   console.log('1');
@@ -170,6 +170,7 @@ export function destroy(req, res) {
 
 // Deletes a Permit from the DB
 export function destroyPermitRole(req, res) {
+  console.log('req.params:', req.params);
   PermitRole.destroy({
     where: {
       _id: req.params.id
@@ -184,9 +185,9 @@ export function destroyPermitRole(req, res) {
 export function getPermit(req, res) {
   var permitData = req.body;
   Permit.find({
-      include: [{all: true}],
-      where: permitData
-    })
+    include: [{ all: true }],
+    where: permitData
+  })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -199,47 +200,82 @@ export function addPermit(req, res) {
     .catch(handleError(res));
 }
 
-export function addChild(req, res){
+export function addChild(req, res) {
   //console.log('req params:',req);
   Role.find({
     _id: req.params.id
   })
-  .then(function(role){
-    //console.log('role:',role);
-    role.addChild(req.body).then(respondWithResult(res));
-  })
-  .catch(handleError(res));
+    .then(function (role) {
+      //console.log('role:',role);
+      role.addChild(req.body).then(respondWithResult(res));
+    })
+    .catch(handleError(res));
 }
 
 // get: api/permits/roles
-export function findAllPermitRole(req, res){
+export function findAllPermitRole(req, res) {
+
+  PermitRole.belongsTo(Permit, { as: 'permit' });
+  PermitRole.belongsTo(Role, { as: 'role' });
 
   var query = req.query;
+  var permitFind = {};
+  var roleFind = {};
+  var theFind = {};
 
-  PermitRole.belongsTo(Permit,{as: 'permit'});
-  PermitRole.belongsTo(Role,{as: 'role'});
+  if (query.permitName) {
+    permitFind.fullname = 'root.permit.' + query.permitName;
+    if (query.spaceId) {
+      permitFind.spaceId = query.spaceId;
+    }
+  }
+
+  if (query.permitId) {
+    theFind.permitId = query.permitId;
+  }
+
+  if (query.roleName) {
+    roleFind.fullname = 'root.role.' + query.roleName;
+    if (query.spaceId) {
+      roleFind.spaceId = query.spaceId;
+    }
+  }
+
+  if (query.roleId) {
+    theFind.roleId = query.roleId;
+  }
+
+  if (query.owner) {
+    theFind.owner = query.owner;
+  }
+
+  if (query.ownerId) {
+    theFind.ownerId = query.ownerId;
+  }
 
   return PermitRole.findAll({
-    where: query,
+    where: theFind,
     include: [
-    {
-      model: Permit, as: 'permit'
-    },{
-      model: Role, as: 'role'
-    }]
+      {
+        model: Permit, as: 'permit',
+        where: permitFind
+      }, {
+        model: Role, as: 'role',
+        where: roleFind
+      }]
   }).then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
 //get: api/permits/roles/user, should contain spaceId for find user roles
-export function findAllUserPermitRole(req, res){
+export function findAllUserPermitRole(req, res) {
 
-  PermitRole.belongsTo(Permit,{as: 'permit'});
-  PermitRole.belongsTo(Role,{as: 'role'});
+  PermitRole.belongsTo(Permit, { as: 'permit' });
+  PermitRole.belongsTo(Role, { as: 'role' });
 
   var query = req.query;
 
-  if(!query.spaceId || !query.userId){
+  if (!query.spaceId || !query.userId) {
     handleError(res);
   } else {
     var whereData = {};
@@ -251,10 +287,10 @@ export function findAllUserPermitRole(req, res){
 
     UserRole.findAll({
       where: whereData
-    }).then(function(rows){
-      
+    }).then(function (rows) {
+
       var or = [];
-      rows.forEach(function(row){
+      rows.forEach(function (row) {
         or.push({
           roleId: row.roleId
         });
@@ -262,26 +298,26 @@ export function findAllUserPermitRole(req, res){
       query['$or'] = or;
 
       PermitRole.findAll({
-        where:query,
+        where: query,
         include: [
-         {
-           model: Permit, as: 'permit'
-         },
-         {
-           model: Role, as: 'role'
-         }
+          {
+            model: Permit, as: 'permit'
+          },
+          {
+            model: Role, as: 'role'
+          }
         ]
       })
     })
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+      .then(respondWithResult(res, 201))
+      .catch(handleError(res));
   }
 }
 
-export function findPermitRole(req, res){
+export function findPermitRole(req, res) {
 
-  PermitRole.belongsTo(Permit, {as: 'permit'});
-  PermitRole.belongsTo(Role, {as: 'role'});
+  PermitRole.belongsTo(Permit, { as: 'permit' });
+  PermitRole.belongsTo(Role, { as: 'role' });
   PermitRole.find({
     where: {
       _id: req.params.id
@@ -300,14 +336,65 @@ export function findPermitRole(req, res){
     .catch(handleError(res));
 }
 
-export function createPermitRole(req, res){
+export function findPermitRoleByQuery(req, res) {
+  PermitRole.belongsTo(Permit, { as: 'permit' });
+  PermitRole.belongsTo(Role, { as: 'role' });
+
+  var query = req.query;
+  var permitFind = {};
+  var roleFind = {};
+  var theFind = {};
+
+  if (query.permitName) {
+    permitFind.fullname = 'root.permit.' + query.permitName;
+  }
+
+  if (query.permitId) {
+    theFind.permitId = query.permitId;
+  }
+
+  if (query.roleName) {
+    roleFind.fullname = 'root.role.' + query.roleName;
+  }
+
+  if (query.roleId) {
+    theFind.roleId = query.roleId;
+  }
+
+  if (query.owner) {
+    theFind.owner = query.owner;
+  }
+
+  if (query.ownerId) {
+    theFind.ownerId = query.ownerId;
+  }
+
+  return PermitRole.find({
+    where: theFind,
+    include: [
+      {
+        model: Permit, as: 'permit',
+        where: permitFind
+      },
+      {
+        model: Role, as: 'role',
+        where: roleFind
+      }
+    ]
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function createPermitRole(req, res) {
   //console.log(req.body);
-  PermitRole.belongsTo(Permit,{as: 'permit'});
-  PermitRole.belongsTo(Role, {as: 'role'});
+  PermitRole.belongsTo(Permit, { as: 'permit' });
+  PermitRole.belongsTo(Role, { as: 'role' });
   var body = req.body;
   var spaceId;
 
-  if(body.spaceId){
+  if (body.spaceId) {
     spaceId = body.spaceId;
   }
 
@@ -315,15 +402,15 @@ export function createPermitRole(req, res){
     where: req.body,
     defaults: {}
   })
-    .spread(function(row,created){
+    .spread(function (row, created) {
       return PermitRole.find({
-        where: {_id: row._id},
+        where: { _id: row._id },
         include: [{
           model: Permit, as: 'permit'
         },
-        {
-          model: Role, as: 'role'
-        }
+          {
+            model: Role, as: 'role'
+          }
         ]
       })
     })
@@ -331,52 +418,62 @@ export function createPermitRole(req, res){
     .catch(handleError(res));
 }
 
-export function addBulkPermitRole(req, res){
+export function addBulkPermitRole(req, res) {
 
   //console.log('body',JSON.stringify(req.body));
 
   var rows = req.body;
 
-  Promise.map(rows, function(row){
-    return new Promise(function(resolve,reject){
-       if(row.spaceId && row.permit){
-         var permitData = {};
-         if(typeof row.permit === 'object'){
-           permitData = row.permit;
-         }
-         if(typeof row.permit === 'string'){
-           permitData.name = row.permit;
-         }
-         permitData.spaceId = row.spaceId;
-          return Permit.addPermit(permitData).then(function(permit){
-              row.permitId = permit._id;
-              return resolve(permit);
-            })
-        } else {
-          return resolve(null);
+  return PermitRole.addBulkPermitRole(rows)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+
+  /*
+
+  Promise.map(rows, function (row) {
+    return new Promise(function (resolve, reject) {
+      if (row.spaceId && row.permit) {
+        var permitData = {};
+        if (typeof row.permit === 'object') {
+          permitData = row.permit;
         }
-    }).then(function(){
+        if (typeof row.permit === 'string') {
+          permitData.name = row.permit;
+        }
+        permitData.spaceId = row.spaceId;
+        return Permit.addPermit(permitData).then(function (permit) {
+          row.permitId = permit._id;
+          return resolve(permit);
+        })
+      } else {
+        return resolve(null);
+      }
+    }).then(function () {
       //console.log('2');
-      if(row.spaceId && row.role){
-          return Role.find({
-            where: {
-              spaceId: row.spaceId,
-              fullname: 'root.'+row.role
-            }
-          }).then(function(role){
-              //console.log('role:', JSON.stringify(role));
-              row.roleId = role._id;
-              return Promise.resolve(null);
-          });
-        } else {
+      if (row.spaceId && row.role) {
+        return Role.findOrCreate({
+          where: {
+            spaceId: row.spaceId,
+            fullname: 'root.role.' + row.role
+          },
+          defaults:{
+            name: row.role,
+            alias: row.role
+          }
+        }).spread(function (role, created) {
+          //console.log('role:', JSON.stringify(role));
+          row.roleId = role._id;
           return Promise.resolve(null);
-        }
+        });
+      } else {
+        return Promise.resolve(null);
+      }
     })
-  }).then(function(){
+  }).then(function () {
     //console.log(3);
     //console.log('rows:',JSON.stringify(rows));
-    PermitRole.bulkCreate(rows).then(function(){
-        res.send('success');
-    });  
-  });
+    return PermitRole.bulkCreate(rows)
+      .then(respondWithResult(res, 201))
+      .catch(handleError(res));;
+  });*/
 }

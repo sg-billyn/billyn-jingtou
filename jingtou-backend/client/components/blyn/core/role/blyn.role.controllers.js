@@ -73,12 +73,15 @@
 
     class AdminRoleNutController {
 
-        constructor(BRole, $rootScope, BNut) {
+        constructor(BRole, $rootScope, BNut, BPermit) {
 
             this.space = $rootScope.current.space;
             this.userSpace = $rootScope.current.userSpace;
 
+            this.current = $rootScope.current;
+
             this.BNut = BNut;
+            this.BPermit = BPermit;
 
             var self = this;
 
@@ -110,6 +113,36 @@
                     return config.permits;
                 });
             }
+        }
+
+        togglePermitCheckbox(nut, permitName) {
+            var self = this;
+            var checkboxCollection = self.checkboxCollection;
+
+            var checkboxId = 'nut_' + nut._id + '_' + permitName;
+
+            self.BPermit.findPermitRole(
+                {
+                    owner: 'nut',
+                    ownerId: nut._id,
+                    permitName: permitName,
+                    roleId: self.current.role._id
+                }
+            ).then(function (permitRole) {
+                if (permitRole && permitRole._id && permitRole._id > 0) {
+                    self.BPermit.deletePermitRole(permitRole._id);
+                } else {
+                    self.BPermit.addBulkPermitRole(
+                        [{
+                            owner: 'nut',
+                            ownerId: nut._id,
+                            permit: permitName,
+                            spaceId: self.current.space._id,//if use permit name, must provide spaceId
+                            roleId: self.current.role._id
+                        }]
+                    )
+                }
+            });
         }
     }
 
@@ -172,7 +205,7 @@
 
         showAdminNut(role) {
             var ctrl = this;
-            this.$state.go('pc.space.app.role.adminNut',
+            this.$state.go('pc.space.app.role.adminSpaceRole.adminNut',
                 {
                     spaceId: ctrl.$rootScope.current.space._id,
                     appId: ctrl.$rootScope.current.app._id,

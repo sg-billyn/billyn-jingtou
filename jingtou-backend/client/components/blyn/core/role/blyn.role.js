@@ -56,6 +56,23 @@ angular.module('billynApp.core')
         ncyBreadcrumb: { skip: true },
         authenticate: true
       })
+      .state('pc.space.app.role.adminSpaceRole.adminNut', {
+        url: '/adminNut/:roleId',
+        templateUrl: 'components/blyn/core/role/view/adminRoleNut.html',
+        controller: 'AdminRoleNutController',
+        controllerAs: 'vm',
+        ncyBreadcrumb: { label: '设置角色功能' },
+        authenticate: true,
+        resolve: {
+          currentRole: function($stateParams, BRole, $rootScope){
+            var roleId = $stateParams.roleId;
+            return BRole.findById(roleId).then(function(role){
+              $rootScope.current.role = role;
+              return role;
+            })
+          }
+        }
+      })
       .state('pc.space.app.role.adminUserRole', {
         url: '/adminUserRole',
         template: '<div ui-view=""></div>',
@@ -72,31 +89,7 @@ angular.module('billynApp.core')
         ncyBreadcrumb: { skip: true },
         authenticate: true
       })
-      .state('pc.space.app.role.adminNut', {
-        url: '/adminNut/:roleId',
-        template: '<div ui-view=""></div>',
-        controller: 'AdminRoleNutController',
-        controllerAs: 'vm',
-        ncyBreadcrumb: { label: '设置角色功能' },
-        authenticate: true,
-        resolve: {
-          currentRole: function($stateParams, BRole, $rootScope){
-            var roleId = $stateParams.roleId;
-            return BRole.findById(roleId).then(function(role){
-              $rootScope.current.role = role;
-              return role;
-            })
-          }
-        }
-      })
-      .state('pc.space.app.role.adminNut.home', {
-        url: '/home',
-        templateUrl: 'components/blyn/core/role/view/adminRoleNut.html',
-        controller: 'AdminRoleNutController',
-        controllerAs: 'vm',
-        ncyBreadcrumb: { skip: true },
-        authenticate: true
-      })
+      
       .state('pc.space.app.role.member', {
         url: '/member',
         templateUrl: 'components/blyn/core/role/view/memberHome.html',

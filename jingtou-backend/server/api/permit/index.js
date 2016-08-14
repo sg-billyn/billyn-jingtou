@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/roles', controller.findAllPermitRole);
 router.get('/roles/user', controller.findAllUserPermitRole);
+router.get('/roles/findOne', controller.findPermitRoleByQuery);
 router.get('/roles/:id', controller.findPermitRole);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
