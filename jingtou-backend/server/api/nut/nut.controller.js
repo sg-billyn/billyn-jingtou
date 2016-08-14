@@ -408,69 +408,56 @@ export function findAllPermitRole(req, res) {
   App.belongsTo(Category, { as: 'type' });
 
   var spaceId, appId, nutId;
-  var findData;
+  var findData = {};
+  var nutFind = {};
+  var permitFind = {};
+  var roleFind = {};
+
+  findData.owner = 'nut';
 
   if (req.query.spaceId) {
-    spaceId = req.query.spaceId;
-    findData = {};
-    findData.where = {};
-    findData.where.spaceId = req.query.spaceId;
-    findData.where.owner = 'nut';
+    findData.spaceId = req.query.spaceId;
   }
 
   if (req.query.nutId) {
-    findData = {};
-    findData.where = {};
-    findData.where.ownerId = req.query.nutId;
-    findData.where.owner = 'nut';
+    findData.ownerId = req.query.nutId;
   }
 
   if (req.query.roleId) {
-    findData = {};
-    findData.where = {};
-    findData.where.roleId = req.query.roleId;
-    findData.where.owner = 'nut';
+    findData.roleId = req.query.roleId;
+  }
+
+  if (req.query.permitId) {
+    findData.permitId = req.query.permitId;
   }
 
   if (req.query.appId) {
-    appId = req.query.appId;
-    findData = {};
-    findData.where = {};
-    //appId = req.query.nutId;
-    findData.where.owner = 'nut';
-    findData.include = [{
-      model: Nut,
-      as: 'nut',
-      where: {
-        appId: appId
-      }
-    }];
+    nutFind.appId = req.query.appId;
   }
 
   //console.log('nutController findAllPermitRole spaceId:',spaceId);
-
-  if (typeof findData === 'object') {
-    if (!findData.include) {
-      findData.include = [];
-      findData.include.push({
-        model: Nut, as: 'nut'
-      });
+  PermitRole.findAll(
+    {
+      where: findData,
+      include: [
+        {
+          model: Permit, as: 'permit',
+          where: permitFind
+        },
+        {
+          model: Role, as: 'role',
+          where: roleFind
+        },
+        {
+          model: Nut, as: 'nut',
+          where: nutFind
+        }
+      ]
     }
-    ///*
-    findData.include.push({
-      model: Permit, as: 'permit'
-    });//*/
+  )
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
 
-    findData.include.push({
-      model: Role, as: 'role'
-    });
-
-    PermitRole.findAll(findData)
-      .then(respondWithResult(res, 201))
-      .catch(handleError(res));
-  } else {
-    res.status(500).send('please check input!');
-  }
 
 }
 

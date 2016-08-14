@@ -94,13 +94,26 @@
             })
 
             //populate checkbox value
+            BNut.findAllPermitRole(
+                {
+                    spaceId: self.current.space._id,
+                    roleId: self.current.role._id
+                }
+            ).then(function (permitRoles) {
+                angular.forEach(permitRoles, function (permitRole) {
+                    self.checkboxCollection['nut_' + permitRole.nut._id + '_' + permitRole.permit.name] = true;
+                })
+            })
+
+            //populate checkbox value
+            /*
             angular.forEach(self.userSpace.apps, function (app) {
                 angular.forEach(app.nuts, function (oNut) {
                     angular.forEach(oNut.permitRoles, function (permitRole) {
                         self.checkboxCollection['nut_' + oNut._id + '_' + permitRole.permit.name] = true;
                     })
                 })
-            })
+            })*/
         }
 
         getNutPermitsInConfig(nut) {
