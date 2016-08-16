@@ -100,6 +100,9 @@ export function index(req, res) {
     Space.belongsTo(Category, { as: 'type' });
     Space.hasMany(App, { as: 'apps' });
     Space.hasMany(Role, { as: 'roles' });
+    Role.hasMany(PermitRole, { as: 'rolePermits' });
+    PermitRole.belongsTo(Permit, { as: 'permit' });
+    PermitRole.belongsTo(Role, { as: 'guestRole', foreignKey: 'ownerId' });
 
     var findData = req.body;
     var includeData = [{
@@ -163,7 +166,21 @@ export function index(req, res) {
                         fullname: {
                             $ne: 'root.role'
                         }
-                    }
+                    },
+                    include: [
+                        {
+                            model: PermitRole, as: 'rolePermits',
+                            where: { owner: 'role' },
+                            include: [
+                                {
+                                    model: Permit, as: 'permit'
+                                },
+                                {
+                                    model: Role, as: 'guestRole'
+                                }
+                            ]
+                        }
+                    ]
                 },
             ]
         })
@@ -193,7 +210,7 @@ export function show(req, res) {
     Space.hasMany(Role, { as: 'roles' });
     App.hasMany(Nut, { as: 'nuts' });
     Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
-    Nut.belongsTo(Category, {as: 'type'});
+    Nut.belongsTo(Category, { as: 'type' });
 
     //console.log('2');
 
@@ -402,7 +419,7 @@ export function findUserSpaces(req, res) {
         App.belongsTo(Category, { as: 'type' });
         //console.log(5);
         App.hasMany(Nut, { as: 'nuts' });
-        Nut.belongsTo(Category, {as: 'type'});
+        Nut.belongsTo(Category, { as: 'type' });
         //console.log(6);
         Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
         //console.log(7);

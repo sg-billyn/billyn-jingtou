@@ -14,6 +14,8 @@ router.get('/', controller.index);
 router.get('/name', controller.getRole);
 router.get('/user/space', controller.findAllUserSpaceRole);
 
+router.get('/grants', controller.findAllGrant);
+
 //get role by Id: id = number
 router.get('/:id', controller.getRole);
 

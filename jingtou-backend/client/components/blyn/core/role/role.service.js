@@ -20,6 +20,13 @@
 					params: {
 						id: 'grants'
 					}
+				},
+				findGrants: {
+					method: 'GET',
+					isArray: true,
+					params: {
+						id: 'grants'
+					}
 				}
 			});
 
@@ -160,6 +167,16 @@
 				grants: grantsData,
 				ownerData: ownerData
 			}).$promise;
+		}
+
+		//this function return all grants
+		service.findAllGrant = function(role, ownerData){
+			resRole.findAllGrants(
+				{
+					roleId: role._id,
+					ownerData: ownerData
+				}
+			).$promise;
 		}
 
 		return service;

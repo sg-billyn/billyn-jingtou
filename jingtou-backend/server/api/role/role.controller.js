@@ -366,7 +366,7 @@ export function findUserRoles(req, res) {
 
   var query = req.query;
 
-  console.log('query:', JSON.stringify(query));
+  //console.log('query:', JSON.stringify(query));
 
   if (!_.isEmpty(query) && query.userId && query.userId > 0) {
 
@@ -407,6 +407,12 @@ export function addGrants(req, res) {
 
 export function findAllUserSpaceRole(req, res) {
   Role.findAllUserSpaceRole(req.query.userId, req.query.spaceId)
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function findAllGrant(req, res) {
+  return Role.findGrants(req.body.roleId, req.body.ownerData)
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
