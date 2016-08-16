@@ -31,6 +31,7 @@
 				}
 			});
 
+
 		var currentSpace = {};
 
 		var service = {};
@@ -70,7 +71,7 @@
 							findData.spaceId = spaceId;
 						}
 					}
-					if(!findData.userId){
+					if (!findData.userId) {
 						findData.userId = $rootScope.current.user._id;
 					}
 					return resSpace.findUserSpaces(findData).$promise.then(function (resources) {
@@ -110,13 +111,13 @@
 
 		};
 
-		service.getUserSpace = function (findData, callback){
-			if(typeof findData === 'number' || parseInt(findData) > 0){
+		service.getUserSpace = function (findData, callback) {
+			if (typeof findData === 'number' || parseInt(findData) > 0) {
 				findData = {
 					spaceId: findData
 				}
 			}
-			return this.getUserSpaces(findData, callback).then(function(spaces){
+			return this.getUserSpaces(findData, callback).then(function (spaces) {
 				return spaces[0];
 			})
 		}
@@ -484,7 +485,6 @@
 		service.findRoles = function (roleData) {
 			return this.getRoles(roleData);
 		}
-
 
 		service.getSpaceUsers = function (id) {
 			var res = $resource('/api/users/sp/:spaceId');

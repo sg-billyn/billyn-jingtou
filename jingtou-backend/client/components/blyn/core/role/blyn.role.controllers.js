@@ -569,12 +569,212 @@
 
     } //class
 
+    class AdminUserController {
+        constructor($stateParams, $state, BRole, BUser) {
+
+            var that = this;
+
+            BUser.getUserProfiles().then(function (userProfiles) {
+                if (angular.isArray(userProfiles) && userProfiles.length > 0) {
+                    that.userProfiles = userProfiles;
+                } else {
+                    BUser.bulkAddUserProfile(
+                        [
+                            {
+                                imgUrl: 'a1.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a2.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a3.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a4.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a5.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a6.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a7.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a8.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a9.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a10.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            },
+                            {
+                                imgUrl: 'a11.jpg',
+                                familyName: 'Jackson',
+                                surName: 'Anthony',
+                                position: '产品经理',
+                                email:"a1@billyn.net",
+                                active:'true'
+                            }
+                        ]
+                    ).then(function () {
+                        BUser.getUserProfiles().then(function (results) {
+                            that.userProfiles = results;
+                        })
+                    })
+                }
+            })
+
+        }
+
+
+        startDialog(user) {
+            console.log("mouse dowm");
+
+            this.currentUser = user;
+
+            var ctrl = this;
+
+            ctrl.spaceRoles.forEach(function (role) {
+                var enabled = false;
+                var index = ctrl.currentUser.roles.findIndex(function (r) {
+                    return r._id == role._id;
+                });
+
+                if (index > -1)
+                    enabled = true;
+
+                role.checked = enabled;
+                ctrl.roles.push(role);
+            });
+
+            console.log("total roles = " + ctrl.roles);
+        }
+
+
+        assignRole() {
+
+            var ctrl = this;
+            var toAdd = [];
+            var toDel = [];
+
+            this.roles.forEach(function (role) {
+                var index = ctrl.currentUser.roles.findIndex(function (r) {
+                    return r._id == role._id;
+                });
+                if (role.checked) {
+                    if (index == -1) {//add if not find in user roles bu checked
+                        toAdd.push(role);
+                    }
+                }
+                else {
+                    if (index > -1) { //delete if find in user roles but unchecked
+                        toDel.push(role);
+                    }
+                }
+            });
+            if (toAdd.length > 0) {
+                angular.element('#assignRoleModal').on('hidden.bs.modal', function () {
+                    ctrl.$state.reload();
+                });
+
+                var toAddRoles = [];
+                toAdd.forEach(function (role) {
+                    var roleData = {};
+                    roleData.userId = ctrl.currentUser._id;
+                    roleData.roleId = role._id;
+
+                    toAddRoles.push(roleData);
+                });
+                ctrl.BRole.addUserRoleBatch(toAddRoles).then(function (res) {
+                    ctrl.toaster.success("Success add roles");
+
+                });
+            }
+            if (toDel.length > 0) {
+                angular.element('#assignRoleModal').on('hidden.bs.modal', function () {
+                    ctrl.$state.reload();//.go('pc.joinSpace', null, { reload: true });
+                });
+
+                // toDelRoles = toDel.map(function (role) {
+                //   var roleData = {};
+                //   roleData.userId = ctrl.user._id;
+                //   roleData.spaceId = ctrl.spaceId;
+                //   roleData.roleId = role._id;
+
+                //   return ctrl.BRole.deleteUserRole(roleData);
+                // });
+                // ctrl.$q.all(toDelRoles).then(function (res) {
+                //   var a = res;
+                //   var b = a.length;
+                // });
+            }
+
+            //  ctrl.$state.go('user');//reload();
+
+        } //method
+
+    } //class
+
     angular.module('billynApp.core')
         .controller('RoleController', RoleController)
         .controller('RoleHomeController', RoleHomeController)
         .controller('AdminSpaceRoleController', AdminSpaceRoleController)
         .controller('AdminUserRoleController', AdminUserRoleController)
         .controller('AdminRoleNutController', AdminRoleNutController)
+        .controller('AdminUserController', AdminUserController)
         // .controller('SpaceRoleController', SpaceRoleController)
         // .controller('UserRoleController', UserRoleController)
         // .controller('RoleAdminController', RoleAdminController)

@@ -13,7 +13,7 @@
 				"role": {
 					"preload": true,
 					"grants": {
-						"admin": "adminSpaceRole|管理机构角色,adminUserRole|管理用户角色"					
+						"admin": "adminSpaceRole|管理机构角色,adminUserRole|管理用户角色,adminUser|管理用户"					
 					}
 				},
 				"space": {

@@ -89,6 +89,19 @@ angular.module('billynApp.core')
         ncyBreadcrumb: { skip: true },
         authenticate: true
       })
+      .state('pc.space.app.role.adminUser', {
+        url: '/adminUser',
+        template: '<div ui-view=""></div>',
+        ncyBreadcrumb: { skip: true },
+        authenticate: true
+      })
+      .state('pc.space.app.role.adminUser.home', {
+        url: '/adminUser',
+        templateUrl: 'components/blyn/core/role/view/adminUser.html',
+        controller: 'AdminUserController',
+        ncyBreadcrumb: { label: '用户管理' },
+        authenticate: true
+      })
       
       .state('pc.space.app.role.member', {
         url: '/member',

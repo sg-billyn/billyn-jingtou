@@ -16,6 +16,10 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
+//profile has scope
+router.get('/profiles', controller.queryAllProfile);
+router.post('/profiles', controller.bulkAddProfile);
+
 //router.post('/test', controller.test);
 
 export default router;

@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
     function BUserService($resource, User, $q, Util) {
         var safeCb = Util.safeCb;
@@ -30,15 +30,27 @@
                 }
             });
 
+        var resUserProfile = $resource('/api/user/profiles/:id/:controller', {
+            id: '@_id'
+        }, {
+            bulkAdd: {
+                method: 'POST',
+                isArray: true,
+                params: {
+                    id: 'bulk'
+                }
+            }
+            });
+
         var currentUser = {};
 
         var service = {};
 
-        service.setCurrent = function(user) {
+        service.setCurrent = function (user) {
             return currentUser = user;
         }
 
-        service.current = function(callback) {
+        service.current = function (callback) {
             if (arguments.length === 0) {
                 return currentUser;
             }
@@ -52,6 +64,19 @@
                     safeCb(callback)({});
                     return {};
                 })
+        }
+
+        service.getUserProfiles = function (findContext) {
+            return resUserProfile.get(findContext).$promise;
+        }
+
+        service.bulkAddUserProfile = function (bulkData, context) {
+            context = context || {};
+            if (!context.hasOwnProperty('spaceId')) {
+                context.spaceId = $rootScope.current.space._id;
+            }
+            context.data = bulkData;
+            return resUserProfile.bulkAdd(context).$promise;
         }
 
         return service;

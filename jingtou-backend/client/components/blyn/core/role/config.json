@@ -7,11 +7,8 @@
 		"adminUserRole": {
 			"alias": "admin user role"
 		},
-		"manager": {
-			"alias": "role manager"
-		},
-		"customer": {
-			"alias": "role customer"
+		"adminUser": {
+			"alias": "admin space user"
 		}
 	}
 }

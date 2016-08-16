@@ -35,5 +35,6 @@ db.CircleCollab = db.sequelize.import('../api/collab/circleCollab.model');
 db.Collab = db.sequelize.import('../api/collab/collab.model');
 db.CollabRole = db.sequelize.import('../api/collab/collabRole.model');
 db.Timeslot = db.sequelize.import('../api/timeslot/timeslot.model');
+db.UserProfile = db.sequelize.import('../api/user/UserProfile.model');
 
 export default db;
