@@ -67,9 +67,9 @@
                 { id: '3', alias: '公共机构' },
                 { id: '4', alias: '非盈利机构' }
             ];*/
-            
+
             var that = this;
-            BSpace.getConfig().then(function(config){
+            BSpace.getConfig().then(function (config) {
                 that.spaceTypes = config.types;
             })
         }
@@ -91,82 +91,85 @@
     }
 
     class JoinSpaceController {
-        join() {
-            console.log(this.currentSpace);
+
+        loadJoinableSpaces(user){
+            user = user || this.Auth.getCurrentUser();
+            var that = this;
+            that.BSpace.findAllJoinableSpace(user).then(function(spaces){
+                that.joinableSpaces = spaces;
+            })
+        }
+        loadFollowingSpaces(user){
+            user = user || this.Auth.getCurrentUser();
+            var that = this;
+            that.BSpace.findAllFollowingSpace(user).then(function(spaces){
+                that.followingSpaces = spaces;
+            });
+            that.BRole.findAllUserRole(
+                {
+                    userId: user._id,
+                    joinStatus: ['applying','following']
+                }
+            ).then(function(userRoleCollection){
+                that.userRoleCollection = userRoleCollection;
+            })
+        }
+
+        joinSpace(space) {
+            //console.log(this.currentSpace);
             var user = this.Auth.getCurrentUser();
             var ctrl = this;
-            this.BSpace.userJoin(ctrl.currentSpace._id, user._id).then(function (data) {
+            this.BSpace.userJoin(space._id, user._id).then(function (data) {
+                
                 // console.log("join space result: " + data);
                 if (data.$resolved === true) {
                     ctrl.toaster.success("Join space success.");
-                    var index = -1;
-                    var keepGoing = true;
-                    angular.forEach(ctrl.joinSpaces, function (space) {
-                        if (keepGoing === true) {
-                            if (space._id === ctrl.currentSpace._id) {
-                                index = ctrl.joinSpaces.indexOf(space);
-                                keepGoing = false;
-                            }
-                        }
-                    });
-                    if (index > 0)
-                        ctrl.joinSpaces.splice(index, 1);
-
+                    //ctrl.loadJoinableSpaces();
+                    //ctrl.loadFollowingSpaces();
+                    ctrl.$state.go('pc.joinSpace', null, { reload: 'pc' });
+                    /*
                     angular.element('#myModal').on('hidden.bs.modal', function () {
                         ctrl.$state.go('pc.joinSpace', null, { reload: true });
-                    });
+                    });*/
                 }
                 else
                     ctrl.toaster.error("Join space failed.");
 
             });
         }
-        constructor(BSpace, $state, Auth, toaster) {
-            console.log(BSpace);
+
+        followSpace(space) {
+            //console.log(this.currentSpace);
+            var user = this.Auth.getCurrentUser();
+            var ctrl = this;
+            this.BSpace.userJoin(space._id, user._id, 'following').then(function (data) {
+                
+                // console.log("join space result: " + data);
+                if (data.$resolved === true) {
+                    ctrl.toaster.success("成功关注机构！");
+                    ctrl.loadJoinableSpaces();
+                    ctrl.loadFollowingSpaces();
+                }
+                else
+                    ctrl.toaster.error("关注机构失败！");
+
+            });
+        }
+        constructor(BSpace,BRole, $state, Auth, toaster, $rootScope) {
+            //console.log(BSpace);
+            this.$rootScope = $rootScope;
             this.BSpace = BSpace;
+            this.BRole = BRole;
             this.$state = $state;
             this.Auth = Auth;
             this.toaster = toaster;
             this.joinSpaces = {};
             var ctrl = this;
 
+            this.user = Auth.getCurrentUser();
 
-            this.BSpace.getAllSpaces().then(function (res) {
-                var allSpaces = res; //get all the spaces                
-                var user = Auth.getCurrentUser();
-
-                //Get the spaces of this user
-                //then remove them from all the spaces.       
-                ctrl.BSpace.getUserSpaces(user._id).then(function (spaces) {
-                    angular.forEach(spaces, function (space) {
-                        //   console.log(space);
-                        var keepGoing = true;
-                        angular.forEach(allSpaces, function (aSpace) {
-                            if (keepGoing) {
-
-                                if (aSpace._id == space._id) {
-                                    var index = allSpaces.indexOf(aSpace);
-                                    allSpaces.splice(index, 1);
-                                    keepGoing = false;
-                                }
-                            }
-                        });
-                    });
-                });
-
-                ctrl.joinSpaces = allSpaces;
-            });
-
-
-            //查询指定可加入的spaces数据
-            //this.joinSpaces = [
-            //  {spaceId:1, name: '加入机构1', desc: '测试数据-加入机构1'},
-            //  {spaceId:2, name: '加入机构2', desc: '测试数据-加入机构2'}
-            //];
-            // 用于存储单个space
-            this.currentSpace = {
-                _id: '', name: '', desc: ''
-            };
+            this.loadJoinableSpaces(this.user);
+            this.loadFollowingSpaces(this.user);
 
         }
     }

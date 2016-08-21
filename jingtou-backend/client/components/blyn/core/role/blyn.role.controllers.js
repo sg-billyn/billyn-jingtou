@@ -160,19 +160,31 @@
     }
 
     class AdminSpaceRoleController {
-        constructor($stateParams, $state, BRole, toaster, $rootScope) {
+        constructor($stateParams, $state, BRole, toaster, $rootScope, BSpace) {
+            this.roles = $rootScope.current.space.roles;
+            this.current = $rootScope.current;
+            this.$state = $state;
+            this.BSpace = BSpace;
+            this.$rootScope = $rootScope;
+            this.action = {
+                name: 'showDetail',
+                role: this.roles[0]
+            };
+
             // alert("Space Role Cotroller");
-            this.currentRole = {};
+            //this.currentRole = {};
             this.newRole = {};
             this.toaster = toaster;
-            this.$state = $state;
+            //this.$state = $state;
             var spaceId = $stateParams.spaceId;
             var ctrl = this;
             this.BRole = BRole;
-            this.adminRoles = [];
-            this.memberRoles = [];
-            this.customerRoles = [];
+            //this.adminRoles = [];
+            //this.memberRoles = [];
+            //this.customerRoles = [];
+            //this.publicRoles = [];
             this.$rootScope = $rootScope;
+            /*
             this.BRole.getSpaceRoles(spaceId).then(function (data) {
                 angular.forEach(data, function (role) {
                     //console.log(role);
@@ -185,23 +197,31 @@
                     else if (role.fullname.indexOf("root.role.customer") == 0) {
                         ctrl.customerRoles.push(role);
                     }
+                    else if (role.fullname.indexOf("root.role.public") == 0) {
+                        ctrl.publicRoles.push(role);
+                    }
                 });
-            });
+            });*/
         }
 
 
         save() {
             var newRole = {};
-            newRole.spaceId = this.currentRole.spaceId;
-            newRole.parent = this.currentRole._id;
+            newRole.spaceId = this.current.space._id;
+            newRole.parent = this.action.role._id;
             newRole.name = this.newRole.name;
             newRole.alias = this.newRole.alias;
+            newRole.description = this.newRole.description;
             var ctrl = this;
+            /*
             angular.element('#addRoleModal').on('hidden.bs.modal', function () {
                 ctrl.$state.reload();
-            });
-            this.BRole.addChild(ctrl.currentRole._id, newRole).then(function (res) {
+            });*/
+            this.BRole.addChild(ctrl.action.role._id, newRole).then(function (res) {
                 ctrl.toaster.success("Success add role");
+                ctrl.BSpace.findRoles().then(function (roles) {
+                    ctrl.roles = ctrl.current.space.roles = roles;
+                })
             });
         }
 
@@ -226,10 +246,22 @@
                     roleId: role._id
                 });
         }
+
+        showDetail(role) {
+            var that = this;
+            that.action.role = role;
+            that.action.name = 'showDetail';
+        }
+
+        showAddChild(role) {
+            var that = this;
+            that.action.role = role;
+            that.action.name = 'showAddChild';
+        }
     }
 
     class AdminUserRoleController {
-        constructor($stateParams, $state, BRole, BSpace) {
+        constructor($stateParams, $state, BRole, BSpace, $rootScope) {
             this.BRole = BRole;
             this.BSpace = BSpace;
             this.spaceId = $stateParams.spaceId;
@@ -238,28 +270,66 @@
             this.spaceUsers = [];
             this.currentUser = {};
             this.roles = [];
+            this.current = $rootScope.current;
+            this.action = {
+                'name': 'showUserDetail'
+            }
             var ctrl = this;
 
-
-            ctrl.BRole.getSpaceRoles(ctrl.spaceId).then(function (data) {
-                ctrl.spaceRoles = data;
-            });
-
-
-            ctrl.BSpace.getSpaceUsers(this.spaceId).then(function (data) {
-                data.forEach(function (spaceUser) {
-                    var a = spaceUser.roles;
-                    spaceUser.roles = a.filter(function (role) {
-                        return role.spaceId == ctrl.spaceId;
-                    });
-                });
-
-                ctrl.spaceUsers = data.filter(function (spaceUser) {
-                    return spaceUser.roles.length > 0;
-                });
-            });
+            this.loadSpaceUserRole();
         }
 
+        //reload all space user role
+        loadSpaceUserRole() {
+            var that = this;
+            that.BRole.findAllUserRole(
+                {
+                    spaceId: that.current.space._id,
+                    joinStatus: 'all'
+                }
+            ).then(function (collection) {
+                that.userRoleCollection = collection;
+                that.action.userRole = collection[0];
+            })
+        }
+
+        showUserDetail(userRole) {
+            var that = this;
+            that.action = {
+                name: 'showUserDetail',
+                userRole: userRole
+            }
+        }
+
+        changeUserRole(action) {
+            var joinStatus;
+            var that = this;
+            that.action.subAction = action;
+            if (action === 'approve') {
+                that.action.joinStatus = 'joined';
+            }
+            if (action === 'assign') {
+                that.action.joinStatus = 'joined';
+            }
+            if (action === 'reject') {
+                that.action.joinStatus = 'rejected';
+            }
+            if (action === 'cancel') {
+                that.action.joinStatus = 'cancelled';
+            }
+            if (action === 'confirm') {
+                that.BRole.updateUserRole(
+                    {
+                        id: that.action.userRole._id,
+                        joinStatus: that.action.joinStatus
+                    }
+                ).then(function (result) {
+                    if (result.$resolved && result.$resolved === true) {
+                        that.action.userRole.joinStatus = that.action.joinStatus;
+                    }
+                })
+            }
+        }
 
         startDialog(user) {
             console.log("mouse dowm");
@@ -585,88 +655,88 @@
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a2.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a3.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a4.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a5.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a6.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a7.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a8.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a9.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a10.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             },
                             {
                                 imgUrl: 'a11.jpg',
                                 familyName: 'Jackson',
                                 surName: 'Anthony',
                                 position: '产品经理',
-                                email:"a1@billyn.net",
-                                active:'true'
+                                email: "a1@billyn.net",
+                                active: 'true'
                             }
                         ]
                     ).then(function () {

@@ -7,13 +7,10 @@
 		var resSpace = $resource('/api/spaces/:id/:controller', {
 			id: '@_id'
 		}, {
-				update: {
-					method: 'PUT'
-				},
 				userJoin: {
-					method: 'GET',
+					method: 'Post',
 					params: {
-						controller: 'userJoin'
+						id: 'userJoin'
 					}
 				},
 				addType: {
@@ -26,6 +23,14 @@
 					method: 'GET',
 					params: {
 						id: 'user',
+					},
+					isArray: true
+				},
+				findAllJoinableSpace: {
+					method: 'GET',
+					params: {
+						id: 'user',
+						controller: 'joinable',
 					},
 					isArray: true
 				}
@@ -354,13 +359,17 @@
 				});
 		};
 
-		service.userJoin = function (spaceId, userId, callback) {
+		service.userJoin = function (spaceId, userId, status, callback) {
 			//get: /api/spaces/:id/userJoin
 			//return boolean
-			return resSpace.userJoin({
-				id: spaceId,
+			var joinData = {
+				spaceId: spaceId,
 				userId: userId
-			},
+			};
+			if (status) {
+				joinData.joinStatus = status;
+			}
+			return resSpace.userJoin(joinData,
 				function (data) {
 					return safeCb(callback)(null, data);
 				},
@@ -496,6 +505,17 @@
 			return $http.get('/components/blyn/core/space/config.json').then(function (res) {
 				return $q.when(res.data);
 			});
+		}
+
+		service.findAllJoinableSpace = function (user) {
+			return resSpace.findAllJoinableSpace({ userId: user._id }).$promise;
+		}
+
+		service.findAllFollowingSpace = function (user) {
+			return resSpace.findUserSpaces({
+				//userId: user._id,
+				joinStatus: ['applying', 'following']
+			}).$promise;
 		}
 
 		return service;

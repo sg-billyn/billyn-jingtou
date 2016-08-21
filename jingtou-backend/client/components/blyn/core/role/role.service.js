@@ -27,6 +27,21 @@
 					params: {
 						id: 'grants'
 					}
+				},
+				findAllUserRole: {
+					method: 'GET',
+					isArray: true,
+					params: {
+						id: 'users'
+					}
+				}
+			});
+
+		var resUserRole = $resource('/api/roles/users/:id/:controller', {
+			id: '@_id'
+		}, {
+				update: {
+					method: 'put'
 				}
 			});
 
@@ -170,13 +185,22 @@
 		}
 
 		//this function return all grants
-		service.findAllGrant = function(role, ownerData){
+		service.findAllGrant = function (role, ownerData) {
 			resRole.findAllGrants(
 				{
 					roleId: role._id,
 					ownerData: ownerData
 				}
 			).$promise;
+		}
+
+		//find all userRoles
+		service.findAllUserRole = function (findContext) {
+			return resRole.findAllUserRole(findContext).$promise;
+		}
+
+		service.updateUserRole = function(data){
+			return resUserRole.update(data).$promise;
 		}
 
 		return service;

@@ -34,7 +34,7 @@ angular.module('billynApp.core')
                 url: '/joinSpace',
                 templateUrl: 'components/blyn/core/dash/view/joinSpace.html',
                 controller: 'JoinSpaceController',
-                controllerAs: 'joinSpace',
+                controllerAs: 'vm',
                 ncyBreadcrumb: { label: '加入机构' },
                 authenticate: true
             })

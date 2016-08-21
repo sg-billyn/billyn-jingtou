@@ -83,7 +83,7 @@ angular.module('billynApp.core')
       })
       .state('pc.space.app.role.adminUserRole.home', {
         url: '/home',
-        templateUrl: 'components/blyn/core/role/view/userRole.html',
+        templateUrl: 'components/blyn/core/role/view/adminUserRole.html',
         controller: 'AdminUserRoleController',
         controllerAs: 'vm',
         ncyBreadcrumb: { skip: true },
@@ -97,7 +97,7 @@ angular.module('billynApp.core')
       })
       .state('pc.space.app.role.adminUser.home', {
         url: '/adminUser',
-        templateUrl: 'components/blyn/core/role/view/adminUser.html',
+        templateUrl: 'components/blyn/core/role/view/adminUserRole.html',
         controller: 'AdminUserController',
         ncyBreadcrumb: { label: '用户管理' },
         authenticate: true
