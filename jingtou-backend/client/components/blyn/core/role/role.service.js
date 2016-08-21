@@ -170,10 +170,17 @@
 
 		}
 
-		service.getUserRoleInSpace = function (userId, spaceId) {
+		service.getAllUserRoleInSpace = function (userId, spaceId) {
 
-            var userRoles = $resource('/api/roles?userId=:uId&spaceId=:sId');
-            return userRoles.query({ uId: userId, sId: spaceId }).$promise;
+			if (!userId) {
+				userId = $rootScope.current.user._id;
+			}
+
+			if (!spaceId) {
+				spaceId = $rootScope.current.space._id;
+			}
+
+			return this.findAllUserRole({ userId: userId, spaceId: spaceId });
 		}
 
 		service.addGrants = function (grantsData, ownerData) {
@@ -199,8 +206,42 @@
 			return resRole.findAllUserRole(findContext).$promise;
 		}
 
-		service.updateUserRole = function(data){
+		service.updateUserRole = function (data) {
 			return resUserRole.update(data).$promise;
+		}
+
+		service.userHasRole = function (roleData) {
+
+			var hasRole = false;
+
+			var userRoles = $rootScope.current.userSpace.userRoles;
+
+			if (angular.isString(roleData)) {
+				if (parseInt(roleData) && parseInt(roleData) > 0) {
+					var roleId = parseInt(roleData);
+					userRoles.forEach(function (userRole) {
+						if (userRole.role._id === roleId) {
+							hasRole = true;
+						}
+					})
+				} else {
+					var roleName = roleData;
+					userRoles.forEach(function (userRole) {
+						if (userRole.role.fullname === 'root.role.' + roleName) {
+							hasRole = true;
+						}
+					})
+				}
+			}
+
+			if (angular.isObject(roleData)) {
+				userRoles.forEach(function (userRole) {
+					if (userRole.role._id === roleData._id) {
+						hasRole = true;
+					}
+				})
+			}
+			return hasRole;
 		}
 
 		return service;

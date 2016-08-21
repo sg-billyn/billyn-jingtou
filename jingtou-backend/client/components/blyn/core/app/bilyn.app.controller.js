@@ -9,7 +9,7 @@
   }
 
   class AppHomeController {
-    constructor($rootScope, BNut) {
+    constructor($rootScope, BNut, BRole) {
       var ctrl = this;
       this.space = $rootScope.current.space;
       this.app = $rootScope.current.app;
@@ -19,6 +19,8 @@
       BNut.findUserNuts(this.app._id).then(function(userNuts){
         ctrl.app.userNuts = userNuts;
       });
+
+      this.isAdmin = BRole.userHasRole('admin');
       //this.app.permitNuts = {};
       /*
       BNut.findAllUserPermitNut(this.app._id).then(function(permitNuts) {

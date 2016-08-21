@@ -3,7 +3,9 @@
 (function() {
 	class LayoutController {
 
-		constructor(BSpace, BApp, $rootScope, $q) {
+		constructor(BSpace, BApp, $rootScope, $q, Auth) {
+
+			$rootScope.current.user = Auth.getCurrentUser();
 
 			var ctrl = this;
 			//应该使用getUserSpaces这个函数去获取数据

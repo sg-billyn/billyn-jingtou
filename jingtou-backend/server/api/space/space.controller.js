@@ -398,6 +398,7 @@ export function findUserSpaces(req, res) {
         Space.belongsTo(Category, { as: 'type' });
         //console.log(1);
         Space.hasMany(Role, { as: 'roles', foreignKey: 'spaceId' });
+        Space.hasMany(UserRole, { as: 'userRoles'});
         //console.log(2);
         Role.belongsToMany(User, { through: 'UserRole', as: 'users' });
         //console.log(3);
@@ -414,6 +415,7 @@ export function findUserSpaces(req, res) {
         //console.log(8);
         PermitRole.belongsTo(Role, { as: 'role' });
         //console.log(9);
+        UserRole.belongsTo(Role, { as: 'role' });
 
         var findSpaceWhere = {};
 
@@ -510,6 +512,17 @@ export function findUserSpaces(req, res) {
                                     ]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    model: UserRole, as: 'userRoles',
+                    where: {
+                        userId: query.userId
+                    },
+                    include: [
+                        {
+                            model: Role, as: 'role'
                         }
                     ]
                 }

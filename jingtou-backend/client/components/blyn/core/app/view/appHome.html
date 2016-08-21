@@ -29,7 +29,7 @@
                                     <span ng-repeat="(index, permit) in userNut.permits"><a ui-sref="pc.space.app.{{userNut.name}}.{{vm.dotToDashInString(permit.name)}}({nutId:userNut._id})">{{permit.name}}</a>&nbsp;&nbsp;</span>
                                 </div>
                                 <div class="functionSection-bottom">
-                                    <a ui-sref="pc.space.app.adminNutPermit({nutId:userNut._id})">权限设置</a>
+                                    <a ng-show="vm.isAdmin" ui-sref="pc.space.app.adminNutPermit({nutId:userNut._id})">权限设置</a>
                                 </div>
                             </div>
                         </div>

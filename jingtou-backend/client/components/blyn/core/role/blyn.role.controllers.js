@@ -838,6 +838,30 @@
 
     } //class
 
+    class MyRoleController {
+        constructor($stateParams, $state, BRole, BUser) {
+            this.$state = $state;
+            this.BRole = BRole;
+            this.BUser = BUser;
+
+            this.action = {};
+
+            var that = this;
+
+            BRole.getAllUserRoleInSpace().then(function (userRoles) {
+                that.myUserRoles = userRoles;
+            })
+        }
+
+        showAddRole() {
+            this.action.name = this.action.name === 'addRole' ? this.action = {} : 'addRole';
+        }
+
+        showExitRole(userRole){
+            this.action.name = this.action.name === 'exitRole'+userRole._id ? this.action = {} : 'exitRole'+userRole._id;
+        }
+    }
+
     angular.module('billynApp.core')
         .controller('RoleController', RoleController)
         .controller('RoleHomeController', RoleHomeController)
@@ -845,6 +869,7 @@
         .controller('AdminUserRoleController', AdminUserRoleController)
         .controller('AdminRoleNutController', AdminRoleNutController)
         .controller('AdminUserController', AdminUserController)
+        .controller('MyRoleController', MyRoleController)
         // .controller('SpaceRoleController', SpaceRoleController)
         // .controller('UserRoleController', UserRoleController)
         // .controller('RoleAdminController', RoleAdminController)

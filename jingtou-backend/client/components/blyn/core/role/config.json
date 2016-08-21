@@ -9,6 +9,9 @@
 		},
 		"adminUser": {
 			"alias": "admin space user"
+		},
+		"myRole": {
+			"alias": "admin my role"
 		}
 	}
 }
