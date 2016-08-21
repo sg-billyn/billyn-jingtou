@@ -465,7 +465,7 @@ export function findAllUserRole(req, res) {
     }
     if (lKey === 'joinstatus' || lKey === 'status') {
       var status = req.query[key];
-      if (typeof status === 'array') {
+      if (Array.isArray(status)) {
         whereData.joinStatus = {
           $in: status
         }
@@ -500,5 +500,17 @@ export function findAllUserRole(req, res) {
     }
   )
     .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Deletes a Role from the DB
+export function deleteUserRole(req, res) {
+  UserRole.find({
+    where: {
+      _id: req.params.id
+    }
+  })
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
     .catch(handleError(res));
 }

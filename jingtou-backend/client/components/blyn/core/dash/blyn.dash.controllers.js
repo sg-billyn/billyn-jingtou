@@ -92,70 +92,7 @@
 
     class JoinSpaceController {
 
-        loadJoinableSpaces(user){
-            user = user || this.Auth.getCurrentUser();
-            var that = this;
-            that.BSpace.findAllJoinableSpace(user).then(function(spaces){
-                that.joinableSpaces = spaces;
-            })
-        }
-        loadFollowingSpaces(user){
-            user = user || this.Auth.getCurrentUser();
-            var that = this;
-            that.BSpace.findAllFollowingSpace(user).then(function(spaces){
-                that.followingSpaces = spaces;
-            });
-            that.BRole.findAllUserRole(
-                {
-                    userId: user._id,
-                    joinStatus: ['applying','following']
-                }
-            ).then(function(userRoleCollection){
-                that.userRoleCollection = userRoleCollection;
-            })
-        }
-
-        joinSpace(space) {
-            //console.log(this.currentSpace);
-            var user = this.Auth.getCurrentUser();
-            var ctrl = this;
-            this.BSpace.userJoin(space._id, user._id).then(function (data) {
-                
-                // console.log("join space result: " + data);
-                if (data.$resolved === true) {
-                    ctrl.toaster.success("Join space success.");
-                    //ctrl.loadJoinableSpaces();
-                    //ctrl.loadFollowingSpaces();
-                    ctrl.$state.go('pc.joinSpace', null, { reload: 'pc' });
-                    /*
-                    angular.element('#myModal').on('hidden.bs.modal', function () {
-                        ctrl.$state.go('pc.joinSpace', null, { reload: true });
-                    });*/
-                }
-                else
-                    ctrl.toaster.error("Join space failed.");
-
-            });
-        }
-
-        followSpace(space) {
-            //console.log(this.currentSpace);
-            var user = this.Auth.getCurrentUser();
-            var ctrl = this;
-            this.BSpace.userJoin(space._id, user._id, 'following').then(function (data) {
-                
-                // console.log("join space result: " + data);
-                if (data.$resolved === true) {
-                    ctrl.toaster.success("成功关注机构！");
-                    ctrl.loadJoinableSpaces();
-                    ctrl.loadFollowingSpaces();
-                }
-                else
-                    ctrl.toaster.error("关注机构失败！");
-
-            });
-        }
-        constructor(BSpace,BRole, $state, Auth, toaster, $rootScope) {
+        constructor(BSpace, BRole, $state, Auth, toaster, $rootScope) {
             //console.log(BSpace);
             this.$rootScope = $rootScope;
             this.BSpace = BSpace;
@@ -165,6 +102,7 @@
             this.toaster = toaster;
             this.joinSpaces = {};
             var ctrl = this;
+            this.action = {};
 
             this.user = Auth.getCurrentUser();
 
@@ -172,6 +110,83 @@
             this.loadFollowingSpaces(this.user);
 
         }
+
+        joinSpace(space) {
+            this.action.name = this.action.name === 'joinSpace' + space._id ? this.action = {} : 'joinSpace' + space._id;
+        }
+
+        followSpace(space) {
+            this.action.name = this.action.name === 'followSpace' + space._id ? this.action = {} : 'followSpace' + space._id;
+        }
+
+        cancelUserRole(userRole) {
+            this.action.name = this.action.name === 'cancelUserRole' + userRole._id ? this.action = {} : 'cancelUserRole' + userRole._id;
+        }
+
+        confirmAction(action, space) {
+            var that = this;
+            var user = this.Auth.getCurrentUser();
+            var joinStatus;
+            if (action === 'joinSpace') {
+                joinStatus = 'applying';
+            }
+            if (action === 'followSpace') {
+                joinStatus = 'following';
+            }
+            //if (action === 'joinSpace') {
+            this.BSpace.userJoin(space._id, user._id, joinStatus).then(function (data) {
+
+                // console.log("join space result: " + data);
+                if (data.$resolved === true) {
+                    that.toaster.success("Join space success.");
+                    that.loadJoinableSpaces();
+                    that.loadFollowingSpaces();
+                    that.action = {};
+                    //ctrl.$state.go('pc.joinSpace', null, { reload: 'pc' });
+                    /*
+                    angular.element('#myModal').on('hidden.bs.modal', function () {
+                        ctrl.$state.go('pc.joinSpace', null, { reload: true });
+                    });*/
+                }
+                else
+                    that.toaster.error("Join space failed.");
+            });
+            //}
+        }
+
+        confirmCancel(userRole) {
+            var that = this;
+            that.BRole.deleteUserRole(userRole._id).then(function (result) {
+                that.loadJoinableSpaces();
+                that.loadFollowingSpaces();
+                that.action = {};
+            })
+        }
+
+        loadJoinableSpaces(user) {
+            user = user || this.Auth.getCurrentUser();
+            var that = this;
+            that.BSpace.findAllJoinableSpace(user).then(function (spaces) {
+                that.joinableSpaces = spaces;
+            })
+        }
+
+        loadFollowingSpaces(user) {
+            user = user || this.Auth.getCurrentUser();
+            var that = this;
+            that.BSpace.findAllFollowingSpace(user).then(function (spaces) {
+                that.followingSpaces = spaces;
+            });
+            that.BRole.findAllUserRole(
+                {
+                    userId: user._id,
+                    joinStatus: ['applying', 'following']
+                }
+            ).then(function (userRoleCollection) {
+                that.userRoleCollection = userRoleCollection;
+            })
+        }
+
     }
 
     angular.module('billynApp.core')

@@ -150,10 +150,22 @@
 
 
 		service.deleteUserRole = function (roleData) {
-			// console.log('roleData:',roleData);
-			var saveRes = resRole.save({ id: 'user' }, roleData);
-			// console.log('saveRes',saveRes);
-			return saveRes;
+
+			var userRoleId;
+			if (angular.isObject(roleData)) {
+				userRoleId = roleData._id;
+			}
+
+			if (!isNaN(roleData)) {
+				userRoleId = roleData;
+			}
+
+			return resUserRole.delete(
+				{
+					id: userRoleId
+				}
+			).$promise;
+
 		}
 
 		service.getSpaceRoles = function (spaceId) {

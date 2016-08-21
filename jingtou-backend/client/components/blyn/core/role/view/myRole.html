@@ -3,7 +3,7 @@
         <div class="col-lg-9">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <small class="pull-right"><a ng-click="vm.showAddRole()" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> 加新角色</a></small>
+                    <small class="pull-right"><a ng-click="vm.showAddRole()" class="btn btn-xs btn-primary"><i class="fa fa-user-plus"></i> 申请新角色</a></small>
                     <h5><strong>角色列表</strong></h5>
                 </div>
                 <div ng-show="vm.action.name === 'addRole'" class="ibox-content ibox-heading">
@@ -16,7 +16,7 @@
                             <div>
                                 <strong class="pull-right" ng-class="{joined: 'label label-success',applying: 'label label-warning'}[userRole.joinStatus]">{{userRole.joinStatus}}</strong>
                                 <strong>{{userRole.role.alias}}</strong> ( {{userRole.role.name}} )
-                                <div><small>描述：机构角色，可以推出</small></div>
+                                <div><small>描述：机构角色，可以退出</small></div>
                                 <div class="actions">
                                     <a ng-click="vm.showExitRole(userRole)" class="btn btn-xs btn-danger"><i class="fa fa-level-down"></i> 退出角色</a>
                                 </div>

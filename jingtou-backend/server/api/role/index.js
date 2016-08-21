@@ -46,6 +46,7 @@ router.put('/:id', controller.update);
 
 router.patch('/:id', controller.update);
 
+router.delete('/users/:id', controller.deleteUserRole);
 router.delete('/:id', controller.destroy);
 
 module.exports = router;
