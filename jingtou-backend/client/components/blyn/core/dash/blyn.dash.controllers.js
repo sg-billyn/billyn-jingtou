@@ -12,6 +12,7 @@
 
             // todo 查询指定user下的spaces数据
             var user = Auth.getCurrentUser();
+            this.currentUser = user;
             this.BSpace = BSpace;
             //应该使用getUserSpaces这个函数去获取数据
             ctrl.BSpace.getUserSpaces(user._id).then(function (spaces) {

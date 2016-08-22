@@ -331,6 +331,12 @@
             }
         }
 
+        addUserGroup(){
+            this.action = {
+                name: 'addUserGroup'
+            }
+        }
+
         startDialog(user) {
             console.log("mouse dowm");
 
