@@ -1,46 +1,118 @@
-<div class="panel panel-info">
-  <div class="panel-heading">加入机构</div>
-  <div class="panel-body">
-    <table class="table table-hover">
-    <thead>
-    <tr>
-      <th>机构名称</th>
-      <th>机构说明</th>
-      <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="space in joinSpace.joinSpaces">
-      <td> {{space.name}}</td>
-      <td ng-show="space.description"> {{space.description}}</td>
-      <td ng-hide="space.description"> 暂无描述</td>
-      <td>
-        <div class="row-fluid">
-          <a href="#" data-toggle='modal' data-target='#myModal' ng-click="joinSpace.currentSpace=space">关注机构</a></div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  </div>
-</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <ul class="nav nav-tabs">
+        <li ng-class="{'active' : tab == 1}"><a ng-click="tab = 1" ng-init="tab = 1"><i class="fa fa-user"></i> 查找机构</a></li>
+        <li ng-class="{'active' : tab == 2}"><a ng-click="tab = 2"><i class="fa fa-briefcase"></i> 我的关注</a></li>
+        <li ng-class="{'active' : tab == 3}"><a ng-click="tab = 3"><i class="fa fa-briefcase"></i> 经常访问</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active" ng-show="tab == 1">
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">确认加入机构</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <h5 class="col-md-5">机构名称: <span ng-bind="joinSpace.currentSpace.name"></span></h5>
-          <h5 class="col-md-5">机构ID: <span ng-bind="joinSpace.currentSpace._id"></span></h5>
+                            <div class="clients-list">
+                                <div class="input-group">
+                                    <input type="text" placeholder="查找机构 " class="input form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn btn-success"> <i class="fa fa-filter"></i> 筛选</button>
+                                        <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
+                                    </span>
+
+                                </div>
+                                <div class="row" style="padding-top:10px;padding-right:20px">
+                                    <span class="pull-right small text-muted">搜索结果：300 条</span>
+                                </div>
+
+                                <div class="full-height-scroll" full-scroll>
+
+                                    <div ng-repeat="space in vm.joinableSpaces" class="feed-element">
+                                        <div>
+                                            <strong class="pull-right" ng-class="{joined: 'label label-success',applying: 'label label-warning'}[userRole.joinStatus]">{{userRole.joinStatus}}</strong>
+                                            <strong>{{space.alias}}</strong> ( {{space.name}} )
+                                            <div><small>描述：{{space.alias}},可以申请加入，也可以关注</small></div>
+                                            <div class="actions">
+                                                <a ng-click="vm.joinSpace(space)" class="btn btn-xs btn-primary"><i class="fa fa-user-plus"></i> 申请加入</a>
+                                                <a ng-click="vm.followSpace(space)" class="btn btn-xs btn-info"><i class="fa fa-thumbs-up"></i> 关注机构</a>
+                                            </div>
+                                        </div>
+                                        <div ng-show="vm.action.name === 'joinSpace'+space._id">
+                                            <div class="ibox-content ibox-heading">
+                                                <h4><i class="fa fa-check-square-o"></i> 确认加入申请</h4>
+                                                <small><i class="fa fa-tim"></i> 您正在申请加入 － {{space.alias}} ！</small>
+                                                <small><i class="fa fa-tim"></i> 您可以在关注列表中发现正在进行的机构申请 ！</small>
+                                                <div class="actions pull-right">
+                                                    <a ng-click="vm.confirmAction('joinSpace', space)" class="btn btn-xs btn-primary"><i class="fa fa-level-down"></i> 确认申请</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="vm.action.name === 'followSpace'+space._id">
+                                            <div class="ibox-content ibox-heading">
+                                                <h4><i class="fa fa-check-square-o"></i> 确认关注机构</h4>
+                                                <small><i class="fa fa-tim"></i> 您正在申请关注 － {{space.alias}} ！</small>
+                                                <small><i class="fa fa-tim"></i> 您可以在关注列表中发现已经关注的机构 ！</small>
+                                                <div class="actions pull-right">
+                                                    <a ng-click="vm.confirmAction('followSpace',space)" class="btn btn-xs btn-primary"><i class="fa fa-level-down"></i> 确认关注</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
+                                            <button class="btn btn-white active">1</button>
+                                            <button class="btn btn-white">2</button>
+                                            <button class="btn btn-white">3</button>
+                                            <button class="btn btn-white">4</button>
+                                            <button class="btn btn-white">5</button>
+                                            <button class="btn btn-white">6</button>
+                                            <button class="btn btn-white">7</button>
+                                            <button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="tab-2" class="tab-pane active" ng-show="tab == 2">
+                            <div class="full-height-scroll" full-scroll>
+                                <h2>关注的机构</h2>
+                                <p>
+                                    包括正在关注的机构和正在申请的机构。
+                                </p>
+                                <div ng-repeat="userRole in vm.userRoleCollection" class="feed-element">
+                                    <div>
+                                        <strong class="pull-right" ng-class="{following: 'label label-success',applying: 'label label-info'}[userRole.joinStatus]">{{userRole.joinStatus}}</strong>
+                                        <strong>{{userRole.space.alias}}</strong> ( {{userRole.space.name}} )
+                                        <div><small>描述：机构名称-{{userRole.space.alias}},可以申请</small></div>
+                                        <div class="actions">
+                                            <a ng-show="userRole.joinStatus === 'applying'" ng-click="vm.cancelUserRole(userRole)" class="btn btn-xs btn-warning"><i class="fa fa-user-plus"></i> 取消申请</a>
+                                            <a ng-click="vm.cancelUserRole(userRole)" class="btn btn-xs btn-warning"><i class="fa fa-thumbs-down"></i> 取消关注</a>
+                                        </div>
+                                    </div>
+                                    <div ng-show="vm.action.name === 'cancelUserRole'+userRole._id">
+                                        <div class="ibox-content ibox-heading">
+                                            <h3><i class="fa fa-check-square-o"></i> 确认取消</h3>
+                                            <small><i class="fa fa-tim"></i> 您正在取消关注（申请），请确认！.</small>
+                                            <div class="actions pull-right">
+                                                <a ng-click="vm.confirmCancel(userRole)" class="btn btn-xs btn-primary"><i class="fa fa-level-down"></i> 确认取消</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane active" ng-show="tab == 3">
+                            <div class="full-height-scroll" full-scroll>
+                                正在创建...
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" href="#" data-dismiss="modal" ng-click="joinSpace.join()">确认加入机构</a>
-      </div>
     </div>
-  </div>
 </div>

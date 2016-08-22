@@ -7,6 +7,7 @@ angular.module('billynApp.core')
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminSpaceRole', '/pc/space/:spaceId/app/:appId/role/:nutId/adminSpaceRole/home');
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminUserRole', '/pc/space/:spaceId/app/:appId/role/:nutId/adminUserRole/home');
     $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/adminNut/:roleId', '/pc/space/:spaceId/app/:appId/role/:nutId/adminNut/:roleId/home');
+    $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/myRole', '/pc/space/:spaceId/app/:appId/role/myRole/home');
 
     //    $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/admin', '/pc/space/:spaceId/app/:appId/role/:nutId/admin/home');
     //   $urlRouterProvider.when('/pc/space/:spaceId/app/:appId/role/:nutId/admin/home', '/pc/space/:spaceId/app/:appId/role/:nutId/admin/home/space');
@@ -83,10 +84,23 @@ angular.module('billynApp.core')
       })
       .state('pc.space.app.role.adminUserRole.home', {
         url: '/home',
-        templateUrl: 'components/blyn/core/role/view/userRole.html',
+        templateUrl: 'components/blyn/core/role/view/adminUserRole.html',
         controller: 'AdminUserRoleController',
         controllerAs: 'vm',
         ncyBreadcrumb: { skip: true },
+        authenticate: true
+      })
+      .state('pc.space.app.role.adminUser', {
+        url: '/adminUser',
+        template: '<div ui-view=""></div>',
+        ncyBreadcrumb: { skip: true },
+        authenticate: true
+      })
+      .state('pc.space.app.role.adminUser.home', {
+        url: '/adminUser',
+        templateUrl: 'components/blyn/core/role/view/adminUserRole.html',
+        controller: 'AdminUserController',
+        ncyBreadcrumb: { label: '用户管理' },
         authenticate: true
       })
       
@@ -99,6 +113,22 @@ angular.module('billynApp.core')
       .state('pc.space.app.role.customer', {
         url: '/customer',
         templateUrl: 'components/blyn/core/role/view/customerHome.html',
+        ncyBreadcrumb: { skip: true },
+        authenticate: true
+      })
+      .state('pc.space.app.role.myRole', {
+        url: '/myRole',
+        template: '<div ui-view=""></div>',
+        controller: 'MyRoleController',
+        controllerAs: 'vm',
+        ncyBreadcrumb: { label: '我的角色' },       
+        authenticate: true
+      })
+      .state('pc.space.app.role.myRole.home', {
+        url: '/home',
+        templateUrl: 'components/blyn/core/role/view/myRole.html',
+        controller: 'MyRoleController',
+        controllerAs: 'vm',
         ncyBreadcrumb: { skip: true },
         authenticate: true
       });

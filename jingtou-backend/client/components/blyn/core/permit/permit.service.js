@@ -178,6 +178,10 @@
 			// console.log('getRes',getRes);			  
 		}
 
+		service.hasPermit = function (permitData, ownerData) {
+
+		}
+
 		return service;
 	}
 

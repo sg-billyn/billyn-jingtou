@@ -100,6 +100,9 @@ export function index(req, res) {
     Space.belongsTo(Category, { as: 'type' });
     Space.hasMany(App, { as: 'apps' });
     Space.hasMany(Role, { as: 'roles' });
+    Role.hasMany(PermitRole, { as: 'rolePermits' });
+    PermitRole.belongsTo(Permit, { as: 'permit' });
+    PermitRole.belongsTo(Role, { as: 'guestRole', foreignKey: 'ownerId' });
 
     var findData = req.body;
     var includeData = [{
@@ -193,7 +196,8 @@ export function show(req, res) {
     Space.hasMany(Role, { as: 'roles' });
     App.hasMany(Nut, { as: 'nuts' });
     Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
-    Nut.belongsTo(Category, {as: 'type'});
+    Nut.belongsTo(Category, { as: 'type' });
+    Role.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' })
 
     //console.log('2');
 
@@ -394,6 +398,7 @@ export function findUserSpaces(req, res) {
         Space.belongsTo(Category, { as: 'type' });
         //console.log(1);
         Space.hasMany(Role, { as: 'roles', foreignKey: 'spaceId' });
+        Space.hasMany(UserRole, { as: 'userRoles'});
         //console.log(2);
         Role.belongsToMany(User, { through: 'UserRole', as: 'users' });
         //console.log(3);
@@ -402,7 +407,7 @@ export function findUserSpaces(req, res) {
         App.belongsTo(Category, { as: 'type' });
         //console.log(5);
         App.hasMany(Nut, { as: 'nuts' });
-        Nut.belongsTo(Category, {as: 'type'});
+        Nut.belongsTo(Category, { as: 'type' });
         //console.log(6);
         Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
         //console.log(7);
@@ -410,6 +415,7 @@ export function findUserSpaces(req, res) {
         //console.log(8);
         PermitRole.belongsTo(Role, { as: 'role' });
         //console.log(9);
+        UserRole.belongsTo(Role, { as: 'role' });
 
         var findSpaceWhere = {};
 
@@ -420,13 +426,31 @@ export function findUserSpaces(req, res) {
             }
         }
 
-        if (!query.userId) {
+        //console.log('query:',JSON.stringify(req.query));
+        if (!query.userId && req.user._id) {
             query.userId = req.user._id;
+        }
+
+        //console.log('query:',JSON.stringify(req.query));
+        var joinStatus = ['joined'];
+        if (req.query.joinStatus) {
+            //console.log('joinStatus', joinStatus);
+            if(typeof req.query.joinStatus === 'array'){
+                joinStatus = req.query.joinStatus;
+            }
+            if(typeof req.query.joinStatus === 'string'){
+                if(!joinStatus.includes(req.query.joinStatus)){
+                    joinStatus.push(req.query.joinStatus);
+                }
+            }
+            joinStatus = req.query.joinStatus;
         }
 
         //console.log('query:', JSON.stringify(query));
 
         //console.log('findSpaceWhere:', JSON.stringify(findSpaceWhere));
+
+        //console.log('joinStatus', joinStatus);
 
         return Space.findAll({
             where: findSpaceWhere,
@@ -440,9 +464,17 @@ export function findUserSpaces(req, res) {
                         {
                             model: User, as: 'users',
                             where: {
-                                _id: query.userId
+                                _id: query.userId,
+                            },
+                            through: {
+                                where: {
+                                    joinStatus: {
+                                        $in: joinStatus
+                                    }
+                                }
                             }
-                        }
+                        },
+
                     ]
                 },
                 {
@@ -468,18 +500,29 @@ export function findUserSpaces(req, res) {
                                         },
                                         {
                                             model: Role, as: 'role',
-                                            include: [
+                                            /*include: [
                                                 {
                                                     model: User, as: 'users',
                                                     where: {
                                                         _id: query.userId
                                                     }
                                                 }
-                                            ]
+                                            ]*/
                                         }
                                     ]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    model: UserRole, as: 'userRoles',
+                    where: {
+                        userId: query.userId
+                    },
+                    include: [
+                        {
+                            model: Role, as: 'role'
                         }
                     ]
                 }
@@ -494,25 +537,144 @@ export function findUserSpaces(req, res) {
 }
 
 /**
- * user join to space, by default, will add user as everyone role under space
+ * user join to space, by default, will add user as member role under space
  * @method module:server/api/space.method:userJoin
  * @param req.params.id {int} space id to join 
  * @param req.query.userId {int} userId to join
  * @returns {boolean} true -- created, otherwise error
  */
 export function userJoin(req, res) {
-    var spaceId = req.params.id;
-    var userId = req.query.userId;
+    //console.log('req.body:',JSON.stringify(req.body));
+    var spaceId = req.body.spaceId;
+    var userId = req.body.userId;
+    var joinStatus = 'applying';
     //  console.log("User " + userId + " request to join space " + spaceId);
 
-    Role.add({
+    if (req.body.joinStatus) {
+        var jStatus = req.body.joinStatus;
+        if (['applying', 'following', 'joined'].includes(jStatus)) {
+            joinStatus = jStatus;
+        }
+    }
+
+    return Role.add({
         spaceId: spaceId,
-        name: "everyone"
+        name: "member"
     }).then(function (role) {
-        return UserRole.findOrCreate({ userId: userId, roleId: role._id, spaceId: spaceId });
-    }).spread(function (created, entity) {
-        return Promise.resolve(true);
-    }).then(respondWithResult(res))
+        return UserRole.findOrCreate(
+            {
+                where: {
+                    userId: userId,
+                    roleId: role._id,
+                    spaceId: spaceId
+                },
+                defaults: {
+                    joinStatus: joinStatus
+                }
+            }
+        ).spread(function (created, entity) {
+            return Promise.resolve(entity);
+        }).then(respondWithResult(res))
+            .catch(handleError(res));
+    })
+}
+
+
+/**
+ * find user's joinable spaces'
+ */
+export function findAllJoinableSpace(req, res) {
+
+    App.belongsTo(Category, { as: 'type' });
+
+    UserRole.belongsTo(Space, { as: 'space' });
+    Space.belongsTo(Category, { as: 'type' });
+    //console.log(1);
+    Space.hasMany(Role, { as: 'roles', foreignKey: 'spaceId' });
+    //console.log(2);
+    Role.belongsToMany(User, { through: 'UserRole', as: 'users' });
+    //console.log(3);
+    Space.hasMany(App, { as: 'apps' });
+    //console.log(4);
+    App.belongsTo(Category, { as: 'type' });
+    //console.log(5);
+    App.hasMany(Nut, { as: 'nuts' });
+    Nut.belongsTo(Category, { as: 'type' });
+    //console.log(6);
+    Nut.hasMany(PermitRole, { foreignKey: 'ownerId', as: 'permitRoles' });
+    //console.log(7);
+    PermitRole.belongsTo(Permit, { as: 'permit' });
+    //console.log(8);
+    PermitRole.belongsTo(Role, { as: 'role' });
+
+    var userId = req.query.userId || req.user._id;
+
+    return Space.findAll(
+        {
+            include: [
+                {
+                    model: Role, as: 'roles',
+                    include: [
+                        {
+                            model: User, as: 'users',
+                            where: {
+                                _id: userId
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ).then(function (userSpaces) {
+        //console.log('userSapces:',JSON.stringify(userSpaces));
+        var idList = [];
+        userSpaces.forEach(function (space) {
+            idList.push(space._id);
+        });
+        //console.log('idList:', idList);
+        return Space.findAll(
+            {
+                where: {
+                    _id: {
+                        $notIn: idList
+                    }
+                },
+                include: [
+                    {
+                        model: Category, as: 'type'
+                    },
+                    {
+                        model: Role, as: 'roles',
+                    },
+                    {
+                        model: App, as: 'apps',
+                        include: [
+                            {
+                                model: Category, as: 'type'
+                            },
+                            {
+                                model: Nut, as: 'nuts',
+                                include: [
+                                    {
+                                        model: PermitRole, as: 'permitRoles',
+                                        include: [
+                                            {
+                                                model: Permit, as: 'permit'
+                                            },
+                                            {
+                                                model: Role, as: 'role'
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        )
+    })
+        .then(respondWithResult(res))
         .catch(handleError(res));
 }
 

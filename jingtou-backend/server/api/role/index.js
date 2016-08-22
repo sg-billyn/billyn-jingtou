@@ -13,6 +13,9 @@ router.get('/', controller.index);
 //get role by name: /roles/name?spaceId=xxx&role=xxx[or name=xxx]
 router.get('/name', controller.getRole);
 router.get('/user/space', controller.findAllUserSpaceRole);
+router.get('/users', controller.findAllUserRole);
+
+router.get('/grants', controller.findAllGrant);
 
 //get role by Id: id = number
 router.get('/:id', controller.getRole);
@@ -38,8 +41,12 @@ router.post('/:id', controller.addChild);
 //post data format: {spaceId=xxx,name=xxx}
 router.post('/', controller.create);
 
+router.put('/users', controller.updateUserRole);
 router.put('/:id', controller.update);
+
 router.patch('/:id', controller.update);
+
+router.delete('/users/:id', controller.deleteUserRole);
 router.delete('/:id', controller.destroy);
 
 module.exports = router;

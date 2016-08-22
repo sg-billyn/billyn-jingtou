@@ -225,6 +225,7 @@ export default function (sequelize, DataTypes) {
         var treeObj = new TreeTable();
          return this.getPermitRoot(permitData).then(function (permitRoot) {
            //console.log('permitRoot:',JSON.stringify(permitRoot));
+           //console.log('permitData:',JSON.stringify(permitData));
             return treeObj.addChild(permitRoot,permitData).then(function (child) {
               //console.log("permit model child:",JSON.stringify(child));
               return Promise.resolve(child);

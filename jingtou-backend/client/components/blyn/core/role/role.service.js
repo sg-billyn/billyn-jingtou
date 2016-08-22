@@ -20,6 +20,28 @@
 					params: {
 						id: 'grants'
 					}
+				},
+				findGrants: {
+					method: 'GET',
+					isArray: true,
+					params: {
+						id: 'grants'
+					}
+				},
+				findAllUserRole: {
+					method: 'GET',
+					isArray: true,
+					params: {
+						id: 'users'
+					}
+				}
+			});
+
+		var resUserRole = $resource('/api/roles/users/:id/:controller', {
+			id: '@_id'
+		}, {
+				update: {
+					method: 'put'
 				}
 			});
 
@@ -128,10 +150,22 @@
 
 
 		service.deleteUserRole = function (roleData) {
-			// console.log('roleData:',roleData);
-			var saveRes = resRole.save({ id: 'user' }, roleData);
-			// console.log('saveRes',saveRes);
-			return saveRes;
+
+			var userRoleId;
+			if (angular.isObject(roleData)) {
+				userRoleId = roleData._id;
+			}
+
+			if (!isNaN(roleData)) {
+				userRoleId = roleData;
+			}
+
+			return resUserRole.delete(
+				{
+					id: userRoleId
+				}
+			).$promise;
+
 		}
 
 		service.getSpaceRoles = function (spaceId) {
@@ -148,10 +182,17 @@
 
 		}
 
-		service.getUserRoleInSpace = function (userId, spaceId) {
+		service.getAllUserRoleInSpace = function (userId, spaceId) {
 
-            var userRoles = $resource('/api/roles?userId=:uId&spaceId=:sId');
-            return userRoles.query({ uId: userId, sId: spaceId }).$promise;
+			if (!userId) {
+				userId = $rootScope.current.user._id;
+			}
+
+			if (!spaceId) {
+				spaceId = $rootScope.current.space._id;
+			}
+
+			return this.findAllUserRole({ userId: userId, spaceId: spaceId });
 		}
 
 		service.addGrants = function (grantsData, ownerData) {
@@ -160,6 +201,59 @@
 				grants: grantsData,
 				ownerData: ownerData
 			}).$promise;
+		}
+
+		//this function return all grants
+		service.findAllGrant = function (role, ownerData) {
+			resRole.findAllGrants(
+				{
+					roleId: role._id,
+					ownerData: ownerData
+				}
+			).$promise;
+		}
+
+		//find all userRoles
+		service.findAllUserRole = function (findContext) {
+			return resRole.findAllUserRole(findContext).$promise;
+		}
+
+		service.updateUserRole = function (data) {
+			return resUserRole.update(data).$promise;
+		}
+
+		service.userHasRole = function (roleData) {
+
+			var hasRole = false;
+
+			var userRoles = $rootScope.current.userSpace.userRoles;
+
+			if (angular.isString(roleData)) {
+				if (parseInt(roleData) && parseInt(roleData) > 0) {
+					var roleId = parseInt(roleData);
+					userRoles.forEach(function (userRole) {
+						if (userRole.role._id === roleId) {
+							hasRole = true;
+						}
+					})
+				} else {
+					var roleName = roleData;
+					userRoles.forEach(function (userRole) {
+						if (userRole.role.fullname === 'root.role.' + roleName) {
+							hasRole = true;
+						}
+					})
+				}
+			}
+
+			if (angular.isObject(roleData)) {
+				userRoles.forEach(function (userRole) {
+					if (userRole.role._id === roleData._id) {
+						hasRole = true;
+					}
+				})
+			}
+			return hasRole;
 		}
 
 		return service;

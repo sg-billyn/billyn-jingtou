@@ -11,15 +11,39 @@
 			"alias": "space customer"
 		}
 	},
+	"accessRolePermits": {
+		"allow.apply": {
+			"name": "allow.apply"
+		},
+		"allow.join": {
+			"name": "allow.join"
+		},
+		"allow.approve.auto": {
+			"name": "allow.approve.auto"
+		}
+	},
 	"types": {
 		"normal": {
 			"name": "normal",
 			"alias": "普通机构",
 			"description": "普通机构",
 			"roles": [
-				"admin"
+				{
+					"name": "admin"
+				},
+				{
+					"name": "member"
+				},
+				{
+					"name": "public",
+					"grants": {
+						"member": "allow.apply"
+					}
+				}
 			],
-			"apps": ["weMember"]			
+			"apps": [
+				"weMember"
+			]
 		},
 		"agent.property.com": {
 			"name": "agent.property.com",
@@ -28,7 +52,9 @@
 			"roles": [
 				"admin"
 			],
-			"apps": ["propertyAgent"]
+			"apps": [
+				"propertyAgent"
+			]
 		},
 		"data.property.com": {
 			"name": "data.property.com",
@@ -37,7 +63,9 @@
 			"roles": [
 				"admin"
 			],
-			"apps": ["propertyData"]
+			"apps": [
+				"propertyData"
+			]
 		},
 		"assessment.property.com": {
 			"name": "assessment.property.com",
@@ -46,7 +74,9 @@
 			"roles": [
 				"admin"
 			],
-			"apps": ["propertyAssessment"]
+			"apps": [
+				"propertyAssessment"
+			]
 		}
 	}
 }

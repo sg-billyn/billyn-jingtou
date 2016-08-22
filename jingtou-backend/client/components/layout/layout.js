@@ -15,7 +15,8 @@ angular.module('billynApp')
         ncyBreadcrumb: {label:'机构书签'},
         resolve: {
           currentUser: function ($rootScope, Auth) {
-            $rootScope.current.user = Auth.getCurrentUser();
+            var currentUser = Auth.getCurrentUser();
+            $rootScope.current.user = currentUser;
           }
         }
       })

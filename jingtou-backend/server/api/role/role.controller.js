@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import {Role} from '../../sqldb';
+import {User} from '../../sqldb';
 import {UserRole} from '../../sqldb';
 import {Space} from '../../sqldb';
 import {Category} from '../../sqldb';
@@ -118,6 +119,31 @@ export function update(req, res) {
     Role.find({
       where: {
         _id: roleId
+      }
+    })
+      .then(handleEntityNotFound(res))
+      .then(saveUpdates(req.body))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+  }
+}
+
+export function updateUserRole(req, res) {
+  //return create(req, res);
+  ///*
+  var userRoleId
+  if (req.params.id) {
+    userRoleId = req.params.id;
+  }
+  for (var key in req.body) {
+    if (key.toLocaleLowerCase() === 'id' || key === '_id' || key.toLocaleLowerCase() === 'userroleid') {
+      userRoleId = req.body[key];
+    }
+  }
+  if (userRoleId) {
+    UserRole.find({
+      where: {
+        _id: userRoleId
       }
     })
       .then(handleEntityNotFound(res))
@@ -366,7 +392,7 @@ export function findUserRoles(req, res) {
 
   var query = req.query;
 
-  console.log('query:', JSON.stringify(query));
+  //console.log('query:', JSON.stringify(query));
 
   if (!_.isEmpty(query) && query.userId && query.userId > 0) {
 
@@ -408,5 +434,83 @@ export function addGrants(req, res) {
 export function findAllUserSpaceRole(req, res) {
   Role.findAllUserSpaceRole(req.query.userId, req.query.spaceId)
     .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function findAllGrant(req, res) {
+  return Role.findGrants(req.body.roleId, req.body.ownerData)
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function findAllUserRole(req, res) {
+  UserRole.belongsTo(Role, { as: 'role' });
+  UserRole.belongsTo(User, { as: 'user' });
+  UserRole.belongsTo(Space, { as: 'space' });
+  //Role.belongsTo(Space, { as: 'space' });
+  Space.belongsTo(Category, { as: 'type' });
+
+  var whereData = {};
+
+  for (var key in req.query) {
+    var lKey = key.toLowerCase();
+    if (lKey === 'userid') {
+      whereData.userId = req.query[key];
+    }
+    if (lKey === 'roleid') {
+      whereData.roleId = req.query[key];
+    }
+    if (lKey === 'spaceid') {
+      whereData.spaceId = req.query[key];
+    }
+    if (lKey === 'joinstatus' || lKey === 'status') {
+      var status = req.query[key];
+      if (Array.isArray(status)) {
+        whereData.joinStatus = {
+          $in: status
+        }
+      }
+      if (typeof status === 'string') {
+        if (status.toLocaleLowerCase() !== 'all') {
+          whereData.joinStatus = status;
+        }
+      }
+    }
+  }
+
+  UserRole.findAll(
+    {
+      where: whereData,
+      include: [
+        {
+          model: Role, as: 'role'
+        },
+        {
+          model: User, as: 'user'
+        },
+        {
+          model: Space, as: 'space',
+          include: [
+            {
+              model: Category, as: 'type'
+            }
+          ]
+        }
+      ]
+    }
+  )
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Deletes a Role from the DB
+export function deleteUserRole(req, res) {
+  UserRole.find({
+    where: {
+      _id: req.params.id
+    }
+  })
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
     .catch(handleError(res));
 }

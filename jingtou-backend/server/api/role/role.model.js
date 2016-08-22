@@ -37,6 +37,10 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: -1
     },
+    allowDelete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
     active: DataTypes.BOOLEAN
   }, {
       getterMethods: {
@@ -372,6 +376,40 @@ export default function (sequelize, DataTypes) {
         isChildOf: function (parentObj, recursive) {
           var treeObj = new TreeTable();
           return treeObj.isChildOf(parentObj, this, childData);
+        },
+        findGrants: function(ownerData){
+          var PermitRole = sqldb.PermitRole;
+          var Permit = sqldb.Permit;
+          var Role = sqldb.Role;
+
+          PermitRole.belongsTo(Permit, {as: 'permit'});
+          PermitRole.belongsTo(Role, {as: 'role'});
+
+          var whereData = {
+            roleId: this._id
+          }
+
+          if(typeof ownerData === 'string'){
+            whereData.owner = ownerData;
+          }
+
+          if(typeof ownerData === 'object'){
+            whereData = Object.assign(ownerData, whereData);
+          }
+
+          return PermitRole.findAll(
+            {
+              where: whereData,
+              include: [
+                {
+                  model: Role, as: 'role'
+                },
+                {
+                  model: Permit, as: 'permit'
+                }
+              ]
+            }
+          )
         }
       }
     });

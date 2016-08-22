@@ -131,6 +131,64 @@ export default function (sequelize, DataTypes) {
 						spaceId = space._id;
 						//console.log('space', JSON.stringify(space));
 						if (spaceData.roles) {
+							var hasAdmin = false;
+							var hasMember = false;
+							//var hasCustomer = false;
+							var hasPublic = false;
+							spaceData.roles.forEach(function(role){
+								if(role.name === 'admin'){
+									role.allowDelete = false;
+									hasAdmin = true;
+								}
+								if(role.name === 'member'){
+									role.allowDelete = false;
+									hasMember = true;
+								}
+								/*
+								if(role.name === 'customer'){
+									role.allowDelete = false;
+									hasCustomer = true;
+								}*/
+								if(role.name === 'public'){
+									role.allowDelete = false;
+									hasPublic = true;
+								}
+							})
+
+							if(!hasAdmin){
+								spaceData.roles.push(
+									{
+										name: "admin",
+										allowDelete: false
+									}
+								)
+							}
+
+							if(!hasMember){
+								spaceData.roles.push(
+									{
+										name: "member",
+										allowDelete: false
+									}
+								)
+							}
+							/*
+							if(!hasCustomer){
+								spaceData.roles.push(
+									{
+										name: "customer",
+										allowDelete: false
+									}
+								)
+							}*/
+							if(!hasPublic){
+								spaceData.roles.push(
+									{
+										name: "public",
+										allowDelete: false
+									}
+								)
+							}
 							return that.addRoles(spaceData.roles, space._id);
 						}
 						return Promise.resolve(null);

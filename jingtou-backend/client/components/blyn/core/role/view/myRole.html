@@ -1,0 +1,39 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <small class="pull-right"><a ng-click="vm.showAddRole()" class="btn btn-xs btn-primary"><i class="fa fa-user-plus"></i> 申请新角色</a></small>
+                    <h5><strong>角色列表</strong></h5>
+                </div>
+                <div ng-show="vm.action.name === 'addRole'" class="ibox-content ibox-heading">
+                    <h3><i class="fa fa-user-plus"></i> 申请新角色</h3>
+                    <small><i class="fa fa-tim"></i> 这里列出可以添加的新角色并添加.</small>
+                </div>
+                <div class="ibox-content">
+                    <div class="feed-activity-list">
+                        <div ng-repeat="userRole in vm.myUserRoles" class="feed-element">
+                            <div>
+                                <strong class="pull-right" ng-class="{joined: 'label label-success',applying: 'label label-warning'}[userRole.joinStatus]">{{userRole.joinStatus}}</strong>
+                                <strong>{{userRole.role.alias}}</strong> ( {{userRole.role.name}} )
+                                <div><small>描述：机构角色，可以退出</small></div>
+                                <div class="actions">
+                                    <a ng-click="vm.showExitRole(userRole)" class="btn btn-xs btn-danger"><i class="fa fa-level-down"></i> 退出角色</a>
+                                </div>
+                            </div>
+                            <div ng-show="vm.action.name === 'exitRole'+userRole._id">
+                                <div class="ibox-content ibox-heading">
+                                    <h3><i class="fa fa-check-square-o"></i> 确认删除</h3>
+                                    <small><i class="fa fa-tim"></i> 您正在删除角色，请小心确认！.</small>
+                                    <div class="actions pull-right">
+                                        <a class="btn btn-xs btn-primary"><i class="fa fa-level-down"></i> 确认删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

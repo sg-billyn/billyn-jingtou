@@ -7,13 +7,10 @@
 		var resSpace = $resource('/api/spaces/:id/:controller', {
 			id: '@_id'
 		}, {
-				update: {
-					method: 'PUT'
-				},
 				userJoin: {
-					method: 'GET',
+					method: 'Post',
 					params: {
-						controller: 'userJoin'
+						id: 'userJoin'
 					}
 				},
 				addType: {
@@ -28,8 +25,17 @@
 						id: 'user',
 					},
 					isArray: true
+				},
+				findAllJoinableSpace: {
+					method: 'GET',
+					params: {
+						id: 'user',
+						controller: 'joinable',
+					},
+					isArray: true
 				}
 			});
+
 
 		var currentSpace = {};
 
@@ -70,7 +76,7 @@
 							findData.spaceId = spaceId;
 						}
 					}
-					if(!findData.userId){
+					if (!findData.userId) {
 						findData.userId = $rootScope.current.user._id;
 					}
 					return resSpace.findUserSpaces(findData).$promise.then(function (resources) {
@@ -110,13 +116,13 @@
 
 		};
 
-		service.getUserSpace = function (findData, callback){
-			if(typeof findData === 'number' || parseInt(findData) > 0){
+		service.getUserSpace = function (findData, callback) {
+			if (typeof findData === 'number' || parseInt(findData) > 0) {
 				findData = {
 					spaceId: findData
 				}
 			}
-			return this.getUserSpaces(findData, callback).then(function(spaces){
+			return this.getUserSpaces(findData, callback).then(function (spaces) {
 				return spaces[0];
 			})
 		}
@@ -353,13 +359,17 @@
 				});
 		};
 
-		service.userJoin = function (spaceId, userId, callback) {
+		service.userJoin = function (spaceId, userId, status, callback) {
 			//get: /api/spaces/:id/userJoin
 			//return boolean
-			return resSpace.userJoin({
-				id: spaceId,
+			var joinData = {
+				spaceId: spaceId,
 				userId: userId
-			},
+			};
+			if (status) {
+				joinData.joinStatus = status;
+			}
+			return resSpace.userJoin(joinData,
 				function (data) {
 					return safeCb(callback)(null, data);
 				},
@@ -485,7 +495,6 @@
 			return this.getRoles(roleData);
 		}
 
-
 		service.getSpaceUsers = function (id) {
 			var res = $resource('/api/users/sp/:spaceId');
 			return res.query({ spaceId: id }).$promise;
@@ -496,6 +505,17 @@
 			return $http.get('/components/blyn/core/space/config.json').then(function (res) {
 				return $q.when(res.data);
 			});
+		}
+
+		service.findAllJoinableSpace = function (user) {
+			return resSpace.findAllJoinableSpace({ userId: user._id }).$promise;
+		}
+
+		service.findAllFollowingSpace = function (user) {
+			return resSpace.findUserSpaces({
+				//userId: user._id,
+				joinStatus: ['applying', 'following']
+			}).$promise;
 		}
 
 		return service;
