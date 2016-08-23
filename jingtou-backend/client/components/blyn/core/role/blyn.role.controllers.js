@@ -300,6 +300,7 @@
                 'name': 'showUserDetail'
             }
             this.newGroup = {};
+            this.search;
             var ctrl = this;
 
             this.loadSpaceUserRole();
@@ -316,7 +317,10 @@
                 }
             ).then(function (collection) {
                 that.userRoleCollection = collection;
-                that.action.userRole = collection[0];
+                if (!that.action.userRole) {
+                    that.action.userRole = collection[0];
+                }
+
             })
         }
 
@@ -361,7 +365,10 @@
             var that = this;
             that.action = {
                 name: 'showUserDetail',
-                userRole: userRole
+                userRole: userRole,
+                action: {
+                    name: 'showUserDetail'
+                }
             }
         }
 
@@ -400,7 +407,7 @@
             }
             if (action === 'showAddRoleConfirm') {
                 that.action.action.role = item;
-                that.action.action.confirm == 'showAddRoleConfirm'+item._id? that.action.action.confirm = '':that.action.action.confirm='showAddRoleConfirm'+item._id;  
+                that.action.action.confirm == 'showAddRoleConfirm' + item._id ? that.action.action.confirm = '' : that.action.action.confirm = 'showAddRoleConfirm' + item._id;
             }
             if (action === 'confirmAddRole') {
                 that.BRole.addUserRole(
@@ -423,6 +430,22 @@
             }
             if (actionName === 'showGroupDetail') {
                 this.action.userGroup = item;
+                this.action.action = {
+                    name: 'showGroupDetail'
+                }
+            }
+
+            if (actionName === 'showGroupDetail.showManageGroupUser') {
+                this.action.name = 'showGroupDetail';
+                this.action.action = {
+                    name: 'showManageGroupUser'
+                }
+            }
+            if (actionName === 'showGroupDetail.showManageGroupRole') {
+                this.action.name = 'showGroupDetail';
+                this.action.action = {
+                    name: 'showManageGroupRole'
+                }
             }
         }
 
@@ -453,7 +476,7 @@
             }
         }
 
-        addUserGroup(){
+        addUserGroup() {
             this.action = {
                 name: 'addUserGroup'
             }

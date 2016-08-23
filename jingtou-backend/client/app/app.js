@@ -2,7 +2,7 @@
 
 var translationsZH = {
   BILLYNPLATFORM: '比邻平台',
-  tPropertyAssessmentPlatform: '资产评估平台',
+  JINTOUFINANCECLOUD: '金投金融云平台',
   BILLYNLANGUAGE: '中文',
   appEngine: '系统应用',
   space: "机构",
@@ -32,7 +32,7 @@ var translationsZH = {
 
 var translationsEN = {
   BILLYNPLATFORM: 'Billyn Platform',
-  tPropertyAssessmentPlatform: 'Property Assessment Platform',
+  JINTOUFINANCECLOUD: 'Jintou Finance Cloud',
   BILLYNLANGUAGE: 'English',
   appEngine: 'App Engine',
   LOGIN_PAGE: {

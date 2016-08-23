@@ -45,26 +45,26 @@
 				"weMember"
 			]
 		},
-		"agent.property.com": {
-			"name": "agent.property.com",
-			"alias": "置业管理机构",
-			"description": "专注于客户固定资产项目管理的置业管理公司",
+		"agent.finance.com": {
+			"name": "agent.finance.com",
+			"alias": "金融服务机构",
+			"description": "专注于金融服务的公司",
 			"roles": [
 				"admin"
 			],
 			"apps": [
-				"propertyAgent"
+				"financeAgent"
 			]
 		},
-		"data.property.com": {
-			"name": "data.property.com",
-			"alias": "置业数据机构",
-			"description": "专注于提供准确，全面，快速的房地产数据",
+		"data.finance.com": {
+			"name": "data.finance.com",
+			"alias": "金融数据服务机构",
+			"description": "专注于提供准确，全面，快速的金融数据",
 			"roles": [
 				"admin"
 			],
 			"apps": [
-				"propertyData"
+				"financeData"
 			]
 		},
 		"assessment.property.com": {
