@@ -3,12 +3,12 @@
         <div class="userSection">
             <div class="userSection-content">
                 <div class="userSection-head">
-                    <img src="components/navbar/view/img/avatar.jpg" class="img-rounded" alt="avatar">
+                    <img height="60" width="60" src="components/navbar/view/img/a{{vm.currentUser._id%7}}.jpg" class="img-rounded" alt="avatar">
                 </div>
                 <div class="userSection-body">
                     <div class="userSection-info">
                         <span class="userSection-hello">嗨，</span>
-                        <a class="userSection-userLink" href="#">Jane Devoops</a>
+                        <a class="userSection-userLink" href="#">{{vm.currentUser.loginId}}</a>
                     </div>
                     <div class="userSection-info">
                         当前机构：{{vm.space.alias}}

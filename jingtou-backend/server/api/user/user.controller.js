@@ -3,6 +3,7 @@
 import {User} from '../../sqldb';
 import {UserRole} from '../../sqldb';
 import {UserProfile} from '../../sqldb';
+import {UserGroup} from '../../sqldb';
 import {Role} from '../../sqldb';
 import {Space} from '../../sqldb';
 import {Circle} from '../../sqldb';
@@ -337,6 +338,35 @@ export function bulkAddProfile(req, res) {
   }).then(function () {
     return Promise.resolve(results);
   })
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+export function addUserGroup(req, res) {
+
+  return UserGroup.add(req.body)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+export function findAllUserGroup(req, res) {
+
+  return UserGroup.findAllByQuery(req.query)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+export function findOneUserGroup(req, res) {
+  var query = {};
+
+  if (req.params.id) {
+    query.id = req.params.id;
+  }
+  if (req.query) {
+    query = req.query;
+  }
+
+  return UserGroup.findOneByQuery(query)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

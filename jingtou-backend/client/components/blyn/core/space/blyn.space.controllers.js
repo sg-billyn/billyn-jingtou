@@ -25,6 +25,7 @@
     constructor($state, $stateParams, $rootScope, BNut) {
       var ctrl = this;
       ctrl.space = $rootScope.current.space;
+      ctrl.currentUser = $rootScope.current.user;
       /*
       $rootScope.current.nut.permits = [];
       BNut.findAllUserPermitNut($rootScope.current.app._id).then(function (permitNuts) {

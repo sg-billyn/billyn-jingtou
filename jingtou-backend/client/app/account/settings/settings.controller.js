@@ -36,7 +36,8 @@ class ProfileController {
   constructor(Auth, $rootScope) {
     var user = Auth.getCurrentUser();
     $rootScope.current.user = user;
-    console.log('$rootScope.current.user:',$rootScope.current.user);
+    this.currentUser = user;
+    //console.log('$rootScope.current.user:',$rootScope.current.user);
   }
 }
 

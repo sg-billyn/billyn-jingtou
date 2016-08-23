@@ -2,7 +2,7 @@
 
 (function () {
 
-    function BUserService($resource, User, $q, Util) {
+    function BUserService($resource, User, $q, Util, $rootScope) {
         var safeCb = Util.safeCb;
         var resUser = $resource('/api/apps/:id/:controller', {
             id: '@_id'
@@ -33,13 +33,28 @@
         var resUserProfile = $resource('/api/user/profiles/:id/:controller', {
             id: '@_id'
         }, {
-            bulkAdd: {
-                method: 'POST',
-                isArray: true,
-                params: {
-                    id: 'bulk'
+                bulkAdd: {
+                    method: 'POST',
+                    isArray: true,
+                    params: {
+                        id: 'bulk'
+                    }
                 }
-            }
+            });
+
+        var resUserGroup = $resource('/api/users/groups/:id/:controller', {
+            id: '@_id'
+        }, {
+                add: {
+                    method: 'POST'
+                },
+                findOne: {
+                    method: 'GET'
+                },
+                findAll: {
+                    method: 'GET',
+                    isArray: true
+                }
             });
 
         var currentUser = {};
@@ -77,6 +92,21 @@
             }
             context.data = bulkData;
             return resUserProfile.bulkAdd(context).$promise;
+        }
+
+        service.addGroup = function (data) {
+            if (!data.spaceId) {
+                data.spaceId = $rootScope.current.space._id;
+            }
+            return resUserGroup.add(data).$promise;
+        }
+
+        service.findOneUserGroup = function (data) {
+            return resUserGroup.findOne(data).$promise;
+        }
+
+        service.findAllUserGroup = function (data) {
+            return resUserGroup.findAll(data).$promise;
         }
 
         return service;

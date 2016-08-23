@@ -182,7 +182,7 @@ export function index(req, res) {
  */
 export function show(req, res) {
 
-    console.log(req.params.id);
+    //console.log(req.params.id);
     if (req.params.id && req.params.id === 'user') {
         return findUserSpaces(req, res);
     }
@@ -201,7 +201,7 @@ export function show(req, res) {
 
     //console.log('2');
 
-    Space.find({
+    return Space.find({
         where: {
             _id: req.params.id
         },
