@@ -48,6 +48,12 @@
                                             <tbody>
                                                 <tr>
                                                     <td colspan="4">
+                                                        <h4><i class="fa fa-group"></i> 机构的用户组</h4>
+                                                        <small> 用户建立的分组可以给每个组授予角色</small>
+                                                        <div class="actions pull-right">
+                                                            <a ng-click="vm.showAction('addUserGroup')" class=""><i class="fa fa-plus"></i> 新增用户组</a>
+                                                        </div>
+                                                    </td>
                                                         <div class="ibox-content ibox-heading">
                                                             <h4><i class="fa fa-group"></i> 机构的用户组</h4>
                                                             <small> 用户建立的分组可以给每个组授予角色</small>
@@ -171,10 +177,10 @@
                                                     <td><i class="fa fa-flag"></i> Tunisia</td>
                                                     <td class="client-status"><span class="label label-primary">Active</span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td><a ng-click="client = 6" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
+                                                <tr ng-repeat="uGroup in vm.userGroups" ng-click="vm.showAction('showGroupDetail',uGroup)">
+                                                    <td><a ng-click="client = 6" class="client-link">{{uGroup.alias}}</a></td>
+                                                    <td>{{uGroup.name}}</td>
+                                                    <td><i class="fa fa-flag"></i> {{uGroup.description}}</td>
                                                     <td class="client-status"><span class="label label-primary">Active</span></td>
                                                 </tr>
                                             </tbody>
@@ -183,7 +189,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -192,7 +197,7 @@
             <div class="ibox ">
                 <div class="ibox-content">
                     <div class="tab-content">
-                        <div id="contact-1" class="tab-pane active" ng-show="vm.action.name == 'showUserDetail'" ng-init="vm.action.name == 'showUserDetail'">
+                        <div id="showUserDetail" class="tab-pane active" ng-show="vm.action.name == 'showUserDetail'" ng-init="vm.action.name == 'showUserDetail'">
                             <div class="row m-b-lg">
                                 <div class="col-lg-4 text-center">
                                     <h2></h2>
@@ -217,9 +222,8 @@
                                         <div class="m-t-xs btn-group">
                                             <a ng-show="vm.action.userRole.joinStatus === 'applying'" class="btn btn-xs btn-primary" ng-click="vm.changeUserRole('approve')"><i class="fa fa-check"></i> 批准 </a>
                                             <a ng-show="vm.action.userRole.joinStatus === 'applying'" class="btn btn-xs btn-warning" ng-click="vm.changeUserRole('reject')"><i class="fa fa-remove"></i> 拒绝 </a>
-                                            <a ng-show="vm.action.userRole.joinStatus === 'joined'" class="btn btn-xs btn-danger" ng-click="vm.changeUserRole('cancel')"><i class="fa fa-remove"></i> 强制取消 </a>
-                                            <a ng-show="vm.action.userRole.joinStatus === 'joined'" class="btn btn-xs btn-warning" ng-click="vm.changeUserRole('cancel')"><i class="fa fa-wrench"></i> 修改 </a>
-                                            <a ng-show="vm.action.userRole.joinStatus === 'joined'" class="btn btn-xs btn-success" ng-click="vm.changeUserRole('cancel')"><i class="fa fa-plus"></i> 增加 </a>
+                                            <a ng-show="vm.action.userRole.joinStatus === 'joined'" class="btn btn-xs btn-danger" ng-click="vm.changeUserRole('cancel')"><i class="fa fa-remove"></i> 取消角色 </a>
+                                            <a ng-show="vm.action.userRole.joinStatus === 'joined'" class="btn btn-xs btn-success" ng-click="vm.changeUserRole('addRole')"><i class="fa fa-plus"></i> 增加角色 </a>
                                         </div>
 
                                     </div>
@@ -236,6 +240,56 @@
                                             <button ng-click="vm.changeUserRole('confirm')" class="btn btn-success btn-block m-t"><i class="fa fa-check"></i> 确认批准</button>
                                         </h3>
 
+                                    </div>
+
+                                    <div ng-show="vm.action.action.name === 'showAddRole'">
+
+                                        <h3>增加用户角色</h3>
+                                        <hr>
+                                        <div ng-repeat="role in vm.action.rolesForApply" class="feed-element">
+                                            <div>
+                                                <strong>{{role.alias}}</strong> ( {{role.name}} )
+                                                <div class="actions pull-right">
+                                                    <a ng-click="vm.changeUserRole('showAddRoleConfirm',role)" class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i> 增加角色</a>
+                                                </div>
+                                            </div>
+                                            <div ng-show="vm.action.action.confirm === 'showAddRoleConfirm'+role._id">
+                                                <div class="ibox-content ibox-heading">
+                                                    <h4><i class="fa fa-check-square-o"></i> 加角色</h4>
+                                                    <small><i class="fa fa-tim"></i> 您正在加新角色，请确认！.</small>
+                                                    <div class="actions pull-right">
+                                                        <a ng-click="vm.changeUserRole('confirmAddRole')" class="btn btn-xs btn-primary"><i class="fa fa-legal"></i> 确认添加</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="vm.action === 'showUserDetail'">
+                                        <strong>用户的活动信息</strong>
+
+                                        <ul class="list-group clear-list">
+                                            <li class="list-group-item fist-item">
+                                                <span class="pull-right"> 09:00 pm </span> －－－－－
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="pull-right"> 10:16 am </span> －－－－－
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="pull-right"> 08:22 pm </span> －－－－－
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="pull-right"> 11:06 pm </span> －－－－－
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="pull-right"> 12:00 am </span> －－－－－
+                                            </li>
+                                        </ul>
+                                        <strong>更多信息</strong>
+                                        <p>
+                                            －－－－－－－－－
+                                        </p>
+                                        <hr/>
                                     </div>
 
                                     <strong>用户的活动信息</strong>
@@ -315,124 +369,142 @@
                                         －－－－－－－－－
                                     </p>
                                     <hr/>
+
                                 </div>
                             </div>
                         </div>
-                        <div id="contact-3" class="tab-pane active" ng-show="client == 3">
+                        <div id="addUserGroup" class="tab-pane active" ng-show="vm.action.name == 'addUserGroup'">
                             <div class="row m-b-lg">
-                                <div class="col-lg-4 text-center">
-                                    <h2>Jasper Carson</h2>
-
-                                    <div class="m-b-sm">
-                                        <img alt="image" class="img-circle" src="img/a4.jpg" style="width: 62px">
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <strong>
-                                        About me
+                                <div class="col-lg-12">
+                                    <h4><i class="fa fa-group"></i>
+                                        <strong>
+                                        新增用户组
                                     </strong>
-
-                                    <p>
-                                        Latin professor at Hampden-Sydney College in Virginia, looked embarrassing hidden in the middle.
-                                    </p>
-                                    <button type="button" class="btn btn-primary btn-sm btn-block"><i
-                                            class="fa fa-envelope"></i> Send Message
-                                    </button>
+                                    </h4>
+                                    <small>
+                                        输入用户组信息并创建新的用户组
+                                    </small>
                                 </div>
                             </div>
                             <div class="client-detail">
                                 <div class="full-height-scroll" full-scroll>
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="name">用户组名称（机构内唯一名称）</label>
+                                            <input ng-model="vm.newGroup.name" type="text" class="form-control" id="name" placeholder="名称">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alias">用户组别名（用户组显示名称）</label>
+                                            <input ng-model="vm.newGroup.alias" type="text" class="form-control" id="alias" placeholder="别名">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">描述</label>
+                                            <input ng-model="vm.newGroup.description" type="text" class="form-control" id="description" placeholder="描述">
+                                        </div>
+                                        <button ng-click="vm.showConfirm('addUserGroup')" type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                    <div ng-show="vm.action.confirm == 'addUserGroup'" style="margin-top:10px" class="well">
+                                        <h4><i class="fa fa-bell"></i> 确认建立分组</h4>
+                                        <small> 分组名称：{{vm.newGroup.name}} 分组别名：{{vm.newGroup.alias}}</small>
 
-                                    <strong>Last activity</strong>
-
-                                    <ul class="list-group clear-list">
-                                        <li class="list-group-item fist-item">
-                                            <span class="pull-right"> 09:00 pm </span> Aldus PageMaker including
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="pull-right"> 10:16 am </span> Finibus Bonorum et Malorum
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="pull-right"> 08:22 pm </span> Write a letter to Sandra
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="pull-right"> 11:06 pm </span> Standard chunk of Lorem
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="pull-right"> 12:00 am </span> Open new shop
-                                        </li>
-                                    </ul>
-                                    <strong>Notes</strong>
-                                    <p>
-                                        Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
-                                    </p>
-                                    <hr/>
-                                    <strong>Timeline activity</strong>
-                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-coffee"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>Conference on the sales results for the previous year.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 2:10 pm - 12.06.2014 </span>
-                                            </div>
+                                        <div style="padding-top:10px" class="actions">
+                                            <a ng-click="vm.doConfirm('addUserGroup')" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i> 确认创建</a>
                                         </div>
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-briefcase"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>Many desktop publishing packages and web page editors now use Lorem.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 4:20 pm - 10.05.2014 </span>
-                                            </div>
-                                        </div>
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-bolt"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>There are many variations of passages of Lorem Ipsum available.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 06:10 pm - 11.03.2014 </span>
-                                            </div>
-                                        </div>
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon navy-bg">
-                                                <i class="fa fa-warning"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>The generated Lorem Ipsum is therefore.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 02:50 pm - 03.10.2014 </span>
-                                            </div>
-                                        </div>
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-coffee"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>Conference on the sales results for the previous year.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 2:10 pm - 12.06.2014 </span>
-                                            </div>
-                                        </div>
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-briefcase"></i>
-                                            </div>
-                                            <div class="vertical-timeline-content">
-                                                <p>Many desktop publishing packages and web page editors now use Lorem.
-                                                </p>
-                                                <span class="vertical-date small text-muted"> 4:20 pm - 10.05.2014 </span>
-                                            </div>
+                                    </div>
+                                    <div ng-show="vm.action.result == 'addUserGroup'" style="margin-top:10px" class="well">
+                                        <h4 class="text-success"><i class="fa fa-bell"></i> 提交成功!</h4>
+                                        <div style="padding-top:10px" class="actions">
+                                            <a ng-click="vm.doResult('ok')" class="btn btn-primary btn-sm btn-block"><i class="fa fa-beer"></i> OK</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div id="showGroupDetail" class="tab-pane active" ng-show="vm.action.name == 'showGroupDetail'">
+                            <div class="row m-b-lg">
+                                <div class="col-lg-12">
+                                    <h4><i class="fa fa-support"></i>
+                                        <strong>
+                                        {{vm.action.userGroup.alias}} ( {{vm.action.userGroup.name}} )
+                                        </strong>
+                                    </h4>
+
+                                    <small>
+                                        用户组的描述
+                                    </small>
+                                    <div class="contact-box-footer">
+
+                                        <div class="m-t-xs btn-group">
+                                            <a class="btn btn-xs btn-primary" ng-click="vm.showAction('manageGroupUsers')"><i class="fa fa-plus"></i> 管理用户 </a>
+                                            <a class="btn btn-xs btn-success" ng-click="vm.showAction('manageGroupRoles')"><i class="fa fa-gear"></i> 管理角色 </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="vm.action.name == 'showManageGroupUser'" class="client-detail">
+                                <div class="full-height-scroll" full-scroll>
+
+                                    <strong>管理用户组成员</strong>
+
+                                    <ul class="list-group clear-list">
+                                        <li class="list-group-item fist-item">
+                                            <div class="well">
+
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 10:16 am </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 08:22 pm </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 11:06 pm </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 12:00 am </span> －－－－－
+                                        </li>
+                                    </ul>
+                                    <strong>更多信息</strong>
+                                    <p>
+                                        －－－－－－－－－
+                                    </p>
+                                    <hr/>
+                                </div>
+                            </div>
+                            <div ng-show="vm.action.name == 'showManageGroupRole'" class="client-detail">
+                                <div class="full-height-scroll" full-scroll>
+
+                                    <strong>管理用户组角色</strong>
+
+                                    <ul class="list-group clear-list">
+                                        <li class="list-group-item fist-item">
+                                            <span class="pull-right"> 09:00 pm </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 10:16 am </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 08:22 pm </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 11:06 pm </span> －－－－－
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> 12:00 am </span> －－－－－
+                                        </li>
+                                    </ul>
+                                    <strong>更多信息</strong>
+                                    <p>
+                                        －－－－－－－－－
+                                    </p>
+                                    <hr/>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

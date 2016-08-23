@@ -225,6 +225,25 @@
             });
         }
 
+        addRole() {
+            var newRole = {};
+            newRole.spaceId = this.current.space._id;
+            newRole.name = this.newRole.name;
+            newRole.alias = this.newRole.alias;
+            newRole.description = this.newRole.description;
+            var ctrl = this;
+            /*
+            angular.element('#addRoleModal').on('hidden.bs.modal', function () {
+                ctrl.$state.reload();
+            });*/
+            this.BRole.addRole(newRole).then(function (res) {
+                ctrl.toaster.success("Success add role");
+                ctrl.BSpace.findRoles().then(function (roles) {
+                    ctrl.roles = ctrl.current.space.roles = roles;
+                })
+            });
+        }
+
         delete() {
             var ctrl = this;
             angular.element('#deleteRoleModal').on('hidden.bs.modal', function () {
@@ -258,12 +277,18 @@
             that.action.role = role;
             that.action.name = 'showAddChild';
         }
+
+        showAddRole() {
+            var that = this;
+            that.action.name = 'showAddRole';
+        }
     }
 
     class AdminUserRoleController {
-        constructor($stateParams, $state, BRole, BSpace, $rootScope) {
+        constructor($stateParams, $state, BRole, BSpace, $rootScope, BUser) {
             this.BRole = BRole;
             this.BSpace = BSpace;
+            this.BUser = BUser;
             this.spaceId = $stateParams.spaceId;
             this.$state = $state;
             this.spaceRoles = [];
@@ -274,9 +299,11 @@
             this.action = {
                 'name': 'showUserDetail'
             }
+            this.newGroup = {};
             var ctrl = this;
 
             this.loadSpaceUserRole();
+            this.loadUserGroups();
         }
 
         //reload all space user role
@@ -293,6 +320,43 @@
             })
         }
 
+        loadUserGroups() {
+            var that = this;
+            that.BUser.findAllUserGroup(
+                {
+                    spaceId: that.current.space._id
+                }
+            ).then(function (collection) {
+                that.userGroups = collection;
+            })
+        }
+
+        loadRolesForApply() {
+            var that = this;
+            var roles = that.current.space.roles;
+            var uRolesId = [];
+            that.action.rolesForApply = [];
+            //find all user's role and skip from space roles
+            that.BRole.findAllUserRole(
+                {
+                    spaceId: that.current.space._id,
+                    userId: that.action.userRole.userId
+                }
+            ).then(function (uRoles) {
+                uRoles.forEach(function (ur) {
+                    var rId = ur.roleId;
+                    if (uRolesId.indexOf(rId) === -1) {
+                        uRolesId.push(ur.roleId);
+                    }
+                })
+                roles.forEach(function (r) {
+                    if (uRolesId.indexOf(r._id) === -1) {
+                        that.action.rolesForApply.push(r);
+                    }
+                })
+            })
+        }
+
         showUserDetail(userRole) {
             var that = this;
             that.action = {
@@ -301,10 +365,11 @@
             }
         }
 
-        changeUserRole(action) {
+        changeUserRole(action, item) {
             var joinStatus;
             var that = this;
             that.action.subAction = action;
+            that.action.action = that.action.action || {};
             if (action === 'approve') {
                 that.action.joinStatus = 'joined';
             }
@@ -317,6 +382,10 @@
             if (action === 'cancel') {
                 that.action.joinStatus = 'cancelled';
             }
+            if (action === 'addRole') {
+                that.action.action.name === 'showAddRole' ? that.action.action.name = '' : that.action.action.name = 'showAddRole';
+                that.loadRolesForApply();
+            }
             if (action === 'confirm') {
                 that.BRole.updateUserRole(
                     {
@@ -328,6 +397,59 @@
                         that.action.userRole.joinStatus = that.action.joinStatus;
                     }
                 })
+            }
+            if (action === 'showAddRoleConfirm') {
+                that.action.action.role = item;
+                that.action.action.confirm == 'showAddRoleConfirm'+item._id? that.action.action.confirm = '':that.action.action.confirm='showAddRoleConfirm'+item._id;  
+            }
+            if (action === 'confirmAddRole') {
+                that.BRole.addUserRole(
+                    {
+                        userId: that.action.userRole.userId,
+                        roleId: that.action.action.role._id
+                    }
+                )
+                    .then(function (result) {
+                        that.action.action.confirm = null;
+                        that.loadRolesForApply();
+                        that.loadSpaceUserRole();
+                    })
+            }
+        }
+
+        showAction(actionName, item) {
+            this.action = {
+                name: actionName
+            }
+            if (actionName === 'showGroupDetail') {
+                this.action.userGroup = item;
+            }
+        }
+
+        showConfirm(name) {
+            this.action.confirm = this.action.confirm === name ? this.action.confirm = '' : name;
+            this.action.result = null;
+        }
+
+        showResult(name) {
+            this.action.result = this.action.result === name ? this.action.result = '' : name;
+            this.action.confirm = null;
+        }
+
+        doConfirm(name) {
+            var that = this;
+            if (name === 'addUserGroup') {
+                that.BUser.addGroup(this.newGroup).then(function (result) {
+                    that.showResult('addUserGroup');
+                })
+            }
+        }
+
+        doResult(name) {
+            var that = this;
+            if (name.toLowerCase() === 'ok') {
+                that.action.result = null;
+                that.loadUserGroups();
             }
         }
 
@@ -360,7 +482,6 @@
 
             console.log("total roles = " + ctrl.roles);
         }
-
 
         assignRole() {
 
@@ -863,8 +984,8 @@
             this.action.name = this.action.name === 'addRole' ? this.action = {} : 'addRole';
         }
 
-        showExitRole(userRole){
-            this.action.name = this.action.name === 'exitRole'+userRole._id ? this.action = {} : 'exitRole'+userRole._id;
+        showExitRole(userRole) {
+            this.action.name = this.action.name === 'exitRole' + userRole._id ? this.action = {} : 'exitRole' + userRole._id;
         }
     }
 

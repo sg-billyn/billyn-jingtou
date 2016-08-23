@@ -18,6 +18,15 @@
                         <th>操作</th>
                       </thead>
                       <tbody>
+                        <tr>
+                          <td colspan="5">
+                            <h4><i class="fa fa-gears"></i> 机构角色 </h4>
+                            <small> 这里定义机构角色，并为机构角色添加功能</small>
+                            <div class="actions pull-right">
+                              <a ng-click="vm.showAddRole()" class=""><i class="fa fa-plus"></i> 新角色</a>
+                            </div>
+                          </td>
+                        </tr>
                         <tr ng-repeat="(key, role) in vm.roles">
                           <td><a ng-click="vm.showDetail(role)" class="client-link">{{role.alias}}</a></td>
                           <td> {{role.name}}</td>
@@ -27,7 +36,7 @@
                           <td>
                             <a ng-click="vm.showAdminNut(role)" class="client-link">管理功能</a> |
                             <span ng-show="role.name == 'everyone'" class="client-link text-muted">添加子角色</span>
-                            <a ng-show="role.name != 'everyone'" ng-click="vm.showAddChild(role)" class="client-link">添加子角色</a> |
+                            <a ng-show="role.name != 'everyone'" ng-click="vm.showAddChild(role)" class="client-link">添加子角色</a>                            |
                             <span ng-show="role.allowDelete" ng-click="vm.delete(role)" class="label label-danger">删除</span>
                             <span ng-show="!role.allowDelete" class="label text-muted">－－</span>
                           </td>
@@ -114,6 +123,41 @@
                           <input ng-model="vm.newRole.description" type="text" placeholder="角色描述" class="form-control"></div>
                         <div>
                           <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" ng-click="vm.save()"><strong>加入角色</strong></button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ibox" ng-show="vm.action.name === 'showAddRole'">
+        <div class="ibox-content">
+          <div class="tab-content">
+            <div class="tab-pane active">
+              <div class="row m-b-lg">
+                <div class="col-lg-8">
+                  <h2>新角色</h2>
+                </div>
+                <div class="col-lg-8">
+                  
+                </div>
+              </div>
+              <div class="client-detail">
+                <div class="full-height-scroll" full-scroll>
+                  <div class="row">
+                    <div class="col-sm-10 b-r">
+                      <form role="form">
+                        <div class="form-group"><label>角色名称</label>
+                          <input ng-model="vm.newRole.name" type="text" placeholder="角色名称" class="form-control"></div>
+                        <div class="form-group"><label>角色别名</label>
+                          <input ng-model="vm.newRole.alias" type="text" placeholder="角色别名" class="form-control"></div>
+                        <div class="form-group"><label>角色描述</label>
+                          <input ng-model="vm.newRole.description" type="text" placeholder="角色描述" class="form-control"></div>
+                        <div>
+                          <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" ng-click="vm.addRole()"><strong>确认添加</strong></button>
                         </div>
                       </form>
                     </div>

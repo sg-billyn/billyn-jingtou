@@ -36,5 +36,6 @@ db.Collab = db.sequelize.import('../api/collab/collab.model');
 db.CollabRole = db.sequelize.import('../api/collab/collabRole.model');
 db.Timeslot = db.sequelize.import('../api/timeslot/timeslot.model');
 db.UserProfile = db.sequelize.import('../api/user/UserProfile.model');
+db.UserGroup = db.sequelize.import('../api/user/UserGroup.model');
 
 export default db;

@@ -44,7 +44,7 @@
 					method: 'put'
 				}
 			});
-
+		
 		var currentRole = {};
 
 		var service = {};
@@ -119,7 +119,7 @@
 				if (!roleData.hasOwnProperty('spaceId')) {
 					roleData.spaceId = $rootScope.current.space._id;//BSpace.current()._id;
 				}
-				return resRole.save(roleData);
+				return resRole.save(roleData).$promise;
 			}
 		}
 

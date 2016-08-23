@@ -27,7 +27,7 @@ export default function (sequelize, DataTypes) {
 		},
 		joinStatus: {
 			type: DataTypes.ENUM,
-			values: ['applying', 'following', 'joined'],
+			values: ['applying', 'following', 'joined','rejected','cancelled'],
 			defaultValue: 'joined'
 		},
 		active: DataTypes.BOOLEAN
