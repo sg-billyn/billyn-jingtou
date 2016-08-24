@@ -8,8 +8,10 @@ var router = new Router();
 
 //for user groups
 router.get('/groups', controller.findAllUserGroup);
+router.get('/groups/roles', controller.findAllUserGroupRole);
 router.get('/groups/:id', controller.findOneUserGroup);
 router.post('/groups', controller.addUserGroup);
+router.post('/groups/roles', controller.addUserGroupRole);
 
 
 //impossible to get all users

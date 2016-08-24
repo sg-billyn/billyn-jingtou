@@ -424,15 +424,38 @@
             }
         }
 
+        loadGroupRoles(userGroup) {
+            var spaceRoles = this.current.space.roles;
+            this.BUser.findUserGroupRoles({
+                userGroupId: userGroup._id
+            }).then(function (ugRoles) {
+                var checkedList = [];
+                var rList = [];
+                ugRoles.forEach(function (ugRole) {
+                    checkedList.push(ugRole.roleId);
+                })
+                spaceRoles.forEach(function (r) {
+                    userGroup.roles = userGroup.roles || {};
+                    if (checkedList.indexOf(r._id) !== -1) {
+                        r.checked = true;
+                    } else {
+                        r.checked = false;
+                    }
+                    userGroup.roles[r._id] = r;
+                })
+            })
+        }
+
         showAction(actionName, item) {
-            this.action = {
-                name: actionName
-            }
+            this.action = this.action || {};
+            this.action.name =  actionName;
+
             if (actionName === 'showGroupDetail') {
                 this.action.userGroup = item;
                 this.action.action = {
                     name: 'showGroupDetail'
                 }
+                this.loadGroupRoles(this.action.userGroup);
             }
 
             if (actionName === 'showGroupDetail.showManageGroupUser') {
