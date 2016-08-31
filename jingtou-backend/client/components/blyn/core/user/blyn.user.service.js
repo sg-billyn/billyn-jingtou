@@ -54,6 +54,19 @@
                 findAll: {
                     method: 'GET',
                     isArray: true
+                },
+                findRoles: {
+                    method: 'GET',
+                    isArray: true,
+                    params: {
+                        id: 'roles'
+                    }
+                },
+                addRole: {
+                    method: 'POST',
+                    params: {
+                        id: 'roles'
+                    }
                 }
             });
 
@@ -107,6 +120,54 @@
 
         service.findAllUserGroup = function (data) {
             return resUserGroup.findAll(data).$promise;
+        }
+
+        service.findUserGroupRoles = function(data){
+
+            if(angular.isObject(data)){
+                var userGroupId;
+                for(var key in data){
+                    if(key.toLocaleLowerCase() === 'usergroupid'){
+                        userGroupId = data[key];
+                    }
+                }
+                if(userGroupId){
+                    return resUserGroup.findRoles(
+                        {
+                            userGroupId: userGroupId
+                        }
+                    ).$promise;
+                }else{
+                    return $q.reject('fail to find group roles');
+                }
+            }
+        }
+
+        service.addUserGroupRole = function(data){
+            var roleId, userGroupId;
+
+            if(angular.isObject(data)){
+                for(var key in data){
+                    if(key.toLocaleLowerCase() === 'roleid'){
+                        roleId = data[key];
+                    }
+                    if(key.toLocaleLowerCase() === 'usergroupid'){
+                        userGroupId = data[key];
+                    }
+                    if(key.toLocaleLowerCase() === 'groupid'){
+                        userGroupId = data[key];
+                    }
+                }
+            }
+
+            if(roleId && userGroupId){
+                return resUserGroup.addRole({
+                    roleId: roleId,
+                    userGroupId: userGroupId
+                }).$promise;
+            } else {
+                return $q.reject('fail to add role');
+            }
         }
 
         return service;

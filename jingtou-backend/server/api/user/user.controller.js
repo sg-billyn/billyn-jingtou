@@ -371,3 +371,18 @@ export function findOneUserGroup(req, res) {
     .catch(handleError(res));
 }
 
+export function addUserGroupRole(req, res){
+
+  return UserGroup.addRole(req.body)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+export function findAllUserGroupRole(req, res){
+   return UserGroup.findAllRole(req.query).then(function(results){
+     return Promise.resolve(results);
+   })
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
