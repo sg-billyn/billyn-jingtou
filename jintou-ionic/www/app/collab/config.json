@@ -1,0 +1,24 @@
+{
+	"alias": "collab",
+	"type": "nut.core",
+	"permits": {
+		"adminCollab": {
+			"alias": "admin collab"
+		},
+		"manageCollab": {
+			"alias": "manage collab"
+		},
+		"collabClientChief": {
+			"alias": "collab client chief"
+		},
+		"collabClient": {
+			"alias": "collab client"
+		}
+	},
+	"types": {
+		"normal": {
+			"name": "normal",
+			"alias": "normal collab"
+		}
+	}
+}
