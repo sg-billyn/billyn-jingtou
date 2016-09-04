@@ -1,14 +1,19 @@
 {
-  "name": "jintou-ionic",
+  "name": "IonicMaterialDesign",
   "app_id": "",
-  "proxies": [
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ],
+  "browsers": [
     {
-      "path": "/auth/local",
-      "proxyUrl": "http://localhost:9000/auth/local"
-    },
-    {
-      "path": "/api",
-      "proxyUrl": "http://localhost:9000/api"
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "12.41.296.5"
     }
   ]
 }
