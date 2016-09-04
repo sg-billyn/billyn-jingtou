@@ -1,0 +1,14 @@
+{
+  "name": "jintou-ionic",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/auth/local",
+      "proxyUrl": "http://localhost:9000/auth/local"
+    },
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:9000/api"
+    }
+  ]
+}

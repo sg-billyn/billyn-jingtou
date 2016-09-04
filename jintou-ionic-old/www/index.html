@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+<!-- ionic/angularjs js -->
+<script src="lib/ionic/js/ionic.bundle.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/ngstorage/ngstorage.js"></script>
+
+<!-- cordova script (this will be a 404 during development) -->
+<script src="cordova.js"></script>
+
+<!-- your app's js -->
+<script src="app/app.js"></script>
+<!--<script src="js/controllers.js"></script>-->
+<script src="app/constants.js"></script>
+<script src="app/account/login/loginController.js"></script>
+<script src="app/account/signup/signupController.js"></script>
+<script src="app/appController.js"></script>
+<script src="app/account/authInterceptor.js"></script>
+<script src="app/account/authService.js"></script>
+<script src="app/spinner.js"></script>
+<script src="app/space/spaceService.js"></script>
+<script src="app/space/spaceController.js"></script>
+<script src="app/permit/permitService.js"></script>
+<script src="app/apps/appService.js"></script>
+<script src="app/account/userService.js"></script>
+<script src="app/utilService.js"></script>
+<script src="app/role/roleService.js"></script>
+<script src="app/nut/nutService.js"></script>
+<script src="app/circle/circleService.js"></script>
+</head>
+
+<body ng-app="starter" ng-controller="AppCtrl">
+  <ui-view></ui-view>
+</body>
+</html>
