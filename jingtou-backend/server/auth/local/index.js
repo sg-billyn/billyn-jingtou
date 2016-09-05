@@ -7,7 +7,7 @@ import {signToken} from '../auth.service';
 var router = express.Router();
 
 router.post('/', function(req, res, next) {
-  console.log('req.body:', JSON.stringify(req.body));
+  //console.log('req.body:', JSON.stringify(req.body));
   passport.authenticate('local', function(err, user, info) {
     var error = err || info;
     if (error) {
