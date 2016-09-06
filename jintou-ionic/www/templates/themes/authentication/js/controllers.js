@@ -1,13 +1,25 @@
 // Controller of catalog Page.
-appControllers.controller('authCtrl', function ($scope, $mdToast, $mdDialog) {
+appControllers.controller('authCtrl', function ($scope, $mdToast, $mdDialog, resApi) {
 
     
-    $scope.login = function ($event) {
+    $scope.login = function (loginData) {
        
-        
+        resApi.auth.local(loginData).then(
+            function(success){
+
+            },
+            function(error){
+
+            });
     }
 
-    $scope.signup = function($event) {
-        
+    $scope.signup = function(signupData) {
+        resApi.user.create(signupData).then(
+            function(success){
+
+            },
+            function(error){
+
+            });
     }
 });// End of auth controller.

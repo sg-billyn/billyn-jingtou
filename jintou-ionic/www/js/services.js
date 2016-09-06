@@ -13,7 +13,7 @@ function api($resource) {
     api.auth = $resource(api.baseUrl + '/api/auth/:id/:controller', {
         id: '@_id'
     }, {
-            byLocal: {
+            local: {
                 method: 'POST',
                 params: {
                     id: 'local'
