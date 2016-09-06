@@ -1,0 +1,4417 @@
+<!DOCTYPE html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Ionic Material Design Documentation</title>
+    <!-- Framework CSS -->
+    <link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
+    <link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+    <link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <style type="text/css" media="screen">
+        p, table, hr, .box {
+            margin-bottom: 25px;
+        }
+
+        .box p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="container">
+
+    <h3 class="center alt">&ldquo;Documentation of Ionic Material Design &rdquo;</h3>
+
+    <hr>
+
+    <h1 class="center">&ldquo;Ionic Material Design&rdquo;</h1>
+
+    <div class="borderTop">
+        <div class="span-7 colborder info prepend-1">
+            <p class="prepend-top">
+                <strong>
+                    Created: 24.06.2016<br>
+                    By: Ionic Material Design Team<br>
+                    Email: <a href="mailto:ionicmaterialdesign@gmail.com">ionicmaterialdesign@gmail.com</a>
+                </strong>
+            </p>
+        </div>
+        <!-- end div .span-6 -->
+
+        <div class="span-12 last">
+            <p class="prepend-top append-0">Thank you for purchasing Ionic Material Design. If you have any questions
+                that are
+                beyond the scope of this help file, please feel free to email via my user page contact form <a
+                        href="http://themeforest.net/user/ionicmaterialdesign">here</a>. Thanks so much!
+                     
+        </div>
+    </div>
+    <!-- end div .borderTop -->
+
+    <hr>
+    <h2 class="alt">
+        <img class="thumbnail" src="img/inline_Preview.jpg" width="460" align="right"
+             style="margin-right: 16px; margin-top: 60px;"></h2>
+
+    <h2 id="toc" class="alt">Table of Contents</h2>
+    <ol class="alpha">
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#importantNotes">Important Notes</a></li>
+        <li><a href="#filFolderStructure">File & Folder Structure</a></li>
+        <li><a href="#gettingStarted">Getting Started</a>
+            <ul>
+                <li>D-1 <a href="#installingIonicFramework">Installing Ionic Framework</a></li>
+                <li>D-2 <a href="#openPeoject">Open Project</a></li>
+                <li>D-3 <a href="#addPlatform">Add Platform</a></li>
+                <li>D-4 <a href="#addPlugin">Add Ionic Plugin </a></li>
+                <li>D-5 <a href="#installCrosswalk">Install Crosswalk Browser </a></li>
+                <li>D-6 <a href="#runOnBrowser">Run and Debug On Browser </a></li>
+                <li>D-7 <a href="#androidBuild">Android Build </a></li>
+                <li>D-8 <a href="#iosBuild">IOS Build </a></li>
+                <li>D-9 <a href="#deployToAndroidDevice">Deploy to Android device </a></li>
+                <li>D-10 <a href="#deployToIOSDevice">Deploy to IOS device </a></li>
+                <li>D-11 <a href="#sassSetup">Sass Setup </a></li>
+                <li>D-12 <a href="#iconAndSplash">Icon and Splash Screen</a></li>
+                <li>D-13 <a href="#updatetolatestversion">Update project to latest version</a></li>
+            </ul>
+        </li>
+        <li><a href="#textEditor"> How to edit a Project File. </a></li>
+        <li><a href="#htmlStructure"> HTML Files and Structure </a></li>
+        <li><a href="#cssStructure"> CSS Files and Structure </a></li>
+        <li><a href="#javascriptStructure"> Javascript Files and Structure </a></li>
+        <li><a href="#configuration"> Configuration </a>
+            <ul>
+                <li>I-1 <a href="#themeColor"> Theme Color</a></li>
+                <li>I-2 <a href="#androidKeyboard"> Android Keyboard</a></li>
+                <li>I-3 <a href="#disablePhoneNumberTyping">Disable phone number typing</a></li>
+                <li>I-4 <a href="#phoneCall"> Phone call</a></li>
+            </ul>
+        </li>
+        <li><a href="#componentDetail">Component Detail </a>
+            <ul>
+                <li>J-1 <a href="#applicationStorage"> Application Storage</a>
+                    <ul>
+                        <li>J-1-1 <a href="#sqLiteDB">SQLite Database</a></li>
+                        <li>J-1-2 <a href="#localStorage">Local Storage Database</a></li>
+                    </ul>
+                </li>
+                <li>J-2 <a href="#socialNetworkConnect">Social Network Connect</a>
+                    <ul>
+                        <li>J-2-1 <a href="#wordPress">WordPress</a></li>
+                        <li>J-2-2 <a href="#facebook">Facebook</a></li>
+                        <li>J-2-3 <a href="#googlePlus">Google Plus</a></li>
+                        <li>J-2-4 <a href="#instagram">Instagram</a></li>
+                        <li>J-2-5 <a href="#foursquare">Foursquare</a></li>
+                        <li>J-2-6 <a href="#dropbox">Dropbox</a></li>
+                    </ul>
+                </li>
+                <li>J-3 <a href="#shareApplicationContent">Share Application Content</a>
+                    <ul>
+
+                        <li>J-3-1 <a href="#socialShare">Social Share</a></li>
+                        <li>J-3-2 <a href="#emailMessage">Email & Message</a></li>
+                    </ul>
+                </li>
+
+                <li>J-4 <a href="#googleAdMob">Advertising Application</a>
+                    <ul>
+                        <li>J-4-1 <a href="#googleAdMob">Google AdMob</a></li>
+                    </ul>
+                </li>
+                <li>J-5 <a href="#pushNotification">Push Notification</a>
+                    <ul>
+                        <li>J-5-1 <a href="#singlePush">Single Push</a></li>
+                    </ul>
+                    <ul>
+                        <li>J-5-2 <a href="#schedulePush">Schedule Push</a></li>
+                    </ul>
+                </li>
+                <li>J-6 <a href="#mapApiConnect">Map API Connect</a>
+                    <ul>
+                        <li>J-6-1 <a href="#iosMap">IOS Map</a></li>
+                    </ul>
+                    <ul>
+                        <li>J-6-2 <a href="#androidMap">Android Map</a></li>
+                    </ul>
+                </li>
+                <li>J-7 <a href="#hardwareConnect">Hardware Connect</a>
+                    <ul>
+                        <li>J-7-1 <a href="#mobileContract">Mobile Contract</a></li>
+                        <li>J-7-2 <a href="#imagePicker">Image Picker</a></li>
+                        <li>J-7-3 <a href="#vibration">Vibration</a></li>
+                        <li>J-7-4 <a href="#flashlight">Flashlight</a></li>
+                        <li>J-7-5 <a href="#deviceInformation">Device Information</a></li>
+                    </ul>
+                </li>
+                <li>J-8 <a href="#materialDesignThemes">Material Design Themes</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#knownIssues"> Known Issues </a></li>
+        <li><a href="#compatibility"> Compatibility </a></li>
+        <li><a href="#support"> Support </a></li>
+        <li><a href="#usefulResources"> Useful Resources </a></li>
+        <li><a href="#sourcesAndCredits"> Sources and Credits </a></li>
+        <li><a href="#version">Version History</a></li>
+
+    </ol>
+    <hr>
+
+    <h3 id="intro"><strong>A) Introduction</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Ionic Material Design is mobile application that developed by
+        <a href="http://ionicframework.com/getting-started/"> Ionic Framework </a> under the design concept of
+        <a href="https://www.google.com/design/spec/material-design/introduction.html">Google
+            Material Design</a> including the functions of
+        <a href="http://ngcordova.com/">ngCorgova</a>.
+        The application will present the function of :
+
+
+    <ul>
+        <li><strong>Application storage</strong>
+            <ul>
+                <li><strong>SQLite Database</strong> : Best way to store data to application storage. It allow you to
+                    manage complex relational database.
+                </li>
+                <li><strong>Local Storage Database</strong> : Use HTML5 Local Storage feature to save data to device.
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Social Connect</strong>
+            <ul>
+                <li><strong> WordPress Connect</strong> : The easy way connect with WordPress. Just input your wordpress
+                    url to the application.
+                </li>
+                <li><strong> Facebook Connect</strong> : Connecting the application with Facebook and guideline how to
+                    get start with Facebook APIs.
+                </li>
+                <li><strong> Google Connect</strong> : Connecting the application with Google Plus and guideline how to
+                    get start with Google Plus APIs.
+                </li>
+                <li><strong> Instagram Connect</strong> : Connecting the application with Instagram and guideline how
+                    to get start with Instagram APIs.
+                </li>
+                <li><strong> Foursquare Connect</strong> : Connecting the application with Foursquare and guideline how
+                    to get start with Foursquare APIs.
+                </li>
+                <li><strong> Dropbox Connect</strong> : Connecting the application with Dropbox and guideline how
+                    to get start with Dropbox APIs.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Share content to social network</strong>
+            <ul>
+                <li><strong> Facebook sharing</strong>: Share Application content via Facebook.
+                </li>
+                <li><strong> Twitter sharing</strong>: Share Application content via Twitter.
+                </li>
+                <li><strong> Email sharing</strong>: Sending Application content via Email.
+                </li>
+                <li><strong> Text Message</strong>: Sending Application content via Text Message.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Advertising in application</strong>
+            <ul>
+                <li><strong>Google AdMob</strong> : Earn money with advertising application by Google AdMob APIs.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Push Notification</strong>
+            <ul>
+                <li><strong>Single Push</strong> : Interacting with user by send single push notification message.
+                </li>
+                <li><strong>Schedule Push</strong> : Interacting with user by create schedule queue for sent push
+                    notification message.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+    <ul>
+        <li><strong>Map API Connect</strong>
+            <ul>
+                <li><strong>IOS Map</strong> : Connecting the application with IOS and Google map application.
+                </li>
+                <li><strong>Android Map</strong> : Connecting the application with Android map application.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Hardware connect</strong>
+            <ul>
+                <li><strong>Mobile Contract</strong> : Getting all contracts from mobile device contracts.
+                </li>
+                <li><strong>Image Picker</strong> : Getting image from mobile device photo gallery.
+                </li>
+                <li><strong>Vibration</strong> : APIs for vibration your device.
+                </li>
+                <li><strong>Flashlight</strong> : APIs for open your device flashlight.
+                </li>
+                <li><strong>Device Information</strong> : Getting Device Information from mobile device.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <ul>
+        <li><strong>Material Design Themes</strong>
+            <ul>
+                <li><strong>Themes</strong> : Material theme that will help you to generate idea to create your
+                    powerful application.
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr/>
+
+    </p>
+    <p>
+        We hope Ionic Material Design will help you gain idea to developing your application and decrease your
+        development period.
+    </p>
+
+    <p>
+        This document cover : Introduction of Project, Important Notes, File & Folder Structure, Installation guide,
+        HTML Files and Structure, CSS Files and Structure, Javascript Files and Structure, Configuration, Component
+        Detail, Known Issues, Compatibility, Support, Useful Resources, Sources and Credits, Version History.
+        We encourage you to deeply read this document. If you have any difficulties.
+        Please contact us at <a href="mailto:ionicmaterialdesign@gmail.com">ionicmaterialdesign@gmail.com</a> or via my
+        user page contact form <a href="http://themeforest.net/user/ionicmaterialdesign">here</a>.
+    </p>
+
+    <hr/>
+
+
+    <h3 id="importantNotes"><strong>B) Important Notes</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+    <ol>
+        <li>You’ll need a basic understanding of :
+            <ul>
+                <li><a href="http://www.w3schools.com/html/html_basic.asp"> HTML</a></li>
+                <li><a href="http://www.w3schools.com/js/js_examples.asp">JavaScript</a></li>
+                <li><a href="http://www.w3schools.com/css/css_intro.asp"> CSS</a></li>
+                <li><a href="https://angularjs.org/"> AngularJs</a></li>
+                <li><a href="http://ionicframework.com/">Ionic Framework</a></li>
+            </ul>
+            To get this up and running. I’ve made it as simple as possible but you’ll still need to know the basics.
+        <li> If you would like to learn or find more information go to <a href="#usefulResources">Useful Resources</a>
+            and
+            <a href="#sourcesAndCredits">Sources and Credits</a></li>
+
+        </li>
+    </ol>
+    </p>
+    <hr/>
+    <h3 id="filFolderStructure"><strong>C) File & Folder Structure</strong> - <a href="#toc">top</a></h3>
+
+    <p>First of all when you extract files from a zip package you will found below directory : </p>
+
+    <img src="img/project_directory_01.png" width="400" alt=""/>
+    <br/>
+    <ul>
+        <li><strong>Folder IonicMaterialDesign</strong> : Place of the <strong>Project File </strong>. <a
+                href="#folderIonicMaterialDesign"> C-1)</a></li>
+        <li><strong>Folder Documentation</strong> : Place of the <strong>Documentation </strong>. <a
+                href="#folderDocumentation"> C-2)</a></li>
+        <li><strong>File README</strong> : Contains <strong> information about other files in a directory </strong>. <a
+                href="#fileReadme"> C-3)</a></li>
+    </ul>
+
+    <h3 id="folderIonicMaterialDesign">C-1) Folder IonicMaterialDesign</h3>
+
+    <p>
+        This folder is a default file & folder structure of ionic framework, And place of <strong> Project Ionic
+        Material Design</strong> please user below detail to access the
+        <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, <strong>Configuration</strong> file.
+    </p>
+
+    <img src="img/project_directory_02.png" width="460" alt=""/>
+    <br/>
+
+    <ul>
+        <li><strong>Folder hooks</strong> - This is a default folder of Ionic Framework.
+            <hr/>
+        </li>
+        <li><strong>Folder node_modules</strong> - This is a default folder of NodeJs component.
+            <hr/>
+        </li>
+        <li><strong>Folder platforms</strong> - This is a place of android and ios project after build ionic will paste
+            it here.
+            <hr/>
+        </li>
+        <li><strong>Folder plugins</strong> - This is a place of plugins, When you install plugin.
+            <hr/>
+        </li>
+        <li><strong>Folder resources</strong> - This is a place of <strong>Application Icon</strong> and <strong>Splash
+            Screen</strong> file.
+            <br/>
+            You can learn how to change it at
+            <a href="http://ionicframework.com/docs/cli/icon-splashscreen.html">Add Icons and Splash Screens</a>.
+            <ul>
+                <li><strong>Folder android</strong> -This is a place of android icons and splash screens file.</li>
+                <li><strong>Folder ios</strong> -This is a place of ios icons and splash screens file.
+                    <hr/>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Folder scss</strong> - This is a place of SCSS File. You can learn how to
+            <a href="http://ionicframework.com/docs/cli/sass.html">Using Sass</a>.
+            <hr/>
+        </li>
+
+        <li><strong>Folder www</strong> - This is a place of HTML and Javascript File.
+            <br/><br/>
+            <ul>
+                <li><strong>Folder app-data</strong> - This is a place of all data JSON File.
+                    <hr/>
+                </li>
+                <li><strong>Folder css</strong> - This is a place of css File.
+                    <hr/>
+                </li>
+                <li><strong>Folder img</strong> - This is a place of image File.
+                    <hr/>
+                </li>
+                <li><strong>Folder js</strong> - This is a place of main javascript File.
+                    <ul>
+                        <li><strong>Folder shared</strong> - This is a place of shared angular
+                            <strong>controllers</strong>,
+                            <strong>directives</strong>, <strong>filter</strong>.
+                        </li>
+                        <li><strong>File app.js</strong> - This is a main javascript file of project. All javascript
+                            setting is here.
+                        </li>
+                        <li><strong>File controllers.js</strong> - This is main AngularJs module of controllers and
+                            service file of project.
+                            <hr/>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Folder lib</strong> - This is a place of javascript lib Framework.
+                    <hr/>
+                </li>
+                <li><strong>Folder templates</strong> - This is a place of component.
+                    <ul>
+                        <li><strong>Folder advertising-application</strong>
+                            <ul>
+                                <li><strong>Folder googleAdmob</strong> - This is a place of googleAdmob html and
+                                    javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder application-storage</strong>
+                            <ul>
+                                <li><strong>Folder local-application-db</strong> - This is a place of Local Storage
+                                    Database html and javascript file.
+                                </li>
+                                <li><strong>Folder sqLite</strong> - This is a place of SQLite Database html and
+                                    javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder hardware-connect</strong>
+                            <ul>
+                                <li><strong>Folder device-information</strong> - This is a place of Device Information
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder flash-light</strong> - This is a place of Device Flashlight
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder image-picker</strong> - This is a place of Device Image Picker
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder mobile-contract</strong> - This is a place of Device Mobile Contract
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder vibration</strong> - This is a place of Device Vibration
+                                    html and javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder material-user-interface</strong>
+                            <ul>
+                                <li><strong>Folder dashboard</strong> - This is a place of Dashboard
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder default-user-interface</strong> - This is a place of Default User
+                                    Interface Information html and javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder menu</strong>- This is a place of menu html and javascript file.
+                            <hr/>
+                        </li>
+                        <li><strong>Folder push-notification</strong>
+                            <ul>
+                                <li><strong>Folder schedule-push-notification</strong> - This is a place of schedule
+                                    push notification html and javascript file.
+                                </li>
+                                <li><strong>Folder single-push-notification</strong> - This is a place of single push
+                                    notification html and javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                         <li><strong>Folder map-and-location</strong>
+                            <ul>
+                                <li><strong>Folder ios-map-connect</strong> - This is a place of IOS map connect html and javascript file.
+                                </li>
+                                <li><strong>Folder android-map-connect</strong> - This is a place of Android map connect html and javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder share-application-content</strong>
+                            <ul>
+                                <li><strong>Folder email-message</strong> - This is a place of Email and Message
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder social-share</strong> - This is a place of Social Share html and
+                                    javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder social-network-connect</strong>
+                            <ul>
+                                <li><strong>Folder dropbox</strong> - This is a place of Dropbox
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder facebook</strong> - This is a place of Facebook
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder foursquare</strong> - This is a place of Foursquare
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder google-plus</strong> - This is a place of Google
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder instagram</strong> - This is a place of Instagram
+                                    html and javascript file.
+                                </li>
+                                <li><strong>Folder wordpress</strong> - This is a place of Wordpress
+                                    html and javascript file.
+                                    <hr/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Folder themes</strong> - This is a Material Themes html and javascript file.
+                            <hr/>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>File index.html</strong> - This is a main HTML file of project default page when application
+                    start and all reference of css and javascript lib is here.
+                    <hr/>
+                </li>
+            </ul>
+        </li>
+        <li><strong>File config.xml</strong> - This is a main configuration file of Ionic Framework.
+        </li>
+
+    </ul>
+
+    <hr/>
+
+    <h3 id="folderDocumentation">C-2) Folder Documentation</h3>
+
+    <p>
+        You will found file<strong> index.html</strong> : This is a documentation file.
+    </p>
+
+    <h3 id="fileReadme">C-3) File README</h3>
+
+    <p>
+        You will found information about project files and documentation directory.
+    </p>
+
+
+    <hr/>
+
+    <h3 id="gettingStarted"><strong>D) Getting Started</strong> - <a href="#toc">top</a></h3>
+
+    <br/>
+    <iframe width="800" height="450" src="https://www.youtube.com/embed/61-um7xpf9U" frameborder="0" allowfullscreen></iframe>
+    <br/>
+    <br/>
+
+    <h3 id="installingIonicFramework">D-1) Installing Ionic Framework - <a href="#toc">top</a></h3>
+
+    <p>To run this Ionic Material Design project you have to install Ionic Framework by follow this step:</p>
+
+    <p>
+        First, install <span style="color: red; font-weight: 500;"> LTS Mature and Dependable Version</span> <a href="http://nodejs.org/">Node.js</a> ( Do not use Stable Latest Features Version, Some of cordova plugin will not work 100% and you will lag with plugin issue). Then Downloading Ionic and installing all necessary
+        dependencies for development by
+        <br/>
+        open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+    <pre class="brush: html">
+      npm install -g cordova
+      npm install -g ionic
+     </pre>
+    <br/>
+    <strong>For mac user don't forgot to add admin permission by :</strong>
+    <pre class="brush: html">
+      sudo npm install -g cordova
+      sudo npm install -g ionic
+     </pre>
+    </p>
+    <p>
+        Follow the
+        <a href="http://cordova.apache.org/docs/en/3.3.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide">Android</a>
+        and <a href="http://cordova.apache.org/docs/en/3.3.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide">iOS</a>
+        platform guides to install required platform dependencies.
+        <br/>
+        <strong>More:</strong> <a href="http://ionicframework.com/getting-started/">Getting Started with Ionic </a>
+    </p>
+    <p>
+        <strong>Install Android SDK : </strong>
+        To build locally using cordova-plugin-admobpro, to avoid build error, you need install some extras in Android SDK manager (type android sdk to launch it): Ref:
+        <a href="https://github.com/floatinghotpot/cordova-admob-pro#installation">AdMob Pro Installation</a> . <br> This is the installation step :
+    <ol>
+        <li>Open program <strong>Android Studio</strong> <br>
+            <img src="img/android_build_01.png" alt=""></li>
+        <li>Click <strong>Configure</strong> then <strong>SDK Manager</strong><br>
+            <img src="img/android_build_02.png" alt=""></li>
+        <li>Click <strong>Luanch Standalone SDK Manager</strong>
+            <img src="img/android_build_03.png" width="800" alt=""></li>
+        <li>Select <strong>Extar Folder</strong> to check all extar SDK then click <strong>Install ..</strong> <br>
+            <img src="img/android_build_04.png" width="800"  alt=""></li>
+        <li>Select packages <strong>Android SDK License</strong> then select <strong>Accept License </strong> and click <string>Install</string><br>
+            <img src="img/android_build_05.png" width="800" alt=""></li>
+        <li> <strong>Wait until all SDK is installed then close <strong> the current window</strong></strong>
+            <img src="img/android_build_06.png" width="800" alt=""></li>
+        <li>Click <strong>OK</strong>
+            <img src="img/android_build_07.png" width="800" alt=""></li>
+    <li>Close <strong> Android Studio</strong>
+        <img src="img/android_build_08.png" width="800" alt=""></li>
+    </ol>
+    </p>
+    <p>
+        <strong>For Mac OS El Capitan</strong>
+        <br/>
+        You will found the issue of cordova when add platform then it will get failed return (cordova keeps a cached version in your ${HOME}/.cordova folder.).
+        Reference from <a href="https://forum.ionicframework.com/t/add-platform-ios-failed-for-cordova-ios-3-9-2/36164/7">Ionicframework Forum Add platform ios failed</a>,
+
+        However to fix this issue please following below steps.
+        <br/>
+        Open a new <strong>Terminal</strong> and run :
+        <pre class="brush: html">
+        rm -rf ~/.cordova
+        </pre>
+    </p>
+
+    <hr/>
+
+    <h3 id="openPeoject">D-2) Open Project - <a href="#toc">top</a></h3>
+
+    <p>After you extract files from a zip package. Move <strong> Folder IonicMaterialDesign</strong> to your local
+        computer directory path.</p>
+
+    <hr/>
+
+    <h3 id="addPlatform">D-3) Add Platform - <a href="#toc">top</a></h3>
+
+    <p>To run project on <strong>IOS / Android</strong> you need to add ionic platform by following steps.
+        <br/>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for mac and run :
+    </p>
+
+     <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic platform add ios <!-- To run project on IOS -->
+      ionic platform add android <!-- To run project on Android -->
+     </pre>
+
+    <p>
+        Ionic Framework will add platform to project for <strong>Build</strong>, <strong>Deploy</strong> or <strong>Emulate</strong>
+        Application.
+    </p>
+
+    <hr/>
+
+    <h3 id="addPlugin">D-4) Add Ionic Plugin - <a href="#toc">top</a></h3>
+
+    <p>
+        You have to install below plugin for let the project work.
+        <br/>
+    </p>
+
+    <h4><strong>Install all plugin Set 1 and 2.</strong></h4>
+
+    <p>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for mac.
+    </p>
+    Set 1
+    <pre class="brush: html">
+        cd your_project_path/IonicMaterialDesign
+        ionic plugin add cordova-plugin-statusbar
+        ionic plugin add cordova-plugin-contacts
+        ionic plugin add cordova-plugin-camera
+        ionic plugin add cordova-plugin-vibration
+        ionic plugin add cordova-plugin-device
+        ionic plugin add cordova-plugin-console
+        ionic plugin add cordova-plugin-transport-security
+        ionic plugin add cordova-plugin-inappbrowser
+        ionic plugin add cordova-plugin-splashscreen
+        ionic plugin add cordova-plugin-admobpro
+     </pre>
+    Set 2
+    <pre class="brush: html">
+        ionic plugin add cordova-plugin-x-socialsharing
+        ionic plugin add cordova-plugin-email-composer
+        ionic plugin add ionic-plugin-keyboard
+        ionic plugin add cordova-sms-plugin
+        ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git
+        ionic plugin add https://github.com/devgeeks/Canvas2ImagePlugin.git
+        ionic plugin add https://github.com/wymsee/cordova-imagePicker.git
+        ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git#0.7.14
+        ionic plugin add https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin
+        ionic plugin add https://github.com/katzer/cordova-plugin-local-notifications
+    </pre>
+
+    <p>Now your project is ready to run.</p>
+
+    <hr/>
+
+    <h3 id="installCrosswalk">D-5) Install Crosswalk Browser - <a href="#toc">top</a></h3>
+
+    <p>
+        Crosswalk is an open source project that allows you to specify a version of Chrome to use as your web browser in
+        Android. The compiled app will have your code hosted inside of this Chrome webview. <strong>Performancr will
+        better than devise browser.</strong> You can find mor information at <a
+            href="http://blog.ionic.io/crosswalk-comes-to-ionic/">Ionic Crosswalk</a>
+        <br/>
+    </p>
+
+    <h4><strong>Install Crosswalk Browser</strong></h4>
+
+    <p>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for mac.
+    </p>
+    <pre class="brush: html">
+        cd your_project_path/IonicMaterialDesign
+        ionic browser add crosswalk
+        </pre>
+
+    <p>Now your project is ready for Crosswalk.</p>
+
+    <hr/>
+
+
+    <h3 id="runOnBrowser">D-6) Run and Debug On Browser - <a href="#toc">top</a></h3>
+
+    <p>
+        Use <strong>ionic serve -l</strong> to start a local development and run on browser.
+
+        <br/>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+
+        <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic serve -l
+     </pre>
+
+    <br/>
+    <img src="img/ionic_serve_01.jpg" width="860">
+    <br/>
+    <strong>Important :</strong> Function that required device environment will not working on browser.
+    <br/>
+    <strong>Learn More Option:</strong> <a href="http://ionicframework.com/docs/cli/test.html">Ionic Testing and Live
+    Development</a>
+
+    </p>
+
+    <p>You can debug on browser by :
+    <ol>
+        <li>Open google chrome</li>
+        <li>Open debug console by right click and click <strong>inspect element</strong>
+            <img src="img/ionic_serve_02.png" width="800">
+            <br/>
+            <strong>Learn More :</strong> <a href=" https://developer.chrome.com/devtools/docs/dom-and-styles">Ionic
+                Google Chrome Inspect Element</a>
+        </li>
+
+
+    </ol>
+    </p>
+
+    <hr/>
+
+    <h3 id="androidBuild">D-7) Android Build - <a href="#toc">top</a></h3>
+
+    <p>
+
+        To build project to android platform you have to install android and java runtime to your computer by following
+        instruction of :
+        <br/>
+        Ionic Framework walkthrough <a href="http://learn.ionicframework.com/videos/windows-android/">installing Cordova, Android</a>
+        <br/>
+        Or Youtube walkthrough of Ionic Framework channel : <a href="https://www.youtube.com/watch?v=RNrNIHQ9cWo">Youtube
+        walkthrough on installing Cordova, Android</a>
+
+        <br/>
+        <br/>
+        After install success to build android you have to follow this step:
+        <br/>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+
+        <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic build android
+     </pre>
+
+    <br/>
+    Build result will paste at <strong>Folder platforms</strong> - This is a place of android and ios project after
+    build ionic will paste it here.
+    </p>
+
+
+    <hr/>
+
+    <h3 id="iosBuild">D-8) IOS Build - <a href="#toc">top</a></h3>
+    To build project to IOS platform you can build it only mac computer by following step:
+    <br/>
+    <br/>
+    <ol>
+        <li>
+            Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+            mac and run :
+
+     <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic build ios
+     </pre>
+            <br/>
+            Build result will paste at <strong>Folder platforms</strong> - This is a place of android and ios project
+            after build ionic will paste it here.
+        </li>
+        <li>Open your Xcode by go to your project path.
+            <strong>your_project_path/platforms/ios/IonicMaterialDesign.xcodeproj</strong>. You can run it by select
+            your IOS device or device emulator. and click play button.
+        </li>
+        <li><strong>Important for Xcode 7</strong>. You have to set build option to disabled <strong>Bitcode</strong>
+            for using Google AdMob by following step :
+            <ul>
+                <li>
+                    Open your xcode by go to your project path.
+                    <strong>your_project_path/platforms/ios/IonicMaterialDesign.xcodeproj.</strong>
+                </li>
+                <li>Click <strong>Project Property</strong></li>
+                <li>Click <strong>Build Setting</strong></li>
+                <li>Change to <strong> Enable Bitcode</strong> to <strong>No</strong>
+                    <br/>
+                    <img src="img/IOSBuild_03.jpg" width="800" alt=""/>
+                    <br/>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <p>
+
+    </p>
+    <hr/>
+    <h3 id="deployToAndroidDevice">D-9) Deploy To Android device - <a href="#toc">top</a></h3>
+
+    <p>
+        To install this Ionic Material Design project to your Android device you have to follow this step:
+        <br/>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+
+        <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic run android
+     </pre>
+
+    <strong>Important :</strong> You have to <a href="http://learn.ionicframework.com/videos/windows-android/">installing Cordova, Android</a> to your computer.
+    <br/>
+    <strong>Learn More :</strong> <a href="#androidBuild">Android Build Section</a>
+    <br/>
+    <strong>Note :</strong>
+            You have to set your android device to debug mode and connect it to computer before run
+            command.
+
+    </p>
+
+    <hr/>
+
+    <h3 id="deployToIOSDevice">D-10) Deploy To IOS device - <a href="#toc">top</a></h3>
+
+    <p>
+        To install this Ionic Material Design project to your IOS device you have to follow this step:
+        <br/>
+    <ol>
+        <li>Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+            mac and run :
+
+        <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic build ios
+     </pre>
+
+            <strong>Note :</strong> You have to connect ios device to computer before run command.
+        </li>
+        <li>Open your xcode by go to your project path.
+            <strong>your_project_path/platforms/ios/IonicMaterialDesign.xcodeproj</strong>
+        </li>
+        <li>
+            Select your IOS device or device emulator. <br>
+            <img src="img/installDevice_01.png">
+        </li>
+        <li>
+            Click build button. It will install to your IOS device<br>
+            <img src="img/installDevice_02.png">
+        </li>
+    </ol>
+
+    </p>
+    <hr/>
+    <h3 id="sassSetup">D-11) Sass Setup - <a href="#toc">top</a></h3>
+
+
+    <p>Ionic Material Design use <a href="http://ionicframework.com/docs/cli/sass.html">Powerfull tool Ionic Sass</a>
+        for default css file.
+        <br/>
+        <strong>Directory : project_path/scss :</strong>
+    </p>
+
+    <h4>Setup</h4>
+
+    <p>
+        You have to install <a href="http://gulpjs.com/">gulpjs</a> is required for run sass by :
+        <br/>
+        open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+
+    <pre class="brush: html">
+       cd your_project_path
+       npm install gulp
+     </pre>
+    <br/>
+    Then setup Sass
+ <pre class="brush: html">
+       ionic setup sass
+ </pre>
+
+    <p>
+        <strong>Note: </strong>
+        After you success sass setup. It will change css reference at index.html (head section).
+        You Need to manual set it back. by add below code to index.html file at head section
+ <pre class="brush: html">
+<head>
+    <!-- CSS reference section -->
+    &lt;link rel="stylesheet" href="css/ionic.app.css">
+    &lt;link rel="stylesheet" href="css/style.css">
+    ...
+</pre>
+        <br/>
+        <strong>Learn more: </strong> <a href="http://ionicframework.com/docs/cli/sass.html"> Ionic Sass</a>
+
+    </p>
+
+    <p>
+        After save file style.scss file nodejs will convert to css file at path <strong>www/css/style.css</strong>. We
+        reference style.css at <strong>www/index.html </strong>
+    </p>
+
+    <p>
+        <strong>Important: </strong>
+        To convert file scss to css file you need to run ionic server for start gup task :
+        <br/>
+        Open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+        mac and run :
+
+        <pre class="brush: html">
+      cd your_project_path/IonicMaterialDesign
+      ionic serve -l
+     </pre>
+    <br/>
+    <img src="img/sass_setup_01.png" alt=""/>
+    </p>
+
+    <hr/>
+    <h3 id="iconAndSplash">D-12) Icon and Splash Screen - <a href="#toc">top</a></h3>
+
+    <p>
+        To change Application <a href="http://ionicframework.com/docs/cli/icon-splashscreen.html">Icon and Splash
+        Screen</a> Ionic Framework have tool for create it to all
+        device size and platform by following step.
+    <ol>
+        <li>Create icon by save an <strong> icon.png, icon.psd or icon.ai</strong> file within the <strong>resources
+            directory</strong> at the root of the project. The icon image's minimum dimensions should be 192x192 px, and
+            should have <strong>no</strong> rounded corners. Note that each platform will apply it's own mask and
+            effects to the icons. For example, iOS will automatically apply it's custom rounded corners, so the source
+            file should not already come with rounded corners. This <a
+                    href="http://code.ionicframework.com/resources/icon.psd">Photoshop icon template</a> provides the
+            recommended size and guidelines of the artwork's safe zone.
+            <br/>
+            <br/>
+        </li>
+        <li>
+            Create splash screen by save a <strong>splash.png ,splash.psd or splash.ai</strong>
+            file within the <strong>resources directory</strong> at the root of the project. Splash screen
+            dimensions vary for each platform, device
+            and orientation, so a square source image is required the generate each of various sizes. The source
+            image's minimum dimensions should be 2208x2208 px, and its artwork should be centered within the square,
+            knowing that each generated image will be center cropped into landscape and portrait images. The splash
+            screen's artwork should roughly fit within a center square (1200x1200 px). This <a
+                href="http://code.ionicframework.com/resources/splash.psd">Photoshop splash screen template</a>
+            provides the recommended size and guidelines of the artwork's safe zone. Additionally, when the <code>Orientation</code>
+            <a href="http://cordova.apache.org/docs/en/edge/config_ref_index.md.html#The%20config.xml%20File_global_preferences">preference
+                config</a> is set to either <code>landscape</code> or <code>portrait</code> mode, then only the
+            necessary images will be generated.
+            <br/>
+            <br/>
+        </li>
+        <li>
+            open a new <strong>cmd.exe</strong> for windows or <strong>Terminal</strong> for
+            mac and run :
+    <pre class="brush: html">
+    cd your_project_path/IonicMaterialDesign
+    ionic resources
+     </pre>
+            <br/>
+            Ionic framework will create image file all size and platform at <strong>resources/ios and android
+            directory</strong> at the
+            root of the project
+            <br/>
+            <br/>
+        </li>
+        <li>
+            Deploy to device new application icon and splash screen will change.
+            <br/>
+            <a href="#deployToAndroidDevice">Deploy To Android device</a>
+            <br/>
+            <a href="#deployToIOSDevice">Deploy To IOS device</a>
+        </li>
+    </ol>
+    </p>
+    <p>
+        <strong>Learn More :</strong> <a href="http://ionicframework.com/docs/cli/icon-splashscreen.html">Icon and
+        Splash
+        Screen</a>
+    </p>
+    <hr/>
+    <h3 id="updatetolatestversion"> D-13) Update project to latest version - <a href="#toc">top</a></h3>
+    <p>
+        Please follow below step to update project for the latest version of Ionic Material Design.
+        <br/>
+        You have to uninstall all plugin from your project and install it again by using below upgrade procedure :
+    <ol>
+        <li>Create copy of Backup you project</li>
+        <li>Open a new cmd.exe for windows or Terminal for mac.</li>
+        <li>Remove platfrom IOS and Android
+            <pre class="brush: html">cd your_project_path/IonicMaterialDesign
+ionic platform remove android
+ionic platform remove ios
+</pre>
+        </li>
+        <li>Uninstall all plugin by remove all plugin in project.
+            <pre class="brush: html">
+cd your_project_path/IonicMaterialDesign
+ionic plugin remove cordova-plugin-googleplayservices
+ionic plugin remove com.cordova.plugins.sms
+ionic plugin remove com.synconset.imagepicker
+ionic plugin remove org.apache.cordova.splashscreen
+ionic plugin remove cordova-plugin-admob
+ionic plugin remove cordova-plugin-camera
+ionic plugin remove cordova-plugin-console
+ionic plugin remove cordova-plugin-contacts
+ionic plugin remove cordova-plugin-flashlight
+ionic plugin remove cordova-plugin-inappbrowser
+ionic plugin remove cordova-plugin-splashscreen
+ionic plugin remove cordova-plugin-transport-security
+ionic plugin remove cordova-plugin-vibration
+ionic plugin remove cordova-plugin-whitelist
+ionic plugin remove cordova-plugin-x-socialsharing
+ionic plugin remove cordova-sqlite-storage
+ionic plugin remove de.appplant.cordova.plugin.email-composer
+ionic plugin remove de.appplant.cordova.plugin.local-notification
+ionic plugin remove ionic-plugin-keyboard
+ionic plugin remove org.devgeeks.Canvas2ImagePlugin
+ionic plugin remove com.google.admobsdk
+ionic plugin remove cordova-plugin-app-event
+ionic plugin remove cordova-plugin-crosswalk-webview
+ionic plugin remove cordova-plugin-admobpro
+ionic plugin remove cordova-plugin-email-composer
+ionic plugin remove cordova-plugin-extension
+ionic plugin remove cordova-plugin-image-picker
+ionic plugin remove cordova-plugin-device
+ionic plugin remove cordova-plugin-statusbar
+</pre>
+        </li>
+    <li>Update file <strong>package.json</strong> by :
+    <ul>
+        <li>Open file at root path <strong>~/IonicMaterialDesign/package.json</strong><br>
+            <img src="img/update_project_01.png" alt=""></li>
+        <li>Set value of <strong>cordovaPlugins</strong> to empty array []
+            <br>  <img src="img/update_project_02.png" width="800" alt=""></li>
+
+        </li>
+        <li>Save the file.</li>
+    </ul>
+    </li>
+    <li>Update file <strong>~/IonicMaterialDesign/config.xml</strong> by :
+    <ul>
+        <li>
+            Remove XML node  <strong> &lt;preference name="xwalk...*" value="...*" &gt;</strong> like below list
+            <ol>
+                <li>
+                &lt;preference name="xwalkVersion" value="14+" /&gt;</li>
+                <li>&lt;preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" /&gt;</li>
+                <li>&lt;preference name="xwalkMode" value="embedded" /&gt;</li>
+                <li> &lt;preference name="xwalkMultipleApk" value="true" /&gt;</li>
+            </ol>
+            <img src="img/update_project_03.png" width="800" alt="">
+        </li>
+    </ul>
+    </li>
+        <li>Open directory of your project IonicMaterialDesign rename or remove folder <strong>platforms</strong> and <strong>plugins</strong> </li>
+        <li>This version we have update below file for new feature of Ionic Material Design
+            <br/>
+            You can copy below file from new package and then paste to your project :<br/> <br/>
+            <ol>
+                <li><strong>SCSS/style.scss</strong> </li>
+                <li><strong>www/css/style.css</strong> </li>
+                <li><strong>www/css/style.min.css</strong> </li>
+            </ol>
+            <br/>
+        </li>
+        <li>Following installation step of project documentation D1 – D10 at <ul>
+            <li>D-1 <a href="#installingIonicFramework" rel="nofollow">Installing Ionic Framework</a></li>
+            <li>D-2 <a href="#openPeoject" rel="nofollow">Open Project</a></li>
+            <li>D-3 <a href="#addPlatform" rel="nofollow">Add Platform</a></li>
+            <li>D-4 <a href="#addPlugin" rel="nofollow">Add Ionic Plugin </a></li>
+            <li>D-5 <a href="#installCrosswalk" rel="nofollow">Install Crosswalk Browser </a></li>
+            <li>D-6 <a href="#runOnBrowser" rel="nofollow">Run and Debug On Browser </a></li>
+            <li>D-7 <a href="#androidBuild" rel="nofollow">Android Build </a></li>
+            <li>D-8 <a href="#iosBuild" rel="nofollow">IOS Build </a></li>
+            <li>D-9 <a href="#deployToAndroidDevice" rel="nofollow">Deploy to Android device </a></li>
+            <li>D-10 <a href="#deployToIOSDevice" rel="nofollow">Deploy to IOS device </a></li>
+        </ul>
+        </li>
+    </ol>
+
+    </p>
+    <hr>
+    <h3 id="textEditor"><strong>E) How to edit a Project File.</strong> - <a href="#toc">top</a></h3>
+
+    You can use below editors to edit project file on <strong>Windows</strong> and <strong>Mac</strong> :
+    <br/>
+    <li><a href="http://www.sublimetext.com/">Sublimetext</a></li>
+    <li><a href="https://www.jetbrains.com/webstorm/">Webstorm</a></li>
+    <li><a href="http://brackets.io/">Brackets</a></li>
+    <li><a href="https://atom.io/">Atom</a></li>
+    By download and install to your computer.
+    <br/> <br/>
+    <hr/>
+    <h3 id="htmlStructure"><strong>F) HTML Files and Structure</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Please find HTML structure of Ionic Material Design :
+
+    <ol>
+        <li><strong>index.html :</strong> This is a main HTML file of project default page when application
+            start and all reference of css and javascript lib is here.
+            <br/>
+            <ul>
+                <li>If you would like to add or update reference of <strong>CSS</strong>, <strong>Javascript
+                    Lib</strong>, <strong>Angular
+                    Controller, Angular Module</strong>, You can add or update it at <strong>&lt;head&gt;
+                    section</strong>
+                    <br/>
+                </li>
+                <li>
+                    <strong>Ionic navigation bar section </strong> is a directive of Ionic Framework for show
+                    application navigation
+                    bar. And present a view to the page.
+                    <br/>
+                    <strong>Learn more: </strong><a href="http://ionicframework.com/docs/api/directive/ionNavBar/">Ionic
+                    ion-nav-bar</a>
+                    <br/>
+                </li>
+
+                <li>If you would like to add or edit Angular custom template you would do the following:
+
+                    <ol>
+                        <li>
+                            Go to Angular custom template section
+                        </li>
+                        <li>
+                            Add new template by create new script :
+                            <br/>
+                        <pre class="brush: html">
+<!-- new template  section  -->
+<script type="text/ng-template" id="name.html">
+    .......
+</script><!--End new template section  -->
+                        </pre>
+
+                        </li>
+                    </ol>
+                    <strong>Learn more about</strong>
+                    <a href="https://docs.angularjs.org/api/ng/directive/ngInclude">Angular themplete</a>
+                </li>
+                <li>
+                    <strong>File Structure :</strong>
+              <pre class="brush: html">
+&lt;!--This is a main HTML file of project default page when application start.-->
+&lt;!--All reference of css and javascript lib is here.-->
+
+&lt;!DOCTYPE html>
+&lt;html>
+
+&lt;!--head section This is a place of all reference of css and javascript lib-->
+&lt;head>
+    &lt;!-- Meta section -->
+    &lt;meta charset="utf-8">
+    &lt;meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    &lt;meta name="format-detection" content="telephone=no"> &lt;!-- To disable phone number typing.-->
+    &lt;!-- end Meta section -->
+    &lt;title>&lt;/title>
+
+    &lt;!-- Font reference section -->
+    &lt;link href="lib/robotodraft/robotodraft.css">
+    &lt;!-- end Font reference section -->
+
+    &lt;!-- CSS reference section -->
+    &lt;link rel="stylesheet" href="css/ionic.app.css">
+    &lt;link rel="stylesheet" href="css/style.css">
+    &lt;link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+    &lt;link rel="stylesheet" href="lib/font-awesome-4.4.0/css/font-awesome.css">
+    &lt;!-- end CSS reference section -->
+
+    &lt;!-- Ionic javascript lib -->
+    &lt;script src="lib/ionic/js/ionic.bundle.js">&lt;/script>
+    &lt;!-- end Ionic javascript lib -->
+
+    &lt;!-- Angular javascript lib -->
+    &lt;script src="lib/angular-messages/angular-messages.js">&lt;/script>
+    &lt;script src="lib/angular-aria/angular-aria.js">&lt;/script>
+    &lt;script src="lib/angular-material/angular-material.js">&lt;/script>
+    &lt;!-- end Angular javascript lib -->
+
+    &lt;!-- Cordova script (this will be a 404 during development) -->
+    &lt;script src="lib/ngCordova/dist/ng-cordova.js">&lt;/script>
+    &lt;script src="cordova.js">&lt;/script>
+    &lt;!-- end Cordova script -->
+
+    &lt;!--ionic framework ngIOS9UIWebViewPatch-->
+    &lt;!--Learn more about ngIOS9UIWebViewPatch at : http://blog.ionic.io/ios-9-potential-breaking-change/-->
+    &lt;script src="lib/ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js">&lt;/script>
+    &lt;!--end ionic framework ngIOS9UIWebViewPatch-->
+
+    &lt;!-- app.js section-->
+    &lt;script src="js/app.js">&lt;/script>
+    &lt;!-- end app.js section-->
+
+    &lt;!-- Controllers section-->
+    &lt;script src="js/controllers.js">&lt;/script>
+    &lt;script src="js/shared/directives.js">&lt;/script>
+    &lt;script src="js/shared/filter.js">&lt;/script>
+    &lt;script src="js/shared/controllers.js">&lt;/script>
+    &lt;script src="templates/menu/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/sqLite/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/sqLite/js/services.js">&lt;/script>
+    &lt;script src="templates/application-storage/local-application-db/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/local-application-db/js/services.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/facebook/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/instagram/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/google-plus/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/foursquare/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/dropbox/js/controllers.js">&lt;/script>
+    &lt;script src="templates/share-application-content/social-share/js/controllers.js">&lt;/script>
+    &lt;script src="templates/share-application-content/email-message/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/device-information/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/mobile-contract/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/flash-light/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/vibration/js/controllers.js">&lt;/script>
+    &lt;script src="templates/advertising-application/googleAdmob/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/image-picker/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/wordpress/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/default-user-interface/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/menu-dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/expense-dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/catalog/js/controllers.js">&lt;/script>
+    &lt;script src="templates/push-notification/single-push-notification/js/controllers.js">&lt;/script>
+    &lt;script src="templates/push-notification/schedule-push-notification/js/controllers.js">&lt;/script>
+    &lt;!-- end Controllers section-->
+
+    &lt;!-- jQuery section-->
+    &lt;script src="lib/jQuery/jquery.js">&lt;/script>
+    &lt;!-- end jQuery section-->
+
+&lt;/head>&lt;!-- end head section-->
+
+&lt;!--body section-->
+&lt;body ng-app="starter" class="hide-native-scroll-y">
+
+&lt;!--Custom Style section-->
+&lt;style type="text/css">
+    {{customStyle}}
+&lt;/style>&lt;!-- end Custom Style section-->
+
+&lt;!-- Ionic navigation bar section-->
+&lt;ion-nav-view>&lt;/ion-nav-view>
+&lt;!-- end Ionic navigation bar section-->
+
+&lt;/body>&lt;!-- end body section-->
+
+
+&lt;!-- Angular custom template section-->
+
+&lt;!--Share template confirm-dialog section-->
+&lt;script type="text/ng-template" id="confirm-dialog.html">
+    &lt;md-dialog aria-label="confirm-dialog">
+        &lt;form>
+            &lt;md-dialog-content>
+                &lt;div>
+                    &lt;h2 class="md-title">{{displayOption.title}}&lt;/h2>
+
+                    &lt;p>{{displayOption.content}}&lt;/p>
+                &lt;/div>
+            &lt;/md-dialog-content>
+            &lt;div class="md-actions" layout="row">
+                &lt;a class="md-primary-color dialog-action-btn" ng-click="cancel()">
+                    {{displayOption.cancel}}
+                &lt;/a>
+                &lt;a class="md-primary-color dialog-action-btn" ng-click="ok()">
+                    {{displayOption.ok}}
+                &lt;/a>
+            &lt;/div>
+        &lt;/form>
+    &lt;/md-dialog>
+&lt;/script> &lt;!-- end share template confirm-dialog section-->
+
+&lt;!-- Share template toast section-->
+&lt;script type="text/ng-template" id="toast.html">
+    &lt;md-toast class="toast-form">
+        &lt;span flex>{{displayOption.title}}&lt;/span>
+    &lt;/md-toast>
+&lt;/script>&lt;!-- end share template toast section-->
+
+&lt;!-- end Angular custom template section-->
+
+&lt;/html>
+              </pre>
+                </li>
+            </ul>
+
+        </li>
+        <li><strong>templates html :</strong> Ionic Material Design use <a
+                href="http://ionicframework.com/docs/api/directive/ionNavView/">ion-nav-view</a> and
+            <a href="http://ionicframework.com/docs/api/directive/ionContent/">ion-content </a> for present
+            children view to navigation bar directive of Ionic framework. If you would like to edit templates html view,
+            You can add html to <strong>Content section</strong> and please use below html structure :
+<pre class="brush: html">
+    <ion-view title="Google AdMob">
+        <!-- Content section-->
+        <ion-content id="google-admob-content" scroll="false">
+
+            <div class="row">
+                <div class="col">
+                    This is a sample
+                    <!-- Your HTML Here-->
+                </div>
+            </div>
+
+        </ion-content>
+        <!-- End Content section-->
+    </ion-view>
+</pre>
+
+            <br/>
+
+            <p>
+                All section of html will have label section name, ID that reference to css. If you would like to edit
+                you
+                can open <strong>projectPath/scss/style.scss</strong>
+                then find id of reference and edit it.
+                <br/>
+                <img src="img/html_structure_01.png" width="780" alt=""/>
+            </p>
+
+        </li>
+    </ol>
+    </p>
+
+    <hr/>
+
+    <h3 id="cssStructure"><strong>G) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Ionic Material Design use css library as below :
+    </p>
+    <ul>
+        <li><strong> Default CSS</strong> - Is a default CSS of Project.
+            <ul>
+                <li><strong>SASS Directory:</strong> scss/style.scss</li>
+                <li><strong> CSS Directory:</strong> www/css/style.css</li>
+            </ul>
+        </li>
+        <li><strong> Ionic Framework CSS</strong> - Is a default CSS of Ionic Framework.
+            <ul>
+                <li><strong>CSS Directory :</strong> www/css/ionic.app.css</li>
+            </ul>
+        </li>
+        <li><strong> Angular Material CSS</strong> - Is a default CSS of Angular Material.
+            <ul>
+                <li><strong>CSS Directory :</strong> www/lib/angular-material/angular-material.css</li>
+            </ul>
+        </li>
+        <li><strong> Goolge Font robotodraft</strong>
+            <ul>
+                <li><strong>CSS Directory :</strong> www/lib/robotodraft/robotodraft.css</li>
+            </ul>
+        </li>
+        <li><strong> Font Awesome</strong>
+            <ul>
+                <li><strong>CSS Directory :</strong> www/lib/font-awesome-4.4.0/css/font-awesome.css</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Default CSS of Project.</h3>
+
+    <p>
+        This project use <strong>Ionic Sass</strong> to create<strong> default CSS file </strong>. You can go to <a
+            href="#sassSetup"> Sass Setup Section</a> to setup sass.
+    </p>
+
+    <p>
+        If you would like to edit default CSS of project. Open
+        <strong>style.scss file</strong>
+        at path <strong>scss/style.scss</strong> you will found a section of :
+    <ul>
+        <li><strong> global variable section</strong> - Is a place of global variable of scss file.
+            <ul>
+                <li><strong>colors variable section</strong> - Place of all color reference, You can change a value of
+                    variable to change a color here.
+                </li>
+                <li><strong>fonts variable section</strong> - Place of all fonts reference, You can change a value of
+                    variable to change a font here.
+                </li>
+                <li><strong>urls variable section</strong> - Place of all urls reference, You can change a value of
+                    variable to change a urls of resource here.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    Structure :
+    <pre class="brush: js">
+//global variable section
+
+//colors variable section
+$color_white: white;
+$color_gray: gray;
+$color_alto: #dbdbdb;
+$color_black: black;
+$color_mercury: #e5e5e5;
+$color_black_14: rgba(0, 0, 0, 0.14);
+$color_black_12: rgba(0, 0, 0, 0.12);
+$color_black_20: rgba(0, 0, 0, 0.2);
+$color_black_084: rgba(0, 0, 0, 0.084);
+$color_black_098: rgba(0, 0, 0, 0.098);
+$color_black_haze_approx: #f6f6f6;
+$color_angular: #E15258;
+$color_ionic: #3079AB;
+$color_material: #E59A13;
+$color_ios: #45AFA8;
+$color_facebook: #3c5c99;
+$color_google_plus: #d73d32;
+$color_instagram: #517fa4;
+$color_foursquare: #f94777;
+$color_dropbox: #017ee6;
+$color_wordoress: #0087BE;
+$color_romance_approx: #fefefe;
+$color_alabaster: #fafafa;
+$color_gondola_40_approx: rgba(34, 25, 25, 0.4);
+$color_celeste_approx: #ccc;
+$color_mine_shaft_approx: #333;
+$color_carnation_approx: #ff5252;
+$color_chenin_approx: #e3cf7a;
+$color_red_orange_approx: #f44336;
+$color_border_under_line: rgba(0, 0, 0, 0.12);
+$color_md_tabs_border: #E1E1E1;
+$color_md-whiteframe: #fff;
+$color_border_menu_dashboard: rgba(225, 225, 225, 0.69);
+$color_news_header: #2882D8;
+
+//fonts variable section
+$font_roboto_draft: RobotoDraft;
+$font_roboto: Roboto;
+$font_helvetica_neue: Helvetica Neue;
+$font_sans-serif: sans-serif;
+$font_arial: Arial;
+
+//urls variable section
+$url_background_cover_pixels: url(../img/background_cover_pixels.png);
+$url_background_cover_contract_us: url(../img/contract_us_bg.jpg);
+$url_background_cover_try_app_01: url(../img/slide_01.png);
+$url_background_cover_try_app_02: url(../img/slide_02.png);
+$url_background_cover_try_app_03: url(../img/slide_03.png);
+$url_background_cover_try_app_04: url(../img/slide_04.png);
+$url_background_cover_try_app_05: url(../img/slide_05.png);
+$url_background_cover_try_app_06: url(../img/slide_06.png);
+$url_background_cover_try_app_07: url(../img/slide_07.png);
+$url_background_cover_try_app_08: url(../img/slide_08.png);
+$url_background_cover_restaurant_01: url(../img/food_01.png);
+$url_background_cover_restaurant_02: url(../img/food_02.png);
+$url_background_cover_restaurant_03: url(../img/food_03.png);
+
+//end global variable section
+
+//global class section
+    </pre>
+    </p>
+
+
+    <p>
+        If you would like to edit a specific section of the site, simply find the appropriate label, section, ID in
+        the CSS file, and then scroll down until you find the appropriate style that needs to be edited.
+        <br/>
+        <img src="img/css_structure_01.png" width="780" alt=""/>
+    </p>
+
+    <h3>Grid system.</h3>
+
+    <p>This project use <a href="http://ionicframework.com/docs/components/#grid"> Ionic Framework Grid System.</a>
+        If you would like to create or edit layout you can use <strong>Column Percentage Class names</strong> for view
+        layout by using this structure :
+        <br/>
+        <pre class="brush: html">
+<div class="row">
+    <div class="col col-50">.col.col-50</div>
+    <div class="col">.col</div>
+    <div class="col">.col</div>
+</div>
+
+<div class="row">
+    <div class="col col-75">.col.col-75</div>
+    <div class="col">.col</div>
+</div>
+
+<div class="row">
+    <div class="col">.col</div>
+    <div class="col col-75">.col.col-75</div>
+</div>
+
+<div class="row">
+    <div class="col">.col</div>
+    <div class="col">.col</div>
+</div>
+        </pre>
+
+    <br/>
+    <img src="img/css_structure_02.png" width="800" alt=""/>
+    </p>
+
+    <p>
+        <strong>Learn more about: </strong> <a href="http://ionicframework.com/docs/components/#grid"> Ionic Framework
+        Grid System.</a>
+    </p>
+    <hr/>
+
+
+    <h3 id="javascriptStructure"><strong>H) Javascript Files and Structure</strong> - <a href="#toc">top</a></h3>
+
+    <p>This application imports three Javascript files.
+    <ul>
+        <li><strong> <a href="http://ionicframework.com/">Ionic Framework</a></strong> - Is the JavaScript frameworks,
+            open source front-end SDK for
+            developing hybrid mobile apps with web technologies.
+
+            <ul>
+                <li><strong>Directory: </strong> www/lib/ionic/js/ionic.bundle.js</li>
+            </ul>
+        </li>
+        <li><strong> <a href="https://material.angularjs.org/latest/#/"> Angular Material</a></strong> - Angular
+            Material JavaScript frameworks is an implementation of Material
+            Design in Angular.js
+            <ul>
+                <li><strong>Directory: </strong> www/lib/angular-material/angular-material.js</li>
+                <li><strong>Required Framework of Angular Material : </strong>
+                    <ul>
+                        <li><strong> <a href="https://docs.angularjs.org/api/ngMessages">Angular Messages</a></strong> -
+                            Is a JavaScript frameworks of Angular Messages provides enhanced support for displaying
+                            messages.
+                            <ul>
+                                <li><strong>Directory: </strong> www/lib/angular-messages/angular-messages.js</li>
+                            </ul>
+                        </li>
+                        <li><strong> <a href="https://docs.angularjs.org/api/ngAria"> Angular Aria</a></strong> - Is a
+                            JavaScript frameworks of Angular Aria provides support for common
+                            <a href="http://www.w3.org/TR/wai-aria/"><abbr
+                                    title="Accessible Rich Internet Applications">ARIA</abbr></a>
+                            attributes that convey state or semantic information about the application for users
+                            of assistive technologies, such as screen readers.
+                            <ul>
+                                <li><strong>Directory: </strong> www/lib/angular-messages/angular-aria.js</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><strong> <a href="http://ngcordova.com/"> ngCordova</a></strong> - Is a JavaScript frameworks of AngularJS
+            Services for Cordova and Phonegap.
+            <ul>
+                <li><strong>Directory: </strong> www/lib/ngCordova/dist/ng-cordova.js</li>
+            </ul>
+        </li>
+        <li><strong> <a href="https://jquery.com/"> jQuery</a></strong>
+            <ul>
+                <li><strong>Directory: </strong> www/lib/jQuery/jquery.js</li>
+            </ul>
+            <br/>
+            <hr/>
+        </li>
+        <li><strong> Main Angular Javascript Of Application</strong> - This is a main javascript file of project. All
+            javascript setting is here.
+            <ul>
+                <li><strong>Directory: </strong> www/js/app.js</li>
+                <li>You can change javascript setting of :
+                    <ul>
+                        <li><strong>Global Variable</strong> use for setting color, start page, message, oAuth key.
+                            <br/>
+                            <pre class="brush: js">
+//
+//Welcome to app.js
+//This is main application config of project. You can change a setting of :
+//  - Global Variable
+//  - Theme setting
+//  - Icon setting
+//  - Register View
+//  - Spinner setting
+//  - Custom style
+//
+//global variable use for setting color, start page, message, oAuth key.
+var db = null; //Use for SQLite database.
+window.globalVariable = {
+    color: {//custom color style variable
+        appPrimaryColor: "",
+        dropboxColor: "#017EE6",
+        facebookColor: "#3C5C99",
+        foursquareColor: "#F94777",
+        googlePlusColor: "#D73D32",
+        instagramColor: "#517FA4",
+        wordpressColor: "#0087BE"
+    },//end custom color style variable
+    startPage: {
+        url: "/app/dashboard", //Url of start page.
+        state: "app.dashboard"//State name of start page.
+    },
+    message: {
+        errorMessage: "Technical error please try again later." //Default error message.
+    },
+    oAuth: {
+        dropbox: "xxx-xxx-xxx", //Use for Dropbox API clientID.
+        facebook: "xxx-xxx-xxx", //Use for Facebook API clientID.
+        foursquare: "xxx-xxx-xxx", //Use for Foursquare API clientID.
+        instagram: "xxx-xxx-xxx", //Use for Instagram API clientID.
+        googlePlus: "xxx-xxx-xxx", //Use for Google API clientID.
+        adMob: "xxx-xxx-xxx" //Use for AdMob API clientID.
+    }
+};//end global variable
+                            </pre>
+                        </li>
+                        <li><strong> Theme setting</strong> - Use mdThemingProvider for change theme color of Ionic
+                            Material Design Appplication.
+                            <br/>
+                            <pre class="brush: js">
+//mdThemingProvider use for change theme color of Ionic Material Design Appplication.
+/* You can select color from Material Color List configuration :
+ * red
+ * pink
+ * purple
+ * purple
+ * deep-purple
+ * indigo
+ * blue
+ * light-blue
+ * cyan
+ * teal
+ * green
+ * light-green
+ * lime
+ * yellow
+ * amber
+ * orange
+ * deep-orange
+ * brown
+ * grey
+ * blue-grey
+ */
+//Learn more about material color patten: https://www.materialpalette.com/
+//Learn more about material theme: https://material.angularjs.org/latest/#/Theming/01_introduction
+$mdThemingProvider
+  .theme('default')
+  .primaryPalette('pink')
+  .accentPalette('red');
+
+                            </pre>
+                        </li>
+                        <li><strong> Icon setting</strong> - Use mdIconProvider to improve performance loading. You can
+                            add new .SVG file or edit here.
+                            <br/>
+                            <pre class="brush: js">
+//mdIconProvider is function of Angular Material. It use for reference .SVG file and improve performance loading.
+$mdIconProvider
+    .icon('facebook', 'img/icons/facebook.svg')
+    .icon('twitter', 'img/icons/twitter.svg')
+    .icon('mail', 'img/icons/mail.svg')
+    .icon('message', 'img/icons/message.svg')
+    .icon('share-arrow', 'img/icons/share-arrow.svg')
+    .icon('more', 'img/icons/more_vert.svg');
+                            </pre>
+
+                        </li>
+                        <li><strong> Register View</strong> - You can change setting of view in application here.
+                            <br/>
+                            <pre class="brush: js">
+ //$stateProvider is using for add or edit HTML view to navigation bar.
+ //
+ //Setting by :
+ //state_name(String)      : Name of state to use in application.
+ //page_name(String)       : Name of page to present at localhost url.
+ //cache(Bool)             : Cache of view and controller default is true. Change to false if you want page reload when application navigate back to this view
+ //html_file_path(String)  : Path of html file.
+ //controller_name(String) : Name of Controller.
+ //
+ //Learn more about ionNavView at http://ionicframework.com/docs/api/directive/ionNavView/
+ //Learn more about  AngularUI Router's at https://github.com/angular-ui/ui-router/wiki
+ $stateProvider
+     .state('app', {
+         url: "/app",
+         abstract: true,
+         templateUrl: "templates/menu/html/menu.html",
+         controller: 'menuCtrl'
+     })
+                            </pre>
+                        </li>
+                        <li><strong> Spinner setting</strong>
+                            <br/>
+                           <pre class="brush: js">
+//use for change ionic spinner to android pattern.
+$ionicConfigProvider.spinner.icon("android");
+                            </pre>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong> Main Angular Controller Of Application</strong>- This is main AngularJs module of controllers and
+            service file of
+            project. All controller is here.
+            <ul>
+                <li><strong>Directory: </strong> www/js/controllers.js</li>
+                <li>This application have 2 module as below detail :
+                <pre class="brush: js">
+var appControllers = angular.module('starter.controllers', []); //Use for all controller of application.
+var appServices = angular.module('starter.services', []); //use for all service of application.
+                </pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong> Shared Controller , directives , filter Of Application</strong> - This is a place of shared angular
+            controllers, directives, filter.
+            <ul>
+                <li><strong>Directory: </strong> www/js/shared/controllers.js
+                <pre class="brush: js">
+//This is controller for Dialog box
+appControllers.controller('DialogController', function ($scope, $mdDialog, displayOption) {
+
+    //this variable for display wording of dialog.
+    //object schema:
+    //displayOption: {
+    //    title: "Confirm to remove all data?",
+    //        content: "All data will remove from local storage.",
+    //        ok: "Confirm",
+    //        cancel: "Close"
+    //}
+    $scope.displayOption = displayOption;
+
+    $scope.cancel = function () {
+        $mdDialog.cancel(); //close dialog.
+    };
+
+    $scope.ok = function () {
+        $mdDialog.hide();//hide dialog.
+    };
+});//end controller for Dialog box.
+
+//This is controller for toast
+appControllers.controller('toastController', function ($scope, displayOption) {
+
+    //this variable for display wording of toast.
+    //object schema:
+    // displayOption: {
+    //    title: "Data Saved !"
+    //}
+    $scope.displayOption = displayOption;
+
+});//end controller for toast.
+
+
+                </pre>
+                </li>
+                <li><strong>Directory: </strong> www/js/shared/directives.js
+                <pre class="brush: js">
+//Directive numbersOnly :
+//Use for change input to have ability accept only number.
+//Example : <input ng-model="contract.age" numbers-only type="tel">
+//
+appControllers.directive('numbersOnly', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModelCtrl) {
+            function fromUser(text) {
+                if (text) {
+                    var transformedInput = text.replace(/[^0-9]/g, '');
+
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                return undefined;
+            }
+
+            ngModelCtrl.$parsers.push(fromUser);
+        }
+    };
+});//end Directive numbersOnly.
+
+                </pre>
+                </li>
+                <li><strong>Directory: </strong> www/js/shared/filter.js
+                <pre class="brush: js">
+//Filter epochToDate :
+//Use for convert epoch date format to default date format.
+//Example :
+//<p>{{item.createdAt |epochToDate | date:"short"}}</p>
+appControllers.filter('epochToDate', function ($filter) {
+    return function (input) {
+        return new Date(Date(input));
+    };
+});//end Filter epochToDate.
+
+//Filter numberSuffix :
+//Use for convert number to have suffix 1,000 to 1K
+//Example :
+//{{item.likes.summary.total_count | numberSuffix}}
+//
+appControllers.filter('numberSuffix', function () {
+    return function (input) {
+        var exp;
+        var suffixes = ['k', 'M', 'G', 'T', 'P', 'E'];
+
+        if (window.isNaN(input)) {
+            return 0;
+        }
+
+        if (input < 1000) {
+            return input;
+        }
+
+        exp = Math.floor(Math.log(input) / Math.log(1000));
+
+        return (input / Math.pow(1000, exp)).toFixed(1) + suffixes[exp - 1];
+    }
+});//end Filter numberSuffix.
+                </pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong> templates Controller </strong> - This is a place of themplete controller.
+            <ul>
+                <li><strong>Directory: </strong> www/templates/component_name/component/js/controllers.js</li>
+                <il>If you would like to edit controller go to directory of component, Then this is a sample of
+                    templates Controller :
+                    <pre class="brush: js">
+// For using social share you have to install $cordovaSocialSharing by running the following
+// command in your cmd.exe for windows or Terminal for mac:
+// $ cd your project path
+// $ ionic plugin remove nl.x-services.plugins.socialsharing
+// $ ionic plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
+//
+// For using save image  you have to install Canvas2ImagePlugin by running the following
+// command in your cmd.exe for windows or Terminal for mac:
+// $ cd your project path
+// $ ionic plugin remove org.devgeeks.Canvas2ImagePlugin
+// $ ionic plugin add https://github.com/devgeeks/Canvas2ImagePlugin.git
+//
+// Controller of product list Page.
+appControllers.controller('productListCtrl', function ($scope, $timeout, $state, $http) {
+
+    // This function is the first activity in the controller.
+    // It will initial all variable data and let the function works when page load.
+    $scope.initialForm = function () {
+        // $scope.productList is the variable that store user product data.
+        $scope.productList = [];
+
+        // loading progress
+        $timeout(function () {
+            if ($scope.isAndroid) {
+                jQuery('#product-list-loading-progress').show();
+            }
+            else {
+                jQuery('#product-list-loading-progress').fadeIn(700);
+            }
+        }, 400);
+        $timeout(function () {
+            jQuery('#product-list-loading-progress').hide();
+            jQuery('#product-list-content').fadeIn();
+        }, 4000);// End loading progress
+    };// End initialForm
+
+    // navigateTo is for navigate to other page.
+    // by using targetPage to be the destination page
+    // and send object to the destination page.
+    // Parameter :
+    // targetPage = destination page.
+    // objectData = object data that sent to destination page.
+    $scope.navigateTo = function (targetPage, objectData) {
+        $state.go(targetPage, {
+            product: objectData
+        });
+    };// End navigateTo
+
+    // loadMore is for loadMore product list.
+    $scope.loadMore = function () {
+        $timeout(function () {
+            //get product list from json  at paht: www/app-data/product-list.json
+            $http.get('app-data/product-list.json')
+                .success(function (productList) {
+                    // Success retrieve data.
+                        // Store user data to $scope.productList.
+                    for (var product = 0; product < productList.length; product++) {
+                        $scope.productList.push(productList[product]);
+                    }
+                    // To stop loading progress.
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                });
+        }, 2000);
+    };// End loadMore
+
+    $scope.initialForm();
+
+});// End of product list controller.
+
+// Controller of product Detail Page.
+appControllers.controller('productDetailCtrl', function ($scope, $mdToast, $mdBottomSheet, $timeout, $stateParams) {
+
+    // This function is the first activity in the controller.
+    // It will initial all variable data and let the function works when page load.
+    $scope.initialForm = function () {
+        //$scope.product is product detail
+        // $stateParams.product is the object that pass from product list page.
+        $scope.product = $stateParams.product;
+        // Loading progress.
+        $timeout(function () {
+            if ($scope.isAndroid) {
+                jQuery('#product-detail-loading-progress').show();
+            }
+            else {
+                jQuery('#product-detail-loading-progress').fadeIn(700);
+            }
+        }, 400);
+        $timeout(function () {
+            jQuery('#product-detail-loading-progress').hide();
+            jQuery('#product-detail-content').fadeIn();
+        }, 3000);// End loading progress
+    };// End initialForm
+
+    // addToCart for show Item Added ! toast.
+    $scope.addToCart = function () {
+        $mdToast.show({
+            controller: 'toastController',
+            templateUrl: 'toast.html',
+            hideDelay: 800,
+            position: 'top',
+            locals: {
+                displayOption: {
+                    title: "Item Added !"
+                }
+            }
+        });
+    }; // End addToCart
+
+    // sharedProduct fro show shared social bottom sheet by calling sharedSocialBottomSheetCtrl controller
+    $scope.sharedProduct = function ($event, product) {
+        $mdBottomSheet.show({
+            templateUrl: 'bottom-sheet-shared.html',
+            controller: 'sharedSocialBottomSheetCtrl',
+            targetEvent: $event,
+            locals: {
+                product: product
+            }
+        });
+    };// End sharedProduct
+
+    $scope.initialForm();
+});// End of product list controller.
+
+// Controller of share social bottom sheet.
+appControllers.controller('sharedSocialBottomSheetCtrl', function ($scope, $mdBottomSheet, $timeout, product, $mdToast, $cordovaSocialSharing) {
+
+    // This function is the first activity in the controller.
+    // It will initial all variable data and let the function works when page load.
+    $scope.initialForm = function () {
+
+        //$scope.setCanvasImage for set canvas image to save to your mobile gallery.
+        $scope.setCanvasImage(product.img);
+        //$scope.isSaving is image saving status.
+        $scope.isSaving = false;
+    };// End initialForm
+
+    //setCanvasImage for set canvas image to save to your mobile gallery.
+    $scope.setCanvasImage = function (imgPath) {
+        // create canvas image
+        var canvas = document.getElementById('imgCanvas');
+        var context = canvas.getContext('2d');
+        var imageObj = new Image();
+
+        imageObj.onload = function () {
+            canvas.height = this.height;
+            canvas.width = this.width;
+            context.drawImage(imageObj, 0, 0);
+        };
+        //image path.
+        imageObj.src = imgPath;
+
+        return canvas.toDataURL();
+    };// End setCanvasImage
+
+    // getCanvasImageUrl for get canvas image path.
+    $scope.getCanvasImageUrl = function () {
+        var canvas = document.getElementById('imgCanvas');
+        return canvas.toDataURL();
+    };// End getCanvasImageUrl
+
+    // sharedFacebook for share product picture to facebook by calling $cordovaSocialSharing
+    $scope.sharedFacebook = function () {
+        $cordovaSocialSharing.shareViaFacebook(" ", $scope.getCanvasImageUrl());
+        $mdBottomSheet.hide();
+    }// End sharedFacebook
+
+    // sharedTwitter for share product picture to twitter by calling $cordovaSocialSharing
+    $scope.sharedTwitter = function () {
+        $cordovaSocialSharing.shareViaTwitter(" ", $scope.getCanvasImageUrl());
+        $mdBottomSheet.hide();
+    }// End sharedTwitter
+
+    // sharedMail for share product picture to email by calling $cordovaSocialSharing
+    $scope.sharedMail = function () {
+        $cordovaSocialSharing.shareViaEmail(" ", "Shopping with ionic meterial", "ionicmaterialdesign@gmail.com", "cc@IonicMeterial.com", "bcc@IonicMeterial.com", $scope.getCanvasImageUrl());
+        $mdBottomSheet.hide();
+    }// End sharedMail
+
+    // saveImage for save product picture to mobile gallery.
+    $scope.saveImage = function () {
+
+        if ($scope.isSaving == false) {
+            try {
+                // calling canvas2ImagePlugin to save image to gallery.
+                window.canvas2ImagePlugin.saveImageDataToLibrary(
+                    function (msg) {
+
+                    },
+                    function (err) {
+                        throw err;
+                    },
+                    document.getElementById('imgCanvas'));
+                $scope.isSaving = true;
+
+                // show Image Saved ! toast when save image success.
+                $mdToast.show({
+                    controller: 'toastController',
+                    templateUrl: 'toast.html',
+                    hideDelay: 800,
+                    position: 'top',
+                    locals: {
+                        displayOption: {
+                            title: "Image Saved !"
+                        }
+                    }
+                });
+            }
+            catch (e) {
+                console.log(e);
+                // show Save Failed : Please try again! toast when save image  is error.
+                $mdToast.show({
+                    controller: 'toastController',
+                    templateUrl: 'toast.html',
+                    hideDelay: 800,
+                    position: 'top',
+                    locals: {
+                        displayOption: {
+                            title: "Save Failed : Please try again!"
+                        }
+                    }
+                });
+            }
+        }
+        // hide bottom sheet
+        $timeout(function () {
+            $mdBottomSheet.hide();
+        }, 1800);
+    }// End saveImage
+
+    // sharedMore for hide bottom sheet
+    $scope.sharedMore = function () {
+
+        $mdBottomSheet.hide();
+    }// End sharedMore
+
+    $scope.initialForm();
+});// End of share social bottom sheet controller.
+
+// Controller of product check out page.
+appControllers.controller('productCheckoutCtrl', function ($scope, $mdToast, $mdDialog) {
+    //You can do some thing hear when tap on a credit card button.
+    $scope.doSomeThing = function () {
+
+    }// End doSomeThing
+
+    // showConfirmDialog for show alert box.
+    $scope.showConfirmDialog = function ($event) {
+        //mdDialog.show use for show alert box for Confirm to complete order.
+        $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            targetEvent: $event,
+            locals: {
+                displayOption: {
+                    title: "Complete Order",
+                    content: "Confirm to complete Order.",
+                    ok: "Confirm",
+                    cancel: "Close"
+                }
+            }
+        }).then(function () {
+            // For confirm button to complete order.
+
+            //Showing Order Completed. Thank You ! toast.
+            $mdToast.show({
+                controller: 'toastController',
+                templateUrl: 'toast.html',
+                hideDelay: 1200,
+                position: 'top',
+                locals: {
+                    displayOption: {
+                        title: "Order Completed. Thank You !"
+                    }
+                }
+            });
+        }, function () {
+            // For cancel button to complete order.
+        });
+    }// End showConfirmDialog
+});// End of product check out controller.
+
+                    </pre>
+                </il>
+            </ul>
+        </li>
+    </ul>
+    <br/>
+    <strong>Learn more about framework :</strong> <a href="http://ionicframework.com/">Ionic Framework</a>, <a
+        href="https://material.angularjs.org/latest/#/"> Angular Material</a>,
+    <a href="https://docs.angularjs.org/api/ngMessages">Angular Messages</a>,
+    <a href="https://docs.angularjs.org/api/ngAria"> Angular Aria</a>,
+    <a href="http://ngcordova.com/"> ngCordova</a>
+
+    </p>
+    <p> All Javascript framework is reference at <strong>www/index.html</strong> at <strong>&lt;head&gt;</strong>
+        section :</p>
+    <pre class="brush: html">
+&lt;!--head section This is a place of all reference of css and javascript lib-->
+&lt;head>
+    &lt;!-- Meta section -->
+    &lt;meta charset="utf-8">
+    &lt;meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    &lt;meta name="format-detection" content="telephone=no"> &lt;!-- To disable phone number typing.-->
+    &lt;!-- end Meta section -->
+    &lt;title>&lt;/title>
+
+    &lt;!-- Font reference section -->
+    &lt;link href="lib/robotodraft/robotodraft.css">
+    &lt;!-- end Font reference section -->
+
+    &lt;!-- CSS reference section -->
+    &lt;link rel="stylesheet" href="css/ionic.app.css">
+    &lt;link rel="stylesheet" href="css/style.css">
+    &lt;link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+    &lt;link rel="stylesheet" href="lib/font-awesome-4.4.0/css/font-awesome.css">
+    &lt;!-- end CSS reference section -->
+
+    &lt;!-- Ionic javascript lib -->
+    &lt;script src="lib/ionic/js/ionic.bundle.js">&lt;/script>
+    &lt;!-- end Ionic javascript lib -->
+
+    &lt;!-- Angular javascript lib -->
+    &lt;script src="lib/angular-messages/angular-messages.js">&lt;/script>
+    &lt;script src="lib/angular-aria/angular-aria.js">&lt;/script>
+    &lt;script src="lib/angular-material/angular-material.js">&lt;/script>
+    &lt;!-- end Angular javascript lib -->
+
+    &lt;!-- Cordova script (this will be a 404 during development) -->
+    &lt;script src="lib/ngCordova/dist/ng-cordova.js">&lt;/script>
+    &lt;script src="cordova.js">&lt;/script>
+    &lt;!-- end Cordova script -->
+
+    &lt;!--ionic framework ngIOS9UIWebViewPatch-->
+    &lt;!--Learn more about ngIOS9UIWebViewPatch at : http://blog.ionic.io/ios-9-potential-breaking-change/-->
+    &lt;script src="lib/ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js">&lt;/script>
+    &lt;!--end ionic framework ngIOS9UIWebViewPatch-->
+
+    &lt;!-- app.js section-->
+    &lt;script src="js/app.js">&lt;/script>
+    &lt;!-- end app.js section-->
+
+    &lt;!-- Controllers section-->
+    &lt;script src="js/controllers.js">&lt;/script>
+    &lt;script src="js/shared/directives.js">&lt;/script>
+    &lt;script src="js/shared/filter.js">&lt;/script>
+    &lt;script src="js/shared/controllers.js">&lt;/script>
+    &lt;script src="templates/menu/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/sqLite/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/sqLite/js/services.js">&lt;/script>
+    &lt;script src="templates/application-storage/local-application-db/js/controllers.js">&lt;/script>
+    &lt;script src="templates/application-storage/local-application-db/js/services.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/facebook/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/instagram/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/google-plus/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/foursquare/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/dropbox/js/controllers.js">&lt;/script>
+    &lt;script src="templates/share-application-content/social-share/js/controllers.js">&lt;/script>
+    &lt;script src="templates/share-application-content/email-message/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/device-information/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/mobile-contract/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/flash-light/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/vibration/js/controllers.js">&lt;/script>
+    &lt;script src="templates/advertising-application/googleAdmob/js/controllers.js">&lt;/script>
+    &lt;script src="templates/hardware-connect/image-picker/js/controllers.js">&lt;/script>
+    &lt;script src="templates/social-network-connect/wordpress/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/material-user-interface/default-user-interface/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/menu-dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/expense-dashboard/js/controllers.js">&lt;/script>
+    &lt;script src="templates/themes/catalog/js/controllers.js">&lt;/script>
+    &lt;script src="templates/push-notification/single-push-notification/js/controllers.js">&lt;/script>
+    &lt;script src="templates/push-notification/schedule-push-notification/js/controllers.js">&lt;/script>
+    &lt;!-- end Controllers section-->
+
+    &lt;!-- jQuery section-->
+    &lt;script src="lib/jQuery/jquery.js">&lt;/script>
+    &lt;!-- end jQuery section-->
+
+&lt;/head>&lt;!-- end head section-->
+    </pre>
+
+    <hr/>
+
+    <h3 id="configuration"><strong>I) Configuration</strong> - <a href="#toc">top</a></h3>
+
+    <h3 id="themeColor">I-1) Theme Color - <a href="#toc">top</a></h3>
+
+    <p>
+        If you would like to change theme color of this application please following below step :
+    </p>
+    <ol>
+        <li>
+            Open File <strong>www/js/app.js</strong>
+        </li>
+        <li>
+            Go to Line : <strong>297</strong>
+            <pre class="brush: js">
+$mdThemingProvider
+ .theme('default')
+ .primaryPalette('pink')
+ .accentPalette('red');
+            </pre>
+        </li>
+        <li>
+            You can change the <strong>primaryPalette</strong> and <strong>accentPalette</strong> of theme by using
+            below support color :
+            <ul>
+                <li>red</li>
+                <li>pink</li>
+                <li>purple</li>
+                <li>purple</li>
+                <li>deep-purple</li>
+                <li>indigo</li>
+                <li>blue</li>
+                <li>light-blue</li>
+                <li>cyan</li>
+                <li>teal</li>
+                <li>green</li>
+                <li>light-green</li>
+                <li>lime</li>
+                <li>yellow</li>
+                <li>amber</li>
+                <li>orange</li>
+                <li>deep-orange</li>
+                <li>brown</li>
+                <li> grey</li>
+                <li>blue-grey</li>
+            </ul>
+        </li>
+        <li>
+            Build project again theme color will change.
+            <br/>
+            <img src="img/theme_color_01.png" width="800" alt=""/>
+        </li>
+    </ol>
+    <strong>Learn more about about :</strong>
+    <ul>
+        <li><strong>material color patten for idea and inspiration about color:</strong> <a
+                href="https://www.materialpalette.com/">
+            https://www.materialpalette.com/</a>
+        </li>
+        <li><strong>Material theme:</strong>
+            <a href="https://material.angularjs.org/latest/#/Theming/01_introduction">
+                https://material.angularjs.org/latest/#/Theming/01_introduction</a>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <h3 id="androidKeyboard">I-2) Android Keyboard - <a href="#toc">top</a></h3>
+
+    <p>
+        To disable push up the screen when android keyboard was show up.
+    </p>
+    <ol>
+        <li> Go to <strong>AndroidManifest.xml</strong> by project path :
+            <strong>yourProjectPaht/platforms/android/AndroidManifest.xml </strong>
+        </li>
+        <li>Put <strong>adjustPan</strong> for android:windowSoftInputMode in tag <strong>activity</strong>
+            <img width="800" src="img/config_01.png"/>
+        </li>
+    </ol>
+    <hr/>
+    <h3 id="disablePhoneNumberTyping">I-3) Disable phone number typing - <a href="#toc">top</a></h3>
+
+    <p>
+        To disable phone number typing.
+        <br/>
+        Go to <strong>yourProjectPath/www/index.html</strong> and put this following code <strong>in the
+        meta area on head section</strong>.
+          <pre class="brush: js">
+                 &lt;meta name="format-detection" content="telephone=no"&gt;
+           </pre>
+    </p>
+
+    <hr/>
+    <h3 id="phoneCall">I-4) Phone call - <a href="#toc">top</a></h3>
+
+
+    <p>
+        To allow application to using mobile phone call.
+        <br/>
+        Go to <strong>yourProjectPath/config.xml</strong> and put this following code
+        <strong>in the access area</strong>.
+            <pre class="brush: js">
+                &lt;access origin="tel:*" launch-external="yes"/&gt;
+           </pre>
+    </p>
+
+
+    <hr/>
+    <h3 id="componentDetail"><strong>J) Component Detail</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        This is the main feature of Ionic Material Design Application that include of many components.
+        In this section will introduce you all component detail. You will know what is it, how it work and
+        how to use it.
+    </p>
+
+    <p>
+        <strong>Source Code Structure</strong> <br/>
+        We have added a comment of description
+        how to get the component work in source code.
+    </p>
+
+    <h3>
+        This is the sample structure:
+    </h3>
+    <strong>HTML :</strong> 
+     <pre class="brush: html">
+<!--View Information-->
+<!--View name : Contract List-->
+<!--Controller name : contractListCtrl-->
+<!--Controller path : www/templates/application-storage/sqLite/js/controllers.js-->
+<!--State name : app.contractlist-->
+<!--URL : #app/contractlist-->
+
+<ion-view view-title="">
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="navigateTo('app.contractsetting')"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons>
+    <!--end right button on navigation bar-->
+
+    <!--toolbar section-->
+    <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>SQLite Database</h1>
+
+            <h2>Application Storage</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           ng-click="navigateTo('app.contractdetail',contract)"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar>
+    <!--end toolbar section-->
+
+    <!--contract list section-->
+    <ion-content id="contract-list-content" class="fade-in">
+        <!--list section-->
+        <md-list>
+
+            <md-list-item>
+                <md-input-container md-no-float="" class="md-list-item-full-width">
+                    <input ng-model="filterText" placeholder="Search for contacts.">
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item class="md-list-item-default"
+                          ng-click="navigateTo('app.contractdetail',contract)"
+                          ng-repeat="contract in contracts  | filter: filterText | orderBy: 'firstName'">
+
+                <i class="fa fa-user"></i>
+
+                <p>{{ contract.firstName }} {{ contract.lastName }}</p>
+                <md-switch class="md-secondary"
+                           ng-model="contract.isEnable"
+                           ng-change="updateContract(contract)">
+                </md-switch>
+            </md-list-item>
+
+        </md-list>
+        <!--end list section-->
+
+    </ion-content>
+    <!--end contract list section-->
+
+    <!--loading progress-->
+    <div id="contract-list-loading-progress" class="loading-progress fade-in">
+        <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+        <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <!--end loading progress-->
+
+</ion-view>
+     </pre>
+    <strong>Java Script :</strong>
+     <pre class="brush: js">
+// Controller will call ContractDB Services to present data to html view.
+// 
+// For using sqlite you have to install $cordovaSQLite by running the following 
+// command in your cmd.exe for windows or Terminal for mac:
+// cd your project path
+// $ ionic plugin remove io.litehelpers.cordova.sqlite
+// $ ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
+//
+// Learn more about $cordovaSQLite :
+// http://ngcordova.com/docs/plugins/sqlite/
+//
+// Controller of Contract List Page.
+appControllers.controller('contractListCtrl', function ($scope, $filter, $mdDialog, $timeout, $ionicModal, $state, $mdBottomSheet, ContractDB) {
+    
+    // initialForm is the first activity in the controller. 
+    // It will initial all variable data and let the function works when page load.
+    $scope.initialForm = function () {
+        // $scope.contracts  is the variable that store data from ContractDB service.
+        $scope.contracts = [];
+
+        // $scope.filterText  is the variable that use for searching.
+        $scope.filterText = "";
+        
+        // The function for show/hide loading progress.
+        $timeout(function () {
+            if ($scope.isAndroid) {
+                jQuery('#contract-list-loading-progress').show();
+            }
+            else {
+                jQuery('#contract-list-loading-progress').fadeIn(700);
+            }
+        }, 400);
+        $timeout(function () {
+
+            ////Get all contracts.
+            $scope.getContractList();
+
+            jQuery('#contract-list-loading-progress').hide();
+            jQuery('#contract-list-content').fadeIn();
+        }, 3000);// End loading progress.
+
+    };// End initialForm.
+
+    // getContractList is for get all contracts. 
+    // By calling ContractDB.all() service.
+    $scope.getContractList = function () {
+        $scope.contracts = ContractDB.all();
+    };//End getContractList.
+
+    // updateContract is for update contracts. 
+    // By sending contract to ContractDB.update(contract) service.
+    // Parameter :  
+    // contract = contract that user select from view.
+    $scope.updateContract = function (contract) {
+        ContractDB.update(contract);
+    };// End updateContract.
+
+    // navigateTo is for navigate to other page 
+    // by using targetPage to be the destination page 
+    // and sending objectData to the destination page.
+    // Parameter :  
+    // targetPage = destination page.
+    // objectData = object that will sent to destination page.
+    $scope.navigateTo = function (targetPage, objectData) {
+        $state.go(targetPage, {
+            contractdetail: objectData,
+            actionDelete: (objectData == null ? false : true)
+        });
+    };// End navigateTo.
+
+    $scope.initialForm();
+
+});// End of Contract List Page  Controller.
+     </pre>
+
+    <hr/>
+    <h3 id="applicationStorage"><strong>J-1) Application Storage</strong> - <a href="#toc">top</a></h3>
+
+    <p> Every application have to store data.
+        We will introduce you to using application storage to store data in your application by
+        using SQLite and LocalStorage.
+    </p>
+    <hr/>
+    <h3 id="sqLiteDB"><strong>J-1-1) SQLite Database</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        SQLite is the best way to store data to application storage.
+        It allow you to manage complex relational database.
+    </p>
+
+    <p>
+        Advantage of SQLite it have unlimit ability to store data.
+        It will create the sqlite file that store in the application.
+        Also can store more complex data such as relation between tables.
+    </p>
+    <img src="img/screen_01.gif" alt=""/>
+
+    <p>
+        We use SQLite function to create a small contract application that including function to :
+    <ul>
+        <li>Select data</li>
+        <li>Add data</li>
+        <li>Update data</li>
+        <li>Delete data</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/sqLite/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/js/app.js</strong> : Contains instruction how to create SQLite table
+            <strong> in modules.run() method.</strong>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/sqLite/js/controllers.js</strong> :
+            <ul>
+                <li> Contains instruction that connect with ContractDB Services to present data to html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/sqLite/js/services.js</strong> :
+            <ul>
+                <li>Contains instruction of using factory for connecting with SQLite database.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+
+
+    <hr/>
+    <h3 id="localStorage"><strong>J-1-2) Local Storage Database</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        LocalStorage have ability to store data by HTML5 loacalStorage function.
+    </p>
+    <img src="img/screen_02.gif" alt=""/>
+
+    <p>
+        We use LocalStorage function to create a notes application that including function to :
+    <ul>
+        <li>Select data</li>
+        <li>Add data</li>
+        <li>Update data</li>
+        <li>Delete data</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/local-application-db/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/local-application-db/js/controllers.js</strong>
+            :
+            <ul>
+                <li>Contains instruction that connect with LocalStorage Services for present data to html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/application-storage/local-application-db/js/services.js</strong> :
+            <ul>
+                <li> Contains instruction of using factory for connecting with LocalStorage database.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+
+    <hr/>
+    <h3 id="socialNetworkConnect"><strong>J-2) Social Network Connect</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using Social Network Connect for connect your application with social network.
+        You can use it to be your application log in authentication and get user profile information from social
+        network. Also it can retrieve data object of user timeline.
+    </p>
+
+    <p>
+        Advantage of Social Network Connect is you don't need to create login page for your application just use
+        social log in authentication. And it is easy for user to login.
+    </p>
+    <hr/>
+    <h3 id="wordPress"><strong>J-2-1) WordPress</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Getting WordPress feed by input your WordPress URL to application.
+        It will use <a href="https://wordpress.org/plugins/json-rest-api/">WP REST API</a> for connecting with WordPress
+        Feed.
+    </p>
+    <img src="img/screen_03.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Get post feed</li>
+        <li>Get post detail</li>
+        <li>Get post comment</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/wordpress/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/wordpress/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with WordPress.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Install WP REST API</h3>
+    To getting WordPress feed you have to install <strong>WP REST API</strong> plugin to your WordPress by this
+    following instruction :
+    <ul>
+        <li>
+            Download WP REST API plugin to install in to your website from
+            <a href="https://wordpress.org/plugins/json-rest-api/">
+                https://wordpress.org/plugins/json-rest-api/</a>
+            <img src="img/wp1.jpg" width="700" alt=""/>
+        </li>
+        <li>
+            Add plugin to your website by this following :
+            <ul>
+                <li>Add new plugin.
+                    <img src="img/wp2.jpg" width="700" alt=""/>
+                </li>
+                <li>Upload plugin.
+                    <img src="img/wp3.jpg" width="700" alt=""/>
+                </li>
+                <li>Upload WP REST API to install.
+                    <img src="img/wp4.jpg" width="700" alt=""/>
+                </li>
+            </ul>
+        </li>
+        <li>Active this plugin.</li>
+        <img src="img/wp5.jpg" width="700" alt=""/>
+        <li>Set website format to support with WP REST API by this following:
+            <ul>
+                <li>Go to Permalink Settings.
+                    <img src="img/wp6.jpg" width="700" alt=""/>
+                </li>
+                <li>Select Post name then save change.
+                    <img src="img/wp7.jpg" width="700" alt=""/>
+                </li>
+            </ul>
+        </li>
+        <li>
+            To get json object of feed from API by using URl structure:
+            <ul>
+                <li>YOUR_WORDPRESS_URL/wp-json/posts?_jsonp=JSON_CALLBACK&page=PAGE_NUMBER</li>
+            </ul>
+        </li>
+        <li>
+            To get json object of comment from API by using URl structure:
+            <ul>
+                <li>YOUR_WORDPRESS_URL/wp-json/posts/POST_ID/comments</li>
+            </ul>
+        </li>
+    </ul>
+    <hr/>
+    <h3 id="facebook"><strong>J-2-2) Facebook</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Use cordovaOauth for connect with facebook to get <strong>user profile information</strong>, <strong>user
+        timeline</strong> and <strong>friend list</strong> by calling facebook API.
+    </p>
+    <img src="img/screen_04.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Log in</li>
+        <li>Get user profile information</li>
+        <li>Get user timeline</li>
+        <li>Get friend list</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/facebook/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/facebook/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with facebook.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ol>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is not support <strong>Ionic View</strong> because of ngCordova Oauth issue, However the ticket
+            has been raised on Github of Ionic Framework at
+            <a href="https://github.com/driftyco/ionic-view-issues/issues/45">
+                https://github.com/driftyco/ionic-view-issues/issues/45
+            </a>
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ol>
+    <h3>Facebook API Registration :</h3>
+    To connect with facebook you have to register facebook application developer to get APP ID by this following :
+    <ul>
+        <li>
+            Go to <a href="https://developers.facebook.com/">https://developers.facebook.com/</a>
+            then go to <strong>myApp</strong> menu select <strong>add a new app</strong> then select
+            <strong>Website</strong>.
+            <img src="img/facebook_01.png" width="700" alt=""/>
+        </li>
+        <li>
+            Input your application name and click <strong>create new application</strong>.
+            <img src="img/facebook_02.png" width="700" alt=""/>
+        </li>
+        <li>
+            Select your application category and click <strong>create App ID</strong>.
+            <img src="img/facebook_03.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click skip quick start.
+            <img src="img/facebook_04.png" width="700" alt=""/>
+        </li>
+        <li>
+            It will go to your facebook application dashboard.
+            <img src="img/facebook_05.png" width="700" alt=""/>
+        </li>
+        <li>
+            You have to setting Valid OAuth redirect URIs for connect with cordovaOauth by this following:
+            <ul>
+                <li>
+                   Go to Product Setting and select <strong>Add Product</strong>.
+                    <img src="img/facebook_06.png" width="500" alt=""/>
+                </li>
+                <li>
+                   Select <strong>Get Started</strong> for <strong>Facebook Login</strong>.
+                    <img src="img/facebook_07.png" width="700" alt=""/>
+                </li>
+                <li>
+                    Set Valid OAuth redirect URIs = <strong>http://localhost/callback </strong> then save.
+                    <img src="img/facebook_08.png" width="700" alt=""/>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Add App ID to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="googlePlus"><strong>J-2-3) Google Plus</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Use cordovaOauth for connect with Google to get <strong>user profile information</strong> and <strong>user
+        activity</strong> by calling Google API.
+    </p>
+    <img src="img/screen_05.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Log in</li>
+        <li>Get user profile information</li>
+        <li>Get user activity feed</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/google-plus/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/google-plus/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with Google.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ol>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is not support <strong>Ionic View</strong> because of ngCordova Oauth issue, However the ticket
+            has been raised on Github of Ionic Framework at
+            <a href="https://github.com/driftyco/ionic-view-issues/issues/45">
+                https://github.com/driftyco/ionic-view-issues/issues/45
+            </a>
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ol>
+    <h3>Google API Registration :</h3>
+    To connect with google you have to register google application developer to get Client ID by this following :
+    <ul>
+        <li>
+            Go to <a href="https://console.developers.google.com/">https://console.developers.google.com/</a> then go to
+            <strong>create a project</strong>
+            <img src="img/google_01.png" width="700" alt=""/>
+        </li>
+        <li>
+            Input your project name and click create.
+            <img src="img/google_02.png" width="700" alt=""/>
+        </li>
+        <li>
+            Go to your project.
+            <img src="img/google_03.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click <strong>credentials</strong> menu under Api & auth.<br/>
+            <img src="img/google_04.png" width="500" alt=""/>
+        </li>
+        <li>
+            Go to OAuth consent screen and input detail then save.
+            <img src="img/google_05.png" width="700" alt=""/>
+        </li>
+        <li>
+            Add credentials for OAuth2.2 client ID
+            <img src="img/google_06.png" width="700" alt=""/>
+        </li>
+        <li>
+            Select <strong>Web application</strong> and put <strong>http://localhost/callback</strong>
+            for Authorized redirect URIs to connect with cordovaOauth then click create.
+            <img src="img/google_07.png" width="700" alt=""/>
+        </li>
+        <li>
+            It will show your application <strong>Client ID and Client secret</strong>.
+            <img src="img/google_08.png" width="700" alt=""/>
+        </li>
+        <li>
+            To allow application to connect with Google Plus API by go to <strong>APIs</strong> menu.
+            <img src="img/google_09.png" width="500" alt=""/>
+        </li>
+        <li>
+            Select<strong> Google Plus API.</strong>
+            <img src="img/google_10.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click<strong> Enable API.</strong>
+            <img src="img/google_11.png" width="700" alt=""/>
+        </li>
+        <li>
+            Add Client ID to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="instagram"><strong>J-2-4) Instagram</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Use cordovaOauth for connect with instagram to get <strong>user profile information</strong> and <strong>user
+        feed</strong> by calling instagram API.
+    </p>
+    <img src="img/screen_06.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Log in</li>
+        <li>Get user profile information</li>
+        <li>Get user feed</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/instagram/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/instagram/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with instagram.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ol>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is not support <strong>Ionic View</strong> because of ngCordova Oauth issue, However the ticket
+            has been raised on Github of Ionic Framework at
+            <a href="https://github.com/driftyco/ionic-view-issues/issues/45">
+                https://github.com/driftyco/ionic-view-issues/issues/45
+            </a>
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ol>
+    <h3>Instagram API Registration :</h3>
+    To connect with instagram you have to register instagram application developer to get Client ID by this following :
+    <ul>
+        <li>
+            Go to <a href="https://instagram.com/developer/">https://instagram.com/developer/</a>
+            then go to <strong>Register your application</strong>.
+            <img src="img/instagram_01.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click <strong>Register a New Client</strong>.
+            <img src="img/instagram_02.png" width="700" alt=""/>
+        </li>
+        <li>
+            Input your application information.
+            <img src="img/instagram_03.png" width="700" alt=""/>
+        </li>
+        <li>
+            You have to setting Redirect URI(s) for connect with cordovaOauth by this following:
+            <ul>
+                <li>
+                    Set Valid redirect URIs = <strong>http://localhost/callback</strong>.
+
+                    <img src="img/instagram_04.png" width="700" alt=""/>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Go to tab <strong> Security</strong> uncheck for <strong>Disable implicit OAuth</strong> and <strong>Enforce
+            signed requests</strong> then click <strong>register</strong>.
+            <img src="img/instagram_05.png" width="700" alt=""/>
+        </li>
+        <li>
+            It will go to your instagram Manage Clients application.
+            <img src="img/instagram_06.png" width="700" alt=""/>
+        </li>
+        <li>
+            Add Client ID to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="foursquare"><strong>J-2-5) Foursquare</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Use cordovaOauth for connect with foursquare to get <strong>user profile information</strong> and <strong>user
+        tips feed</strong> by calling foursquare API.
+    </p>
+    <img src="img/screen_07.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Log in</li>
+        <li>Get user profile information</li>
+        <li>Get user tips feed</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/foursquare/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/foursquare/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with foursquare.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ol>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is not support <strong>Ionic View</strong> because of ngCordova Oauth issue, However the ticket
+            has been raised on Github of Ionic Framework at
+            <a href="https://github.com/driftyco/ionic-view-issues/issues/45">
+                https://github.com/driftyco/ionic-view-issues/issues/45
+            </a>
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ol>
+    <h3>Foursqure API Registration :</h3>
+    To connect with foursquare you have to register foursquare application developer to get Client ID by this following
+    :
+    <ul>
+        <li>
+            Go to <a href="https://developer.foursquare.com/">https://developer.foursquare.com/</a>
+            then go to <strong>My Apps</strong>
+            <img src="img/foursqure_01.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click <strong>create a new apps</strong>.
+            <img src="img/foursqure_02.png" width="700" alt=""/>
+        </li>
+        <li>
+            Input your application information.
+            <img src="img/foursqure_03.png" width="700" alt=""/>
+        </li>
+        You have to setting Redirect URI(s) for connect with cordovaOauth by this following:
+        <ul>
+            <li>
+                Set Redirect URI(s)= <strong>http://localhost/callback </strong>
+                then click <strong>save changes</strong>
+                <img src="img/foursqure_04.png" width="700" alt=""/>
+            </li>
+            <li>
+                It will go to your application detail.
+                <img src="img/foursqure_05.png" width="700" alt=""/>
+            </li>
+        </ul>
+        </li>
+        <li>
+            Add Client ID to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="dropbox"><strong>J-2-6) Dropbox</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Use cordovaOauth for connect with dropbox to get <strong>user profile information</strong> and <strong>user
+        files directory feed</strong> by calling dropbox API.
+    </p>
+    <img src="img/screen_08.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Log in</li>
+        <li>Get user profile information</li>
+        <li>Get files directory feed</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/dropbox/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/social-network-connect/dropbox/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for connect with dropbox.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ol>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is not support <strong>Ionic View</strong> because of ngCordova Oauth issue, However the ticket
+            has been raised on Github of Ionic Framework at
+            <a href="https://github.com/driftyco/ionic-view-issues/issues/45">
+                https://github.com/driftyco/ionic-view-issues/issues/45
+            </a>
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ol>
+    <h3>Dropbox API Registration :</h3>
+    To connect with dropbox you have to register dropbox application developer to get App Key by this following :
+    <ul>
+        <li>
+            Go to <a href="https://www.dropbox.com/developers">https://www.dropbox.com/developers</a>
+            then go to <strong>App Console.</strong>
+            <img src="img/dropbox_01.png" width="700" alt=""/>
+        </li>
+        <li>
+            Click <strong>create app</strong>.
+            <img src="img/dropbox_02.png" width="700" alt=""/>
+        </li>
+        <li>
+            Select <strong>Dropbox API app </strong>.
+            <img src="img/dropbox_03.png" width="700" alt=""/>
+        </li>
+        <li>
+            It will go to your application detail.
+            <img src="img/dropbox_04.png" width="700" alt=""/>
+        </li>
+        <li>
+            Go to setting Redirect URIs for connect with cordovaOauth by this following:
+            <ul>
+                <li>
+                    Set Redirect URIs= <strong>http://localhost/callback </strong>
+                    then click <strong>add</strong>.
+                    <img src="img/dropbox_05.png" width="700" alt=""/>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Add App Key to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="shareApplicationContent"><strong>J-3) Share Application Content</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Share Application Content is for share content from the application
+        to social network by using feature of ngCordova.
+    </p>
+    <hr/>
+    <h3 id="socialShare"><strong>J-3-1) Social Share</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaSocialSharing for share application content to social network
+        and using Canvas2ImagePlugin for save image to mobile gallery.
+    </p>
+    <img src="img/screen_09.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Share content to facebook</li>
+        <li>Share content to twitter</li>
+        <li>Share content to e-mail</li>
+        <li>Save image to mobile gallery</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/share-application-content/social-share/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/share-application-content/social-share/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of using share application content.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="emailMessage"><strong>J-3-2) Email & Message</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaSocialSharing for send email from the application
+        and using cordovaSMS for sent message.
+    </p>
+    <img src="img/screen_10.gif" width="260" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Send e-mail</li>
+        <li>Send message</li>
+        <li>Mobile calling</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/share-application-content/email-message/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/share-application-content/email-message/js/controllers.js</strong>
+            :
+            <ul>
+                <li>Contains instruction for send email, message and using mobile calling.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="advertisingApplication"><strong>J-4) Advertising Application</strong> - <a href="#toc">top</a></h3>
+
+    <h3 id="googleAdMob"><strong>J-4-1) Google AdMob</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using Google AdMob for earning money to your application. By using AdMob Pro.
+    </p>
+    <img src="img/screen_11.gif" width="200" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Show AdMob</li>
+        <li>Hide AdMob</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/advertising-application/googleAdmob/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/advertising-application/googleAdmob/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction for using AdMob.</li>
+            </ul>
+        </li>
+    </ul>
+    <strong>Note:</strong> AdMob will show random advertising by google AdMob.
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            You have to register the application API before using this feature. Then add App ID to file: www/app.js at
+            <strong>global variable</strong> section to get the function work.
+        </li>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+    <h3>Google AdMob Registration :</h3>
+    You have to register google AdMob by this following :
+    <ul>
+        <li>
+            Go to <a href="https://apps.admob.com/admob/signup"> https://apps.admob.com/admob/signup</a>
+            to sign up for AdMob.
+        </li>
+        <li>
+            Go to <a href="https://apps.admob.com/#home"> https://apps.admob.com/#home</a>
+            you will see your AdMob dashboard.
+        </li>
+        <li>
+            Select menu monetize then click this following button for create google admob.
+            <img src="img/AdMob_01.jpg" width="400" alt=""/>
+        </li>
+        <li>
+            Select one of this AdMob to present on your application.
+            <img src="img/AdMob_02.jpg" width="700" alt=""/>
+        </li>
+        <li>
+            Selecting your AdMob format and name AdMob unit then save.
+            <img src="img/AdMob_03.jpg" width="700" alt=""/>
+        </li>
+        <li>
+            It will show this following ID for your AdMob to put in your application.
+            <img src="img/AdMob_04.jpg" width="700" alt=""/>
+        </li>
+        <li>
+            Add Ad unit ID to file: www/app.js at <strong>global variable</strong> section to get the function work.
+        </li>
+    </ul>
+
+    <h3 id="pushNotification"><strong>J-5)Push Notification</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Push Notification is for sent local notification from application to interactive with user.
+    </p>
+    <hr/>
+
+    <h3 id="singlePush"><strong>J-5-1) Single Push</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        To send notification for interact with user by sending single message.
+    </p>
+    <img src="img/screen_12.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li><strong>Send single push notification</strong>:
+            It will send single message to notification center of your device.
+        </li>
+        <li><strong>Clear all push notification</strong>:
+            It will clear all notification of this application in your device notification center.
+        </li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong>
+                your_project_path/www/templates/push-notification/single-push-notification/html/single-push-notification.html </strong>
+            :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>
+                your_project_path/www/templates/push-notification/single-push-notification/js/controllers.js </strong> :
+            <ul>
+                <li>Contains instruction for using single push.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+    <hr/>
+    <h3 id="schedulePush"><strong>J-5-2) Schedule Push</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        To send notification for interact with user by sending message with schedule queue.
+    </p>
+    <img src="img/screen_13.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li><strong>Send push notification</strong>:
+            It will create schedule queue for sent notification message.
+        </li>
+        <li><strong>Clear all push notification</strong>:
+            It will clear all notification of this application in your device notification center.
+        </li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong>
+                your_project_path/www/templates/push-notification/schedule-push-notification/html/schedule-push-notification.html
+
+            </strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>
+                your_project_path/www/templates/push-notification/schedule-push-notification/js/controllers.js </strong>
+            :
+            <ul>
+                <li>Contains instruction for using schedule push.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+    <h3 id="mapApiConnect"><strong>J-6)Map API Connect</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Map API Connect is for connect the application with map application.
+    </p>
+    <hr/>
+
+    <h3 id="iosMap"><strong>J-6-1) IOS Map</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        To connect the application with map application.
+    </p>
+    <img src="img/screen_21.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li><strong>Connect to IOS map application</strong>:
+            It will connect with IOS map application.
+        </li>
+        <li><strong>Connect to Google map application</strong>:
+            It will connect with Google map application.
+        </li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong>
+                your_project_path/www/templates/map-and-location/ios-map-connect/html/ios-map-connect.html </strong>
+            :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>
+                your_project_path/www/templates/map-and-location/ios-map-connect/js/controllers.js </strong> :
+            <ul>
+                <li>Contains instruction for connecting with map application.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            For connect with Google map you have to install Google map application to your device before using this feature.
+        </li>
+    </ul>
+    <hr/>
+    <h3 id="androidMap"><strong>J-6-2) Android Map</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        To connect the application with map application.
+    </p>
+    <img src="img/screen_22.png" width=500 alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li><strong>Connect to Android map application</strong>:
+            It will connect with Google map application.
+        </li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong>
+               your_project_path/www/templates/map-and-location/android-map-connect/html/android-map-connect.html 
+
+            </strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>
+                your_project_path/www/templates/map-and-location/android-map-connect/js/controllers.js </strong>
+            :
+            <ul>
+               <li>Contains instruction for connecting with map application.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            For connect with Google map you have to install Google map application to your device before using this feature.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="hardwareConnect"><strong>J-7) Hardware Connect</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Hardware Connect is for connecting with mobile feature by using ngCordova.
+    </p>
+    <hr/>
+    <h3 id="mobileContract"><strong>J-7-1) Mobile Contract</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaContacts for connecting the application to mobile contract.
+    </p>
+    <img src="img/screen_14.gif" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Get all contracts</li>
+        <li>Add new contract</li>
+        <li>Update contract</li>
+        <li>Delete contract</li>
+        <li>Mobile calling</li>
+        <li>Send message</li>
+        <li>Send e-mail</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/mobile-contract/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/mobile-contract/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of using mobile contracts.</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+    </p>
+
+    <hr/>
+    <h3 id="imagePicker"><strong>J-7-2) Image Picker</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaImagePicker for selecting image from mobile gallery.
+    </p>
+    <img src="img/screen_15.gif" width="200" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Select single image</li>
+        <li>Select multiple images</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/image-picker/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/image-picker/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of using image picker.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="vibration"><strong>J-7-3) Vibration</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaVibration for using mobile vibration.
+    </p>
+    <img src="img/screen_16.gif" width="200" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Vibrating</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/vibration/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/vibration/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of using vibration.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="flashlight"><strong>J-7-4) Flashlight</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using cordovaFlashlight for using mobile flashlight.
+    </p>
+    <img src="img/screen_17.gif" width="200" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Turn on flashlight</li>
+        <li>Turn off flashlight</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/flash-light/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/flash-light/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of using vibration.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="deviceInformation"><strong>J-7-5) Device Information</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Using ionic.Platform.device for get device information.
+    </p>
+    <img src="img/screen_18.png" width="200" alt=""/>
+
+    <p>
+        The function include:
+    <ul>
+        <li>Get mobile device information</li>
+    </ul>
+    </p>
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/device-information/html</strong> :
+            <ul>
+                <li>Place of html view.</li>
+            </ul>
+        </li>
+        <li>
+            <strong> your_project_path/www/templates/hardware-connect/device-information/js/controllers.js</strong> :
+            <ul>
+                <li>Contains instruction of getting mobile device information.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <h3>Important :</h3>
+    <ul>
+        <li>
+            This feature is required device environment it will not working on browser.
+        </li>
+    </ul>
+
+    <hr/>
+    <h3 id="materialDesignThemes"><strong>J-8) Material Design Themes</strong> - <a href="#toc">top</a></h3>
+
+    <p>
+        Material theme that will help you to generate idea to create your powerful application.
+    </p>
+    <img src="img/screen_19.gif" alt=""/>
+    <img src="img/screen_20.gif" alt=""/>
+
+    <h3>
+        Project file path :
+    </h3>
+
+    <p>
+    <ul>
+        <li>
+            <strong> your_project_path/www/templates/themes</strong> :
+            <ul>
+                <li>Place of theme folder.</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+
+    <hr/>
+    <h3 id="knownIssues"><strong>K) Known Issues</strong> - <a href="#toc">top</a></h3>
+    <h3 id="knownIssues_ionicview"> Ionic View :</h3>
+
+    <ul>
+        <li> If you would like to upload Ionic Material Design to <strong> Ionic View</strong> you will found some
+            feature is not working.<strong> Because this project required to run on devise environment all feature will
+                not working 100% </strong>on <strong> Ionic View</strong>.
+            <br/>
+            I recommend to run this project on emulator
+            or mobile devise the performance
+            will
+            better than <strong>Ionic View </strong> and all feature will work 100%.
+        </li>
+        <li>
+            The function of Social Connect : Facebook, Google plus, Instagram, Foursquare, Dropbox will not
+            working on <strong>Ionic View</strong>.
+            <br/>
+            Because of ngCordova Oauth issue,
+            However the ticket has been raised on
+            Github of Ionic Framework at <a href="https://github.com/driftyco/ionic-view-issues/issues/45">https://github.com/driftyco/ionic-view-issues/issues/45</a>
+        </li>
+        <li>
+            We not support the error case of this project from <strong>Ionic View</strong>
+        </li>
+    </ul>
+
+
+    <hr/>
+    <h3> HTML Button Tag :</h3>
+
+
+    <p>
+        <strong> Problem :</strong> Ionic Material Design doesn't support <strong>HTML button Tag</strong>, Because
+        <strong>Angular
+            material and angular-aria</strong> will have double event when tap at the HTML button Tag on <strong>Mobile
+        Browser</strong>.
+    </p>
+
+
+    <p>
+        <strong>Solution :</strong> Ionic Material Design avoid this issue by using <strong>HTML a</strong> to create
+        button by :
+
+<pre class="brush: html">
+&lt;a class="md-raised md-button" href="#" ng-click="doSomeThing()"&gt;Button&lt;/a&gt;
+</pre>
+
+    To create button : <img src="img/limitation_02.png" alt=""/>.
+    </p>
+    <hr/>
+
+    <h3> Social connect :</h3>
+
+    <p>
+        <strong> Foursquare</strong> and <strong>Dropbox</strong> feed API have no paging so it cannot do load more
+        function.
+    </p>
+
+    <hr/>
+
+    <h3> Social share :</h3>
+    <ol>
+        <li> For send email user must add email to the native mail application before sent e-mail.
+        </li>
+        <li>
+            Facebook and Twitter sharing can not send a text via ngCordova API to shareing screen.
+            However user can type text message on sharing screen.
+        </li>
+        <li>
+            The reference limitation of $cordovaSocialSharing :
+            <br/>
+            <img width="800" src="img/limitation_01.png"/>
+            <br/>
+            <strong>Learn more:</strong> <a href="http://ngcordova.com/docs/plugins/socialSharing/">
+            ngcordova socialSharing</a>
+        </li>
+
+    </ol>
+    <hr/>
+    <h3> Mobile contract :</h3>
+
+    <p>
+        For get all contracts you have to wait more than 2 sec for loading contracts form device (depend on data size).
+    </p>
+
+    </ol>
+    <hr/>
+
+    <h3> Image size </h3>
+
+    <p>
+        Application will lag and slow if image size are large.
+    </p>
+
+    <hr/>
+
+    <h3 id="compatibility"><strong>L) Compatibility</strong> - <a href="#toc">top</a></h3>
+
+    <p>This project was tested in :</p>
+    <ul>
+        <li>IOS Version 9 iPhone 6s Plus</li>
+        <li>IOS Version 9 iPhone 6</li>
+        <li>IOS Version 9 iPhone 5c</li>
+        <li>IOS Version 8 iPhone 5c</li>
+        <li>IOS Version 7 iPhone 5</li>
+        <li>Android Version 4.4.4 Samsung E5</li>
+    </ul>
+
+    <h4><strong>Compatible with:</strong></h4>
+    <ul>
+        <li>IOS Version 9</li>
+        <li>IOS Version 8</li>
+        <li>IOS Version 7</li>
+        <li>Android Version 4.4.4</li>
+    </ul>
+
+    <hr/>
+
+    <h3 id="support"><strong>M) Support</strong> - <a href="#toc">top</a></h3>
+
+    <p>If you found any bug, please use the theme comment section or report it to us describing:</p>
+    <ol>
+        <li>Device platform</li>
+        <li>Device version</li>
+        <li>Problem details</li>
+        <li>Explain how to reproduce the problem, step by step.</li>
+    </ol>
+    <p>
+        <strong>Important</strong> : We not support the error case of this project from :
+    <ul>
+        <li><strong>Ionic View</strong> : If you would like to upload Ionic Material Design to Ionic View you will found some feature is not working.
+            Because this project required to run on devise environment all feature will not working 100% on Ionic View.
+            <a href="#knownIssues_ionicview">known issues of Ionic View</a></li>
+        <li><strong>All Desktop Browser</strong> You have to know about this project is mobile hybrid application that run on mobile devise not
+            website that hosted on web serve that have to support all browser on desktop.
+            <br/>
+            We not support error case from compatibility of web browser that run on all desktop browser.
+        </li>
+        <li><strong>Plugins</strong> : We not support the error case of plugin compatibility with platform and new plugin update because we can’t do anything to fix the issue.
+             Because we don’t have the skill and knowledge to develop the plugin. We will let you know and update the instruction on project documentation if it have any update or workaround solutions.</li>
+    <li><strong>Device size</strong> : We not support the issue of tablet and web browser resolution size</li>
+</ul>
+    </p>
+    <hr/>
+    <h3 id="usefulResources"><strong>N) Useful Resources</strong> - <a href="#toc">top</a></h3>
+
+    <p>Please use this following link to help you find useful information :</p>
+    <ul>
+        <li><a href="http://ionicframework.com/getting-started/">Getting Started with Ionic Framework </a></li>
+        <li><a href="http://ionicframework.com/docs/">Ionic Framework Documentation</a></li>
+        <li><a href="http://blog.ionic.io/"> Blog of Ionic Framework </a></li>
+        <li><a href="http://forum.ionicframework.com/"> Forum of Ionic Framework </a></li>
+        <li><a href="http://ngcordova.com/docs/">ngCordova Documentation</a></li>
+        <li><a href="https://wordpress.org/plugins/json-rest-api/"> WordPress REST API. </a></li>
+        <li><a href="https://developers.facebook.com/"> Facebook Developers page for APIs registration. </a></li>
+        <li><a href="https://console.developers.google.com/"> Google Developers page for APIs registration. </a></li>
+        <li><a href="https://instagram.com/developer/"> Instagram Developers page for APIs registration. </a></li>
+        <li><a href="https://developer.foursquare.com/"> Foursquare Developers page for APIs registration. </a></li>
+        <li><a href="https://www.dropbox.com/developers"> Dropbox Developers page for APIs registration. </a></li>
+        <li><a href="https://apps.admob.com/admob/signup"> Google AdMob page for APIs registration. </a></li>
+        <li><a href="https://www.google.com/design/spec/material-design/introduction.html"> Introduction of Google
+            Material Design. </a></li>
+        <li><a href=" https://dribbble.com/">Dribbble.com for idea and inspiration.</a></li>
+        <li><a href="https://www.materialpalette.com/">Materialpalette.com for create a material UI by material base
+            color.</a></li>
+        <li><a href="http://blog.ionic.io/ios-9-potential-breaking-change/">Ionic Framework IOS 9 Potential Breaking
+            Change</a></li>
+        <li><a
+                href="http://blog.ionic.io/crosswalk-comes-to-ionic/">Improve Android Performancr by using Crosswalk
+            Browser</a></li>
+    </ul>
+    <hr/>
+    <h3 id="sourcesAndCredits"><strong>O)Sources and Credits</strong> - <a href="#toc">top</a></h3>
+
+    <p>I've used the following <strong>Icons, Framework, Idea , Inspiration or Other files</strong> as listed. - Also a
+        thanks to all the awesome resources I've used for the development of this project.</p>
+
+    <p><strong>Resources used in Development</strong></p>
+
+    <ul>
+        <li><a href="http://ionicframework.com/">Ionic Framework</a></li>
+        <li><a href="https://material.angularjs.org/latest/#/"> Angular Material</a></li>
+        <li><a href="https://docs.angularjs.org/api/ngMessages">Angular Messages</a></li>
+        <li><a href="https://docs.angularjs.org/api/ngAria"> Angular Aria</a></li>
+        <li><a href="http://ngcordova.com/"> ngCordova</a></li>
+        <li><a href="https://jquery.com/"> jQuery</a></li>
+        <li><a href=" https://fortawesome.github.io/Font-Awesome/"> Fort Awesome</a></li>
+        <li><a href=" https://www.google.com/fonts/specimen/Roboto"> Google Fort Roboto</a></li>
+
+    </ul>
+
+    <p><strong>Resources used in Design</strong></p>
+    <ul>
+        <li><a href="https://www.google.com/design/spec/material-design/introduction.html"> Google Material Design </a>
+        </li>
+        <li><a href=" https://dribbble.com/">Dribbble.com</a></li>
+        <li><a href="https://www.materialpalette.com/">Materialpalette.com</a></li>
+
+    </ul>
+    <hr/>
+    <h3 id="version"><strong>P)Version History</strong> - <a href="#toc">top</a></h3>
+
+    <ul>
+        <li>
+            <strong> Version 4.2</strong> - Released  24 Jun 2016
+            <ol>
+                <li>Plugin :
+                    <ol>
+                        <li>Add plugin cordova-plugin-whitelist to avoid http 404 errors when your app tries to make network requests on android.</li>
+                    </ol>
+                </li>
+                <li>CSS :
+                    <ol>
+                        <li>Add hidden overflow-x to class  product-slide-list to fix horizontal scroll bar appear on page load.</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 4.1</strong> - Released 30 May 2016
+            <ol>
+                <li>
+                    Update Framework :
+                    <ol>
+                        <li>Update cordova to lasted version.</li>
+                        <li>Remove fix plugin version.</li>
+                    </ol>
+                </li>
+                <li>Update Feature :
+                    <ol>
+                        <li>Change plugin AdMob to AdMob Pro version for use more stable version.</li>
+                    </ol>
+                </li>
+                <li>Plugin :
+                    <br/> Because of plugin update make npm throw error while installing plugin. We are changed below plugin to stable version :
+                    <ol>
+                        <li>Change plugin https://github.com/floatinghotpot/cordova-plugin-admob.git (AdMob) to cordova-plugin-admobpro (AdMob Pro)</li>
+                        <li>Change plugin de.appplant.cordova.plugin.email-composer@0.8.2 to cordova-plugin-email-composer</li>
+                        <li>Change plugin org.apache.cordova.splashscreen@1.0.0 to cordova-plugin-splashscreen</li>
+                        <li>Removed unused plugin cordova-plugin-googleplayservices@19.0.3 because of changed plugin AdMob to AdMob Pro version.</li>
+                    </ol>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Update content of section <a href="#installingIonicFramework">D-1 Installing Ionic Framework </a>
+                            <ol>
+                                <li>Add new instruction for build AdMob Pro in android to avoid build error.</li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Update content of section <a href="#addPlugin">D-4) Add Ionic Plugin </a>
+                            <ol>
+                                <li>Change plugin https://github.com/floatinghotpot/cordova-plugin-admob.git (AdMob) to cordova-plugin-admobpro (AdMob Pro)</li>
+                                <li>Change plugin de.appplant.cordova.plugin.email-composer@0.8.2 to cordova-plugin-email-composer</li>
+                                <li>Change plugin org.apache.cordova.splashscreen@1.0.0 to cordova-plugin-splashscreen</li>
+                                <li>Removed unused plugin cordova-plugin-googleplayservices@19.0.3 because of changed plugin AdMob to AdMob Pro version.</li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Update content of section <a href="#updatetolatestversion">D-13) Update project to latest version  </a>
+                            <ol>
+                                <li>Add new content of file and resource that update in this version.</li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Update content of section <a href="#support">M) Support </a>
+                            <ol>
+                                <li>Add new content about devise size</li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Update content of section <a href="#facebook">J-2-2) Facebook </a>
+                            <ol>
+                                <li>Update new content of Facebook API Registration according from Facebook update.</li>
+                            </ol>
+
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 4</strong> - Released 24 February 2016
+            <ol>
+                <li>New Feature :
+                <ol>
+                    <li>Show popup dialog before application close when tap Back Button on android.</li>
+                    <li>Make the side menu close when swipe left on side menu.</li>
+                    <li>Make the side menu close when tap Back Button on android.</li>
+                    <li>Make the bottom sheet close when tap Back Button on android.</li>
+                    <li>Make the popup dialog close when tap Back Button on android.</li>
+                    <li>Make the md-menu close when tap Back Button on android.</li>
+                    <li>Make the md-select close when tap Back Button on android.</li>
+                </ol>
+                </li>
+                <li>Update Feature :
+                <ol>
+                    <li>SQLite contract list page will show grid with md-menu by default.</li>
+                </ol>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Update content of section <a href="#addPlugin">D-4) Add Ionic Plugin </a>
+                            <ol>
+                                <li>Update plugin cordova-plugin-inappbrowser to version 1.1.3</li>
+                                <li>Change cordova-plugin-splashscreen plugin to org.apache.cordova.splashscreen to support new version of Android and IOS</li>
+                                <li>Remove section of <strong> <a href="#aboutlocalnotificationsplugin"> About local notifications plugin</a> Because the probelm has been fixed. </strong>
+                                </li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Remove content of section <strong><a href="#knownIssuesPluginNotWorking"> Plugin that will not working on El Capitan, Xcode 7 (Only IOS)</a>  Because the probelm has been fixed.</strong>
+                        </li>
+                        <li>
+                            Add new section <strong><a href="#updatetolatestversion">Update project to latest version</a></strong> for project update instruction.
+                        </li>
+                        <li>
+                            Add new content of section <strong><a href="#support">Support</a></strong>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 3.3</strong> - Released 08 February 2016
+            <ol>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Update content of section <a href="#addPlugin">D-4) Add Ionic Plugin </a>
+                            <ol>
+                                <li>Fix version of cordova plugin to avoid plugin update not compatible with framework make project build failed.</li>
+                                <li>Change plugin cordova-plugin-inappbrowser to version 1.1.1 because of version 1.1.2 have error about callback url.</li>
+                                <li>Add new section <strong> <a href="#aboutlocalnotificationsplugin"> About local notifications plugin</a>  </strong>
+                                    <ul>
+                                        <li><a href="#aboutlocalnotificationsplugin-osx-el-capitan">For IOS Build from Mac OS Version that is not : El Capitan </a></li>
+                                        <li><a href="#aboutlocalnotificationsplugin-android">For Android Build (Mac and Windows)</a></li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                        </li>
+                        <li>
+                            Update new content of section <a href="#knownIssues">K) Known Issues </a> : <strong><a href="#knownIssuesPluginNotWorking"> Plugin that will not working on El Capitan, Xcode 7 (Only IOS)</a> </strong>
+                            <ol>
+                                    <li><a href="#flashlight">Flash Light </a></li>
+                                    <li><a href="#imagePicker">Image Picker</a></li>
+                                    <li><a href="#emailMessage"> Send Text Messages</a></li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 3.2</strong> - Released 10 January 2016
+            <ol>
+                <li>Plugin :
+                    <ul>
+                        <li>
+                            Change ionic plugin keyboard to stable version from com.ionic.keyboard to ionic-plugin-keyboard
+                        </li>
+                        <li>
+                            Add new googleplayservices plugin to supprot dependencies update of AdMob plugin.
+                        </li>
+                    </ul>
+                </li>
+                <li>Update package.json File :
+                    <ul>
+                        <li>
+                            Update dependencies and devDependencies of gulp-sass from version ^1.3.3 to ^2.0.0 for support NodeJs version  > 4.0.0
+                        </li>
+                    </ul>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Update content of section <a href="#installingIonicFramework">D-1) Installing Ionic Framework </a> to using NodeJs LTS version to avoid cordova plugin issue.
+                        </li>
+                        <li>
+                            Add new content of section <a href="#installingIonicFramework">D-1) Installing Ionic Framework </a> about instruction for Mac OS El Capitan to fix  issue of cordova when add platform then it will get failed return (cordova keeps a cached version in your ${HOME}/.cordova folder.)
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 3.1</strong> - Released 9 December 2015
+            <ol>
+                <li>JavaScript libraries :
+                    <ul>
+                        <li>
+                            Update ngcordova to Version 0.1.23
+                        </li>
+                    </ul>
+                </li>
+                <li>Plugin :
+                    <ul>
+                        <li>
+                            Change inappbrowser plugin to stable version from org.apache.cordova.inappbrowser to cordova-plugin-inappbrowser
+                        </li>
+                    </ul>
+                </li>
+                <li>Update :
+                    <ul>
+                        <li>
+                            Update controller of AdMob to compatible with last updated of AdMob Plugin.
+                        </li>
+                    </ul>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Update content of section <a href="#installingIonicFramework">D-1</a> because of the latest version of cordova is not stable. We recommend you to use cordova version 5.3.3 for avoiding plugin installation issue.
+                        </li>
+                        <li>
+                            Update content of section <a href="#addPlugin">D-4</a> change link of inappbrowser plugin to stable version from org.apache.cordova.inappbrowser to cordova-plugin-inappbrowser
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <strong> Version 3.0</strong> - Released 4 November 2015
+            <ol>
+                <li>New Feature :
+                    <ul>
+                        <li>Android Map Connect.</li>
+                        <li>IOS Map Connect.</li>
+                        <li>Setting for Enable/Disable view animation.</li>
+                    </ul>
+                </li>
+                <li>Performance :
+                    <ul>
+                        <li>Improve application performance by add <a
+                                href="http://blog.ionic.io/crosswalk-comes-to-ionic/">Crosswalk Browser</a> for Android.
+                        </li>
+                        <li>Improve view content and add new setting section for Enable/Disable view animation.</li>
+                    </ul>
+                </li>
+                <li> Update :
+                    <ul>
+                        <li>
+                            Update toggle left Menu to enable animation on IOS and disable on Android.
+                        </li>
+                    </ul>
+                </li>
+                <li>Plugin :
+                    <ul>
+                        <li>Change SQLite Plugin to https://github.com/litehelpers/Cordova-sqlite-storage.git</li>
+                        <li>Add new plugin cordova-plugin-transport-security to allow 'Arbitrary Loads' by adding a
+                            declaration to the Info.plist file to bypass the Xcode 7 and iOS 9 App Transport Security.
+                        </li>
+                    </ul>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Add new section for detail of IOS Map Connect <a href="#iosMap">J-6-1</a>
+                        </li>
+                        <li>
+                            Add new section for detail of Android Map Connect <a href="#androidMap">J-6-2</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ol>
+        </li>
+        <li>
+            <strong> Version 2.0</strong> - Released 4 October 2015
+            <ol>
+                <li>New Feature :
+                    <ul>
+                        <li>Single Push Notification.</li>
+                        <li>Schedule Push Notification.</li>
+                    </ul>
+                </li>
+                <li>Update Library :
+                    <ul>
+                        <li>Font Awesome 4.3.0 to <strong> 4.4.0</strong></li>
+                    </ul>
+                </li>
+                <li>Compatibility :
+                    <ul>
+                        <li>This project was tested in IOS 9 iPhone 6s & 6s+ <strong>PASS</strong></li>
+                        <li>This project Can Build on Xcode 7 <strong>PASS</strong></li>
+                    </ul>
+                </li>
+                <li>Documentation :
+                    <ul>
+                        <li>
+                            Add new section for detail of Single Push Notification. <a href="#singlePush">J-5-1</a>
+                        </li>
+                        <li>
+                            Add new section for detail of Schedule Push Notification. <a href="#schedulePush">J-5-2</a>
+                        </li>
+                        <li>
+                            Update VDO of section <a href="#gettingStarted">D.Getting Started</a> for project
+                            installations IOS and Android.
+                        </li>
+                        <li>
+                            Add Important note to all section in <a href="#componentDetail">J.Component Detail </a>
+                        </li>
+                        <li>
+                            Update Google API Registration Instruction (Case of Google Update).
+                        </li>
+                        <li>
+                            Update Instagram API Registration Instruction (Case of Instagram Update).
+                        </li>
+                        <li>
+                            Add new section <a href="#themeColor">I-1 Theme Color</a> About Theme Configuration.
+                        </li>
+                        <li>
+                            Add new Known issues about
+                            <strong> Ionic View</strong>
+                            at section <a href="#knownIssues">K.Known Issues</a>.
+                        </li>
+                        <li>Add Important note to section <a href="#support">M.Support </a></li>
+
+                    </ul>
+                </li>
+
+            </ol>
+        </li>
+        <li>
+            <strong> Version 1.0</strong> - Released 21 September 2015
+        </li>
+    </ul>
+
+    <hr/>
+
+
+    <p>Once again, thank you so much for purchasing Ionic Material Design. As I said at the beginning, I'd be glad
+        to
+        help you if
+        you have any questions relating to this project. No guarantees, but I'll do my best to assist. If you have a
+        more
+        general question relating to the project on Codecanyon, you might consider visiting the forums and asking
+        your
+        question in the "Item Discussion" section.</p>
+
+    <p class="append-bottom alt large"><strong>Ionic Material Design Team</strong></p>
+
+    <p><a href="#toc">Go To Table of Contents</a></p>
+
+    <hr class="space">
+</div>
+<!-- end div .container -->
+
+<script src="assets/js/jquery-1.8.2.js"></script>
+<script src="assets/js/jquery.easing.min.js"></script>
+<script src="syntax-highlighter/scripts/shCore.js"></script>
+<script src="syntax-highlighter/scripts/shBrushXml.js"></script>
+<script src="syntax-highlighter/scripts/shBrushCss.js"></script>
+<script src="syntax-highlighter/scripts/shBrushJScript.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html> 
