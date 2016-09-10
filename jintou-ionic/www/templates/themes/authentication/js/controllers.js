@@ -1,25 +1,41 @@
 // Controller of catalog Page.
-appControllers.controller('authCtrl', function ($scope, $mdToast, $mdDialog, resApi) {
+appControllers.controller('authCtrl', function ($scope, $mdToast, $mdDialog, $ionicPopup, AuthService,$state) {
 
-    
-    $scope.login = function (loginData) {
-       
-        resApi.auth.local(loginData).then(
-            function(success){
+  $scope.user = {
+    loginId: '',
+    password: ''
+  };
 
-            },
-            function(error){
+  $scope.login = function () {
+//    alert("authCtrl login: " + $scope.user.loginId + ", " + $scope.user.password);
 
-            });
-    }
+   AuthService.login($scope.user).then(function(data) {
+    //  $state.go('myspaces');
+     alert("success");
 
-    $scope.signup = function(signupData) {
-        resApi.user.create(signupData).then(
-            function(success){
+    }, function(errMsg) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Login failed!',
+        template: errMsg
+      });
+    });
 
-            },
-            function(error){
+  }
 
-            });
-    }
+ $scope.signup = function() {
+    AuthService.register($scope.user).then(function(msg) {
+      $state.go('app.login');
+      var alertPopup = $ionicPopup.alert({
+        title: 'Register success!',
+        template: msg
+      });
+    }, function(errMsg) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Register failed!',
+        template: errMsg
+      });
+    });
+  };
+
+
 });// End of auth controller.

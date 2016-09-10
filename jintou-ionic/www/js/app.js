@@ -39,7 +39,7 @@ window.globalVariable = {
 };// End Global variable
 
 
-angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova'])
+angular.module('starter', ['ionic','ngIOS9UIWebViewPatch','ngResource',  'ngStorage', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
 
         //Create database table of contracts by using sqlite database.
@@ -574,21 +574,23 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     }
                 }
             })
-            .state('app.fakeLogin', {
-                url: "/fakeLogin",
+            .state('app.login', {
+                url: "/login",
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/themes/authentication/html/fake-login.html"
+                        templateUrl: "templates/themes/authentication/html/fake-login.html",
+                        controller: 'authCtrl'
                     }
                 }
             })
-            .state('app.fakeSignUp', {
-                url: "/fakeSignUp",
+            .state('app.signup', {
+                url: "/signup",
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/themes/authentication/html/fake-sign-up.html"
+                        templateUrl: "templates/themes/authentication/html/fake-sign-up.html",
+                        controller: 'authCtrl'
                     }
                 }
             })
@@ -915,4 +917,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
         //Use $urlRouterProvider.otherwise(Url);
         $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
 
-    });
+    })
+
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+  $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+    if (!AuthService.isAuthenticated()) {
+      console.log(next.name);
+  //    if (next.name !== 'outside.login' && next.name !== 'outside.register') {
+     if (next.name !== 'app.login' && next.name !== 'app.signup') {
+        event.preventDefault();
+        $state.go('app.login');
+      }
+    }
+  });
+});
