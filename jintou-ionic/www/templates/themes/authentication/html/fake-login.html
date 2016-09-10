@@ -5,11 +5,11 @@
 
 <ion-view title="Sign In">
     <!--left button on navigation bar-->
-    <ion-nav-buttons side="left">
+    <!--<ion-nav-buttons side="left">
         <a ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item nav-back-btn">
             <i class="ion-android-arrow-back"></i>
         </a>
-    </ion-nav-buttons><!--end left button on navigation bar-->
+    </ion-nav-buttons> -->
 
     <!--login content section-->
     <ion-content id="social-login" class="bg-white">
@@ -22,20 +22,22 @@
 
             <div id="fakeLogin">
                 <md-input-container md-no-float="">
-                    <input class="user-name" placeholder="Username">
+                    <input class="user-name" placeholder="Username"  ng-model="user.loginId">
                 </md-input-container>
                 <hr/>
                 <md-input-container md-no-float="">
-                    <input class="user-password" type="password" placeholder="Password">
+                    <input class="user-password" type="password" placeholder="Password"  ng-model="user.password">
                 </md-input-container>
             </div>
             <div>
-                <a class="md-raised social-button md-button md-default-theme material-background">
+                <!--<a class="md-raised social-button md-button md-default-theme material-background" ng-click="login()">-->
+                <a class="md-raised md-button md-default-theme material-background" ng-click="login()">
                     Log In
                 </a>
             </div>
             <div>
-                <a href="#/app/fakeSignUp"  class="md-raised social-button md-button md-default-theme material-background">
+                <a href="#/app/signup"  class="md-raised  md-button md-default-theme material-background">
+                <!--<a ui-sref="app.signUp"  class="md-raised social-button md-button md-default-theme material-background" ng-click="signup">-->
                     Sign UP
                 </a>
             </div>

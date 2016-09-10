@@ -15,5 +15,15 @@
       "browser": "crosswalk",
       "version": "12.41.296.5"
     }
+  ],
+  "proxies": [
+    {
+      "path": "/auth/local",
+      "proxyUrl": "http://localhost:9000/auth/local"
+    },
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:9000/api"
+    }
   ]
 }
